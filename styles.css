@@ -1514,49 +1514,6 @@ button{
 }
 
 /* Spanish landing (/es/) — full page */
-.es-landing .es-header{
-  opacity:1;
-  visibility:visible;
-  transform:translateY(0);
-}
-
-.es-nav-right{
-  display:flex;
-  flex-wrap:wrap;
-  align-items:center;
-  justify-content:flex-end;
-  gap:10px 14px;
-  margin-left:auto;
-}
-
-.es-nav-links{
-  display:flex;
-  flex-wrap:wrap;
-  align-items:center;
-  gap:14px 18px;
-  font-family:"League Spartan", sans-serif;
-  font-size:.72rem;
-  letter-spacing:.08em;
-  text-transform:uppercase;
-}
-
-.es-nav-links a{
-  opacity:.88;
-  transition:opacity .2s ease;
-}
-
-.es-nav-links a:hover{
-  opacity:1;
-}
-
-@media (max-width: 520px){
-  .es-nav-links{
-    width:100%;
-    justify-content:flex-end;
-    gap:10px 14px;
-  }
-}
-
 .es-hero .hero-actions{
   justify-content:center;
 }

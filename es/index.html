@@ -160,22 +160,37 @@
 
 <a class="skip-link" href="#main">Saltar al contenido principal</a>
 
-<header class="site-header lang-stub-header is-visible es-header">
+<header class="site-header" id="siteHeader">
   <div class="container nav">
-    <a href="#top" class="brand">Melanie Diaz</a>
-    <div class="nav-right es-nav-right">
-      <nav class="es-nav-links" aria-label="Secciones">
-        <a href="#sobre">Sobre Melanie</a>
-        <a href="#servicios">Servicios</a>
-        <a href="#reserva">Reserva</a>
-      </nav>
+    <a href="#main" class="brand">Melanie Diaz</a>
+
+    <div class="nav-right">
       <a class="lang-link" href="../" hreflang="en" lang="en">English</a>
+
+      <button
+        class="nav-toggle"
+        id="navToggle"
+        type="button"
+        aria-label="Abrir menú"
+        aria-expanded="false"
+        aria-controls="mobileMenu"
+      >
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
     </div>
+
+    <nav class="nav-links" id="mobileMenu" aria-label="Secciones">
+      <a href="#sobre">Sobre Melanie</a>
+      <a href="#servicios">Servicios</a>
+      <a href="#reserva">Reserva</a>
+    </nav>
   </div>
 </header>
 
 <main id="main" tabindex="-1">
-  <section class="hero es-hero" id="top">
+  <section class="hero es-hero" id="hero">
     <div class="hero-overlay"></div>
     <div class="hero-glow"></div>
     <div class="hero-sparkle" aria-hidden="true"></div>
@@ -319,13 +334,6 @@
   </div>
 </footer>
 
-<script>
-  requestAnimationFrame(function () {
-    requestAnimationFrame(function () {
-      var h = document.querySelector(".es-hero");
-      if (h) h.classList.add("is-ready");
-    });
-  });
-</script>
+<script src="../script.js"></script>
 </body>
 </html>
