@@ -11,6 +11,14 @@
     <priority>1.0</priority>
   </url>
   <url>
+    <loc>https://www.melanie-diaz.com/links/</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.melanie-diaz.com/links/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.melanie-diaz.com/links/"/>
+    <lastmod>2026-04-03</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.85</priority>
+  </url>
+  <url>
     <loc>https://www.melanie-diaz.com/es/</loc>
     <xhtml:link rel="alternate" hreflang="en" href="https://www.melanie-diaz.com/"/>
     <xhtml:link rel="alternate" hreflang="es" href="https://www.melanie-diaz.com/es/"/>

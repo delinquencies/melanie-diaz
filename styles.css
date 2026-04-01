@@ -1262,6 +1262,27 @@ button{
   margin:2px 0 0;
 }
 
+.footer-linkhub{
+  margin:0;
+  padding:4px 8px 0;
+  font-family:"League Spartan", sans-serif;
+  font-size:.76rem;
+  letter-spacing:.1em;
+  text-transform:uppercase;
+  text-align:center;
+}
+
+.footer-linkhub a{
+  color:rgba(255,255,255,0.72);
+  text-decoration:underline;
+  text-underline-offset:3px;
+  transition:color .2s ease;
+}
+
+.footer-linkhub a:hover{
+  color:#fff;
+}
+
 .footer-lang{
   max-width:min(100%, 40rem);
   margin:0;
@@ -1307,6 +1328,7 @@ button{
     grid-template-areas:
       "brand social"
       "tag   social"
+      "link  link"
       "lang  lang"
       "copy  copy";
     align-items:center;
@@ -1337,11 +1359,16 @@ button{
     display:none;
   }
 
+  .footer-linkhub{
+    grid-area:link;
+    padding:10px 0 0;
+  }
+
   .footer-lang{
     grid-area:lang;
     justify-self:stretch;
     max-width:none;
-    padding:8px 0 0;
+    padding:6px 0 0;
     text-align:center;
   }
 
