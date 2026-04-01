@@ -1,4 +1,7 @@
 document.addEventListener("DOMContentLoaded", () => {
+  const langIsEs =
+    document.documentElement.lang && document.documentElement.lang.toLowerCase().startsWith("es");
+
   const galleryMainImage = document.getElementById("galleryMainImage");
   const galleryThumbs = document.querySelectorAll(".gallery-thumb");
 
@@ -130,17 +133,20 @@ document.addEventListener("DOMContentLoaded", () => {
   }
 
   if (navToggle && header) {
+    const labelOpen = langIsEs ? "Abrir menú" : "Open menu";
+    const labelClose = langIsEs ? "Cerrar menú" : "Close menu";
+
     navToggle.addEventListener("click", () => {
       const isOpen = header.classList.toggle("menu-open");
       navToggle.setAttribute("aria-expanded", String(isOpen));
-      navToggle.setAttribute("aria-label", isOpen ? "Close menu" : "Open menu");
+      navToggle.setAttribute("aria-label", isOpen ? labelClose : labelOpen);
     });
 
     navLinks.forEach((link) => {
       link.addEventListener("click", () => {
         header.classList.remove("menu-open");
         navToggle.setAttribute("aria-expanded", "false");
-        navToggle.setAttribute("aria-label", "Open menu");
+        navToggle.setAttribute("aria-label", labelOpen);
       });
     });
 
@@ -150,7 +156,7 @@ document.addEventListener("DOMContentLoaded", () => {
       if (!clickedInsideHeader && header.classList.contains("menu-open")) {
         header.classList.remove("menu-open");
         navToggle.setAttribute("aria-expanded", "false");
-        navToggle.setAttribute("aria-label", "Open menu");
+        navToggle.setAttribute("aria-label", labelOpen);
       }
     });
   }
@@ -171,10 +177,18 @@ document.addEventListener("DOMContentLoaded", () => {
   });
 
   if (contactForm) {
+    const msgSending = langIsEs ? "Enviando…" : "Sending…";
+    const msgError = langIsEs
+      ? "Algo salió mal. Inténtalo de nuevo."
+      : "Something went wrong. Please try again.";
+    const msgNetwork = langIsEs
+      ? "Error de red. Inténtalo de nuevo."
+      : "Network error. Please try again.";
+
     contactForm.addEventListener("submit", async (event) => {
       event.preventDefault();
 
-      if (formStatus) formStatus.textContent = "Sending…";
+      if (formStatus) formStatus.textContent = msgSending;
       if (formSubmitBtn) formSubmitBtn.disabled = true;
 
       try {
@@ -191,11 +205,11 @@ document.addEventListener("DOMContentLoaded", () => {
           if (formStatus) formStatus.textContent = "";
           openModal();
         } else if (formStatus) {
-          formStatus.textContent = "Something went wrong. Please try again.";
+          formStatus.textContent = msgError;
         }
       } catch {
         if (formStatus) {
-          formStatus.textContent = "Network error. Please try again.";
+          formStatus.textContent = msgNetwork;
         }
       } finally {
         if (formSubmitBtn) formSubmitBtn.disabled = false;
