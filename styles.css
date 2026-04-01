@@ -1226,6 +1226,31 @@ button{
   margin:2px 0 0;
 }
 
+.footer-lang{
+  max-width:min(100%, 40rem);
+  margin:0;
+  padding:0 8px;
+  font-family:"Libre Baskerville", serif;
+  font-size:.84rem;
+  line-height:1.55;
+  color:rgba(255,255,255,0.78);
+  text-align:center;
+}
+
+.footer-lang a{
+  color:rgba(255,255,255,0.95);
+  text-decoration:underline;
+  text-underline-offset:3px;
+}
+
+.footer-lang a:hover{
+  color:#fff;
+}
+
+.footer-lang-muted{
+  color:rgba(255,255,255,0.55);
+}
+
 .footer-copy{
   margin:0;
   font-family:"Inter", sans-serif;
@@ -1245,7 +1270,9 @@ button{
     grid-template-columns:1fr auto;
     grid-template-areas:
       "brand social"
-      "tag   copy";
+      "tag   social"
+      "lang  lang"
+      "copy  copy";
     align-items:center;
     gap:10px 24px;
     text-align:left;
@@ -1267,16 +1294,25 @@ button{
     grid-area:social;
     justify-content:flex-end;
     margin-top:0;
+    align-self:center;
   }
 
   .footer-divider{
     display:none;
   }
 
+  .footer-lang{
+    grid-area:lang;
+    justify-self:stretch;
+    max-width:none;
+    padding:8px 0 0;
+    text-align:center;
+  }
+
   .footer-copy{
     grid-area:copy;
-    justify-self:end;
-    text-align:right;
+    justify-self:center;
+    text-align:center;
   }
 }
 .form-status{
