@@ -32,20 +32,58 @@ document.addEventListener("DOMContentLoaded", () => {
     document.body.style.overflow = "";
   }
 
+  const galleryFeature = galleryMainImage?.closest(".gallery-feature");
+  const galleryMainVideo = document.getElementById("galleryMainVideo");
+
+  function showGalleryImage(src, alt) {
+    if (galleryMainVideo) {
+      galleryMainVideo.pause();
+      galleryMainVideo.removeAttribute("src");
+      galleryMainVideo.load();
+      galleryMainVideo.classList.remove("is-visible");
+    }
+    if (galleryFeature) galleryFeature.classList.remove("gallery-feature--video");
+    if (galleryMainImage) {
+      galleryMainImage.style.display = "block";
+      galleryMainImage.src = src;
+      galleryMainImage.alt = alt;
+    }
+  }
+
+  function showGalleryVideo(src, alt) {
+    if (!galleryMainVideo || !galleryMainImage) return;
+    galleryMainImage.style.display = "none";
+    if (galleryFeature) galleryFeature.classList.add("gallery-feature--video");
+    galleryMainVideo.setAttribute("aria-label", alt || "Gallery video");
+    galleryMainVideo.src = src;
+    galleryMainVideo.load();
+    galleryMainVideo.classList.add("is-visible");
+    const prefersReduced =
+      window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    if (!prefersReduced) {
+      galleryMainVideo.play().catch(() => {});
+    }
+  }
+
   if (galleryMainImage && galleryThumbs.length) {
     galleryThumbs.forEach((thumb) => {
       thumb.addEventListener("click", () => {
         const newSrc = thumb.dataset.full;
         const newAlt = thumb.dataset.alt || "";
+        const isVideo = thumb.dataset.isVideo === "true";
 
         if (!newSrc) return;
 
-        galleryMainImage.style.opacity = "0.55";
+        const mainEl = galleryFeature || galleryMainImage.parentElement;
+        if (mainEl) mainEl.style.opacity = "0.92";
 
         window.setTimeout(() => {
-          galleryMainImage.src = newSrc;
-          galleryMainImage.alt = newAlt;
-          galleryMainImage.style.opacity = "1";
+          if (isVideo) {
+            showGalleryVideo(newSrc, newAlt);
+          } else {
+            showGalleryImage(newSrc, newAlt);
+          }
+          if (mainEl) mainEl.style.opacity = "1";
         }, 120);
 
         galleryThumbs.forEach((item) => item.classList.remove("is-active"));
