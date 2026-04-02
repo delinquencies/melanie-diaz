@@ -114,7 +114,6 @@
   </script>
 </head>
 <body>
-<a class="skip-link" href="#main">Skip to main content</a>
 
 <header class="site-header" id="siteHeader">
   <div class="container nav">
@@ -283,6 +282,15 @@
             src="Curls.jpg"
             alt="Featured curly hair work by Melanie Diaz"
           />
+          <video
+            id="galleryMainVideo"
+            class="gallery-main-video"
+            playsinline
+            muted
+            loop
+            preload="metadata"
+            aria-label="Gallery video"
+          ></video>
         </div>
 
         <div class="gallery-thumbs" id="galleryThumbs">
@@ -327,13 +335,15 @@
           </button>
 
           <button
-            class="gallery-thumb"
+            class="gallery-thumb gallery-thumb-video"
             type="button"
-            data-full="Final.gif"
-            data-alt="Natural curls"
-            aria-label="Final results animation"
+            data-full="Final.mp4"
+            data-is-video="true"
+            data-alt="Natural curls — short video"
+            aria-label="Play gallery video: natural curls"
           >
-            <img src="Final.gif" alt="">
+            <img src="SilkPressFinal.jpg" alt="" loading="lazy" decoding="async">
+            <span class="gallery-thumb-play" aria-hidden="true">▶</span>
           </button>
         </div>
       </div>

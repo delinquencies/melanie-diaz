@@ -17,14 +17,14 @@
   <link href="https://fonts.googleapis.com/css2?family=League+Spartan:wght@900&display=swap" rel="stylesheet">
   <link href="https://fonts.googleapis.com/css2?family=Libre+Baskerville:wght@400;700&display=swap" rel="stylesheet">
   <link href="https://fonts.googleapis.com/css2?family=Mea+Culpa&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="../styles.css" />
+  <link rel="stylesheet" href="styles.css" />
   <link rel="alternate" hreflang="en" href="https://www.melanie-diaz.com/" />
   <link rel="alternate" hreflang="es" href="https://www.melanie-diaz.com/es/" />
   <link rel="alternate" hreflang="x-default" href="https://www.melanie-diaz.com/" />
 
   <meta
     name="description"
-    content="Melanie Diaz, estilista boricua en Baytown 77521: rizos, pelo rizado, silk press y más. Sirve Gran Houston y alrededores. Experiencia cálida, casi ritual de bienestar. Reserva en línea."
+    content="Melanie Diaz, estilista boricua en Baytown 77521: rizos, pelo rizado, silk press y más. Sirve Gran Houston y alrededores. Reserva en línea, galería y formulario en español."
   />
   <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1" />
   <meta name="theme-color" content="#111111" />
@@ -37,7 +37,7 @@
   <meta property="og:title" content="Melanie Diaz | Rizos y pelo rizado — Baytown y Gran Houston" />
   <meta
     property="og:description"
-    content="Estilista boricua: rizos, corte en seco, silk press, relajante. Base en Baytown; clientes de Houston y cerca. Reserva o visita el sitio en inglés para más detalles."
+    content="Estilista boricua: rizos, corte en seco, silk press, relajante. Base en Baytown; clientes de Houston y cerca. Reserva, galería y contacto."
   />
   <meta property="og:url" content="https://www.melanie-diaz.com/es/" />
   <meta property="og:image" content="https://www.melanie-diaz.com/og-image.jpg" />
@@ -50,7 +50,7 @@
   <meta name="twitter:title" content="Melanie Diaz | Rizos y pelo rizado — Baytown y Houston" />
   <meta
     name="twitter:description"
-    content="Boricua, especialista en rizos. Baytown 77521 y Gran Houston. Cita por HeyGoldie; info completa en inglés."
+    content="Boricua, especialista en rizos. Baytown 77521 y Gran Houston. Reserva, galería y mensaje."
   />
   <meta name="twitter:image" content="https://www.melanie-diaz.com/og-image.jpg" />
   <meta name="twitter:image:alt" content="Melanie Diaz — estilista de rizos, Baytown y Gran Houston, Texas" />
@@ -116,7 +116,7 @@
         "@id": "https://www.melanie-diaz.com/es/#webpage",
         "url": "https://www.melanie-diaz.com/es/",
         "name": "Melanie Diaz | Estilista boricua — rizos y pelo rizado en Baytown y Houston",
-        "description": "Página en español de Melanie Diaz: servicios de rizos, ubicación en Baytown 77521, área de Gran Houston, reservas y enlace al sitio en inglés.",
+        "description": "Sitio en español: servicios, galería, formulario de contacto y mapa. Baytown 77521, Gran Houston.",
         "inLanguage": "es-US",
         "isPartOf": { "@id": "https://www.melanie-diaz.com/es/#website" },
         "about": { "@id": "https://www.melanie-diaz.com/es/#melanie" },
@@ -139,7 +139,7 @@
             "name": "¿Cómo reservo una cita?",
             "acceptedAnswer": {
               "@type": "Answer",
-              "text": "Puedes reservar en línea a través de HeyGoldie (enlace en esta página). También puedes escribirle por Instagram o usar el formulario de contacto en el sitio en inglés."
+              "text": "Puedes reservar en línea a través de HeyGoldie (enlaces en esta página) o usar el formulario de contacto."
             }
           },
           {
@@ -147,7 +147,7 @@
             "name": "¿Atiende en español?",
             "acceptedAnswer": {
               "@type": "Answer",
-              "text": "Sí: habla español e inglés. Esta página está pensada para quien prefiere leer en español primero; el sitio en inglés tiene la galería completa y el formulario de contacto."
+              "text": "Sí: habla español e inglés. Esta página ofrece la misma información que el sitio en inglés, en español."
             }
           }
         ]
@@ -156,33 +156,50 @@
   }
   </script>
 </head>
-<body class="es-landing">
+<body>
 
-<a class="skip-link" href="#main">Saltar al contenido principal</a>
-
-<header class="site-header lang-stub-header is-visible es-header">
+<header class="site-header" id="siteHeader">
   <div class="container nav">
-    <a href="#top" class="brand">Melanie Diaz</a>
-    <div class="nav-right es-nav-right">
-      <nav class="es-nav-links" aria-label="Secciones">
-        <a href="#sobre">Sobre Melanie</a>
-        <a href="#servicios">Servicios</a>
-        <a href="#reserva">Reserva</a>
-      </nav>
-      <a class="lang-link" href="../" hreflang="en" lang="en">English</a>
+    <a href="#main" class="brand">Melanie Diaz</a>
+
+    <div class="nav-right">
+      <a class="lang-link" href="/" hreflang="en" lang="en">English</a>
+
+      <button
+        class="nav-toggle"
+        id="navToggle"
+        type="button"
+        aria-label="Abrir menú"
+        aria-expanded="false"
+        aria-controls="mobileMenu"
+      >
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
     </div>
+
+    <nav class="nav-links" id="mobileMenu">
+      <a href="#services">Servicios</a>
+      <a href="#about">Sobre Melanie</a>
+      <a href="#gallery">Galería</a>
+      <a href="#book">Contacto</a>
+    </nav>
   </div>
 </header>
 
 <main id="main" tabindex="-1">
-  <section class="hero es-hero" id="top">
+
+  <section class="hero" id="hero">
     <div class="hero-overlay"></div>
     <div class="hero-glow"></div>
     <div class="hero-sparkle" aria-hidden="true"></div>
 
     <div class="container hero-inner">
       <div class="hero-content">
-        <p class="eyebrow hero-reveal hero-reveal-1">Rizos · pelo rizado · Baytown</p>
+        <p class="eyebrow hero-reveal hero-reveal-1">
+          Especialista en pelo rizado y rizos
+        </p>
 
         <h1 class="hero-name hero-reveal hero-reveal-2">
           <span>Melanie</span>
@@ -190,111 +207,299 @@
         </h1>
 
         <p class="hero-copy hero-reveal hero-reveal-3">
-          Estilista boricua: aquí el pelo se trata con cariño, como en casa. Rizos, definición y estilo con base en Baytown—también para quien viene de Houston y alrededores.
+          Cortes y estilo con cariño para rizos y confianza—con base en Baytown, también para quien viene de Gran Houston y alrededores.
         </p>
 
         <div class="hero-actions hero-reveal hero-reveal-4">
-          <a href="https://book.heygoldie.com/BRUJAS" class="btn btn-primary">Reservar cita</a>
-          <a href="#servicios" class="btn btn-secondary">Ver servicios</a>
+          <a href="https://book.heygoldie.com/BRUJAS" class="btn btn-primary">Reservar</a>
+          <a href="#services" class="btn btn-secondary">Ver servicios</a>
         </div>
       </div>
     </div>
   </section>
 
-  <section id="sobre" class="section section-dark es-about">
+  <section id="services" class="section section-light">
+    <div class="container">
+      <div class="section-heading">
+        <p class="eyebrow eyebrow-dark">Servicios</p>
+        <h2>Lo que ofrece Melanie</h2>
+      </div>
+
+      <div class="services-rail-wrap">
+        <div class="services-rail" id="servicesRail">
+          <article class="service-card service-slide">
+            <h3>Corte en seco para rizos</h3>
+            <p>Forma y equilibrio para tus rizos. Corte en pelo seco—sin lavado ni peinado incluido.</p>
+            <span class="price">desde $50 (1 h)</span>
+          </article>
+
+          <article class="service-card service-slide">
+            <h3>Corte</h3>
+            <p>Corte de precisión para pelo rizado, ondulado o lacio. Sin lavado ni peinado incluido.</p>
+            <span class="price">desde $50 (40 min)</span>
+          </article>
+
+          <article class="service-card service-slide">
+            <h3>Corte rizado + definición</h3>
+            <p>Corte con lavado, hidratación, productos para definir rizos y secado con difusor.</p>
+            <span class="price">desde $100 (2 h)</span>
+          </article>
+
+          <article class="service-card service-slide">
+            <h3>Silk press + recorte</h3>
+            <p>Alisado suave para pelo natural—acabado lacio y brillante sin relajante químico. Incluye champú, secado, recorte y plancha.</p>
+            <span class="price">desde $100 (1 h 30 min)</span>
+          </article>
+
+          <article class="service-card service-slide">
+            <h3>Champú tratamiento</h3>
+            <p>Lavado según tu necesidad: hidratación, reparación, purificación o equilibrio.</p>
+            <span class="price">desde $25 (15 min)</span>
+          </article>
+
+          <article class="service-card service-slide">
+            <h3>Relajante</h3>
+            <p>Servicio de relajante para alisar, calmar el frizz y dejar el pelo manejable y con brillo.</p>
+            <span class="price">desde $150 (2 h 15 min)</span>
+          </article>
+
+          <article class="service-card service-slide">
+            <h3>Secado con lavado</h3>
+            <p>Champú, acondicionador y brushing.</p>
+            <span class="price">desde $50 (1 h)</span>
+          </article>
+        </div>
+      </div>
+
+      <div class="section-cta services-cta-center">
+        <a href="https://book.heygoldie.com/BRUJAS" class="btn btn-dark">Reserva tu cita</a>
+      </div>
+    </div>
+  </section>
+
+  <section id="about" class="section section-dark">
     <div class="container about-grid">
       <div class="about-copy">
         <p class="eyebrow">Sobre Melanie</p>
-        <h2>Con el corazón boricua y los rizos desde siempre</h2>
+        <h2>Cuidado, estilo y pelo sano primero</h2>
         <p>
-          Melanie es boricua de verdad—le gusta decirlo con orgullo. Lleva toda la vida peinando y cuidando sus propios rizos, bien antes de meterse al salón. Ya van dos años de experiencia profesional y muchas clientas contentas que confían en su mano y en su ojo.
+          Melanie es boricua y lleva toda la vida con sus propios rizos, mucho antes de trabajar en el salón. Lleva dos años de experiencia profesional y muchas clientas contentas; trae esa misma cercanía a cada persona en la silla.
         </p>
         <p>
-          Su idea del cuidado del pelo es bien personal: calurosa, cercana, sin prisa. Para ella, una cita no es solo “pasar por la silla”—es más bien un momentito pa’ ti, casi un ritual de bienestar, donde te sientas vista y tranquila.
+          Con base en Baytown y recibiendo gente de Gran Houston y alrededores, busca una experiencia cálida y personal: cuidado del pelo que se siente casi como un ritual de bienestar—sin prisa, contigo al centro.
         </p>
         <p>
-          Trabaja desde Baytown y recibe gente de Gran Houston y de los alrededores. ¿Lista o listo? Reserva en línea o mira el sitio en inglés para el formulario de contacto y la galería completa.
+          ¿Lista o listo para tu visita? Reserva en línea o escribe por el formulario de contacto.
         </p>
+
         <a href="https://book.heygoldie.com/BRUJAS" class="btn btn-primary">Reservar</a>
       </div>
+
       <div class="about-panel">
         <ul>
-          <li>Boricua, rizos propios toda la vida</li>
+          <li>Raíces boricua y rizos de por vida</li>
           <li>Dos años de experiencia, clientas felices</li>
-          <li>Experiencia cálida, tipo ritual de bienestar</li>
-          <li>Baytown · Gran Houston y cerca</li>
+          <li>Atención personal, tipo ritual de bienestar</li>
+          <li>Rizos y estilo · Baytown y más allá</li>
         </ul>
       </div>
     </div>
   </section>
 
-  <section id="servicios" class="section section-light es-services">
+  <section id="gallery" class="section section-light gallery-section">
     <div class="container">
       <div class="section-heading">
-        <p class="eyebrow eyebrow-dark">Servicios</p>
-        <h2>Lo que ofrece Melanie</h2>
-        <p class="es-services-intro">
-          Cortes para rizos, definición, silk press, relajante y más—precios y detalles completos en el <a href="../">sitio en inglés</a>; aquí va el resumen en español.
-        </p>
+        <p class="eyebrow eyebrow-dark">Galería</p>
+        <h2>Un vistazo al trabajo</h2>
       </div>
 
-      <ul class="es-service-list">
-        <li><strong>Corte en seco para rizos</strong> — forma y equilibrio para tu pelo rizado; sin lavado ni peinado incluido.</li>
-        <li><strong>Corte clásico</strong> — para rizado, ondulado o lacio; sin lavado ni peinado.</li>
-        <li><strong>Corte rizado + definición</strong> — lavado, hidratación, productos para definir y secado con difusor.</li>
-        <li><strong>Silk press + recorte</strong> — acabado lacio y brillante sin químicos; incluye champú, secado y plancha.</li>
-        <li><strong>Champú tratamiento</strong> — limpieza según tu necesidad: hidratación, reparación, purificación.</li>
-        <li><strong>Relajante</strong> — alisado químico tradicional, con tiempo según el servicio.</li>
-        <li><strong>Blow-dry con lavado</strong> — champú, acondicionador y brushing.</li>
-      </ul>
+      <div class="gallery-shell">
+        <div class="gallery-feature">
+          <img
+            id="galleryMainImage"
+            src="/Curls.jpg"
+            alt="Trabajo destacado en pelo rizado por Melanie Diaz"
+          />
+          <video
+            id="galleryMainVideo"
+            class="gallery-main-video"
+            playsinline
+            muted
+            loop
+            preload="metadata"
+            aria-label="Vídeo de la galería"
+          ></video>
+        </div>
 
-      <div class="section-cta services-cta-center">
-        <a href="https://book.heygoldie.com/BRUJAS" class="btn btn-dark">Reservar cita</a>
+        <div class="gallery-thumbs" id="galleryThumbs">
+          <button
+            class="gallery-thumb is-active"
+            type="button"
+            data-full="/Curls2.jpg"
+            data-alt="Peinado rizado"
+            aria-label="Ver imagen 1 de la galería"
+          >
+            <img src="/Curls2.jpg" alt="Peinado rizado">
+          </button>
+
+          <button
+            class="gallery-thumb"
+            type="button"
+            data-full="/SilkPress2.jpg"
+            data-alt="Peinado silk press"
+            aria-label="Silk press"
+          >
+            <img src="/SilkPress2.jpg" alt="">
+          </button>
+
+          <button
+            class="gallery-thumb"
+            type="button"
+            data-full="/SilkPress3.jpg"
+            data-alt="Silk press en proceso"
+            aria-label="Silk press en proceso"
+          >
+            <img src="/SilkPress3.jpg" alt="Silk press en proceso">
+          </button>
+
+          <button
+            class="gallery-thumb"
+            type="button"
+            data-full="/SilkPressFinal.jpg"
+            data-alt="Silk press terminado"
+            aria-label="Ver imagen 4 de la galería"
+          >
+            <img src="/SilkPressFinal.jpg" alt="">
+          </button>
+
+          <button
+            class="gallery-thumb gallery-thumb-video"
+            type="button"
+            data-full="/Final.mp4"
+            data-is-video="true"
+            data-alt="Rizos naturales — vídeo corto"
+            aria-label="Reproducir vídeo: rizos naturales"
+          >
+            <img src="/SilkPressFinal.jpg" alt="" loading="lazy" decoding="async">
+            <span class="gallery-thumb-play" aria-hidden="true">▶</span>
+          </button>
+        </div>
       </div>
     </div>
   </section>
 
-  <section id="reserva" class="section section-book es-reserva">
+  <section id="book" class="section section-book contact-section">
     <div class="container">
       <div class="section-heading">
-        <p class="eyebrow eyebrow-dark">Reserva e información</p>
-        <h2>Te esperamos con gusto</h2>
-        <p class="contact-intro es-reserva-intro">
-          La forma más rápida de apartar tu cita es por HeyGoldie. Para preguntas largas o fotos, el formulario de contacto y la galería están en el sitio en inglés—mismo salón, mismo cariño.
+        <p class="eyebrow eyebrow-dark">Contacto</p>
+        <h2>Te esperamos en la silla</h2>
+        <p class="contact-intro">
+          Reserva en línea cuando quieras, o escribe aquí si tienes una pregunta—Melanie te responderá lo antes posible.
         </p>
       </div>
-      <div class="es-reserva-actions">
-        <a href="https://book.heygoldie.com/BRUJAS" class="btn btn-primary">Reservar en HeyGoldie</a>
-        <a href="https://www.instagram.com/brujassb" class="btn btn-secondary-dark" target="_blank" rel="noopener noreferrer">Instagram</a>
-        <a href="../links/" class="btn btn-secondary-dark" hreflang="en">Links (reserva y redes)</a>
-        <a href="../#book" class="btn btn-secondary-dark" hreflang="en">Formulario (inglés)</a>
-      </div>
 
-      <div class="es-faq" id="preguntas">
-        <h3 class="es-faq-title">Preguntas frecuentes</h3>
-        <dl class="es-faq-list">
-          <div class="es-faq-item">
-            <dt>¿Dónde atiende Melanie?</dt>
-            <dd>Su base está en Baytown (77521). Recibe clientes de Gran Houston, el área metropolitana y pueblos cercanos.</dd>
+      <div class="contact-grid">
+        <div class="contact-form-card">
+          <form
+            id="contactForm"
+            class="contact-form"
+            action="https://formspree.io/f/xgonljwj"
+            method="POST"
+          >
+            <input type="hidden" name="_subject" value="Consulta web Melanie Diaz (español)">
+
+            <div class="form-row">
+              <label for="name">Nombre</label>
+              <input id="name" name="name" type="text" placeholder="Tu nombre" required autocomplete="name">
+            </div>
+
+            <div class="form-row">
+              <label for="email">Correo</label>
+              <input id="email" name="email" type="email" placeholder="tu@correo.com" required autocomplete="email">
+            </div>
+
+            <div class="form-row">
+              <label for="phone">Teléfono</label>
+              <input id="phone" name="phone" type="tel" placeholder="(555) 555-5555" autocomplete="tel">
+            </div>
+
+            <div class="form-row">
+              <label for="service">Servicio</label>
+              <select id="service" name="service">
+                <option value="">Elige un servicio</option>
+                <option value="curly-dry-cut">Corte en seco para rizos</option>
+                <option value="haircut">Corte</option>
+                <option value="curly-cut-define">Corte rizado + definición</option>
+                <option value="silk-press-trim">Silk press + recorte</option>
+                <option value="shampoo">Champú tratamiento</option>
+                <option value="relaxer">Relajante</option>
+                <option value="blowdry-wash">Secado con lavado</option>
+              </select>
+            </div>
+
+            <div class="form-row">
+              <label for="message">Mensaje</label>
+              <textarea
+                id="message"
+                name="message"
+                rows="5"
+                placeholder="Cuéntale a Melanie sobre tu pelo y lo que buscas."
+                required
+              ></textarea>
+            </div>
+
+            <div class="form-actions">
+              <button id="formSubmitBtn" type="submit" class="btn btn-primary">
+                Enviar mensaje
+              </button>
+
+              <a
+                href="https://www.instagram.com/brujassb"
+                class="btn btn-secondary-dark"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                Instagram
+              </a>
+            </div>
+
+            <p id="formStatus" class="form-status" aria-live="polite"></p>
+          </form>
+        </div>
+
+        <div class="contact-info-card">
+          <div class="contact-info-block">
+            <h3>Baytown · 77521</h3>
+            <p>
+              Con base en Baytown—atiende comunidades cercanas y Gran Houston. La dirección exacta se comparte al reservar.
+            </p>
           </div>
-          <div class="es-faq-item">
-            <dt>¿Cómo reservo?</dt>
-            <dd>En línea con HeyGoldie, o escríbele por Instagram. El formulario web está en la página de contacto del sitio en inglés.</dd>
+
+          <div class="contact-map">
+            <iframe
+              title="Mapa del área 77521, Baytown, Texas"
+              src="https://www.openstreetmap.org/export/embed.html?bbox=-95.06%2C29.70%2C-94.88%2C29.88&amp;layer=mapnik"
+              width="600"
+              height="450"
+              style="border:0;"
+              loading="lazy"
+              referrerpolicy="no-referrer-when-downgrade"
+            ></iframe>
+            <p class="contact-map-link">
+              <a href="https://www.google.com/maps/search/?api=1&amp;query=77521+Baytown%2C+TX" target="_blank" rel="noopener noreferrer">Abrir mapa en Google Maps</a>
+            </p>
           </div>
-          <div class="es-faq-item">
-            <dt>¿Atiende en español?</dt>
-            <dd>Sí—habla español e inglés. Esta página está pensada pa’ quien prefiere leer en español primero.</dd>
-          </div>
-        </dl>
+        </div>
       </div>
     </div>
   </section>
+
 </main>
 
 <footer class="site-footer">
   <div class="footer-inner">
     <p class="footer-name">Melanie Diaz</p>
-    <p class="footer-tag">Rizos y pelo rizado · Baytown y Houston</p>
+    <p class="footer-tag">Rizos y pelo rizado</p>
 
     <div class="footer-social">
       <a href="https://instagram.com/brujassb" target="_blank" rel="noopener noreferrer" aria-label="Instagram">
@@ -302,6 +507,7 @@
           <path d="M7 2C4.24 2 2 4.24 2 7v10c0 2.76 2.24 5 5 5h10c2.76 0 5-2.24 5-5V7c0-2.76-2.24-5-5-5H7zm5 5.2A4.8 4.8 0 1 1 7.2 12 4.81 4.81 0 0 1 12 7.2zm6.2-.9a1.1 1.1 0 1 1-1.1 1.1 1.1 1.1 0 0 1 1.1-1.1zM12 9a3 3 0 1 0 3 3 3 3 0 0 0-3-3z"/>
         </svg>
       </a>
+
       <a href="https://tiktok.com/@rizozs" target="_blank" rel="noopener noreferrer" aria-label="TikTok">
         <svg viewBox="0 0 24 24" class="social-icon" aria-hidden="true">
           <path d="M16.6 3c.3 2.2 1.9 4 4.1 4.3v3.1c-1.7 0-3.3-.5-4.7-1.4v6.1a6.1 6.1 0 1 1-6.1-6.1c.4 0 .8 0 1.1.1v3.2a2.9 2.9 0 1 0 2.9 2.9V3h2.7z"/>
@@ -310,22 +516,32 @@
     </div>
 
     <div class="footer-divider"></div>
+    <p class="footer-linkhub">
+      <a href="/links/">Links — reserva, menú y redes</a>
+    </p>
     <p class="footer-lang" lang="en">
-      <a href="../" hreflang="en">English site</a>
+      <a href="/" hreflang="en">English site</a>
       <span class="footer-lang-sep" aria-hidden="true"> · </span>
-      <span class="footer-lang-muted">Full gallery, contact form, and details.</span>
+      <span class="footer-lang-muted">Same salon—full site in English.</span>
     </p>
     <p class="footer-copy">© 2026 Melanie Diaz · Baytown, Texas</p>
   </div>
 </footer>
 
-<script>
-  requestAnimationFrame(function () {
-    requestAnimationFrame(function () {
-      var h = document.querySelector(".es-hero");
-      if (h) h.classList.add("is-ready");
-    });
-  });
-</script>
+<div class="modal-backdrop" id="successModal" aria-hidden="true">
+  <div class="modal-card" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
+    <button class="modal-close" id="modalClose" type="button" aria-label="Cerrar">×</button>
+
+    <p class="modal-eyebrow">Mensaje enviado</p>
+    <h3 id="modalTitle">Gracias</h3>
+    <p class="modal-copy">
+      Tu mensaje llegó bien. Melanie se pondrá en contacto contigo pronto.
+    </p>
+
+    <button class="btn btn-dark" id="modalOkay" type="button">Listo</button>
+  </div>
+</div>
+<script src="../script.js"></script>
+
 </body>
 </html>
