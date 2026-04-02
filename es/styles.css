@@ -1,2 +1,0 @@
-/* Loads site styles from site root — keeps one source of truth (../styles.css). */
-@import url("../styles.css");
