@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+  <meta name="robots" content="noindex, nofollow" />
+  <title>Prototype · Story circles + viewer</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="stories.css" />
+</head>
+<body>
+
+<main class="proto">
+  <header class="proto__intro">
+    <p class="eyebrow">Prototype · isolated component</p>
+    <h1 class="proto__title">Story circles → vertical viewer</h1>
+    <p class="proto__note">
+      Built from the Hershesons / Storista measurements in <code>docs/DESIGN_RESEARCH.md §2.5</code>.
+      Story 1 uses the existing <code>Final.mp4</code>. The other stories are <strong>placeholders</strong>
+      (Melanie's existing photos shown as timed image stories) until real 9:16 clips are available.
+      Ring colours are temporary tokens, not a palette decision.
+    </p>
+  </header>
+
+  <!-- ============ COMPONENT ============ -->
+  <section class="stories" aria-labelledby="storiesTitle" data-stories>
+    <h2 id="storiesTitle" class="stories__title">Stories</h2>
+    <ul class="stories__row" role="list">
+      <!-- Items rendered from the data below so the same source feeds the viewer -->
+    </ul>
+  </section>
+  <!-- =================================== -->
+
+  <section class="proto__checklist">
+    <h2 class="eyebrow">Try</h2>
+    <ul>
+      <li>Hover a circle (mouse) to preview the clip inside the ring.</li>
+      <li>Open a story. Navigate with ▲ ▼, arrow keys, mouse wheel, or a vertical swipe on a phone.</li>
+      <li>Tap the video to pause or play. Use the speaker button or the "Tap to unmute" pill for sound.</li>
+      <li>Close with ✕, <kbd>Esc</kbd>, or the browser Back button. Focus returns to the circle you opened.</li>
+      <li>Stories auto-advance when they finish. The last one closes the viewer.</li>
+    </ul>
+  </section>
+</main>
+
+<!-- Viewer (one per page) -->
+<div class="viewer" id="storyViewer" role="dialog" aria-modal="true" aria-label="Stories" hidden>
+  <div class="viewer__track" tabindex="-1"></div>
+
+  <button class="viewer__btn viewer__close" type="button" aria-label="Close stories">
+    <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18"/></svg>
+  </button>
+
+  <div class="viewer__tools">
+    <button class="viewer__btn viewer__mute" type="button" aria-pressed="true" aria-label="Unmute">
+      <svg class="i-muted" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 9h4l5-4v14l-5-4H4z"/><path d="M17 9l4 6M21 9l-4 6"/></svg>
+      <svg class="i-sound" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 9h4l5-4v14l-5-4H4z"/><path d="M17 8.5a5 5 0 010 7M19.5 6a8.5 8.5 0 010 12"/></svg>
+    </button>
+  </div>
+
+  <div class="viewer__nav">
+    <button class="viewer__btn viewer__prev" type="button" aria-label="Previous story">
+      <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 15l6-6 6 6"/></svg>
+    </button>
+    <button class="viewer__btn viewer__next" type="button" aria-label="Next story">
+      <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg>
+    </button>
+  </div>
+
+  <p class="viewer__status" aria-live="polite"></p>
+</div>
+
+<!-- Story data. In production this would come from /data/stories.json -->
+<script type="application/json" id="storiesData">
+[
+  {
+    "title": "Natural curls",
+    "type": "video",
+    "src": "../../Final.mp4",
+    "poster": "../../SilkPressFinal.jpg",
+    "cta": { "label": "Book", "href": "https://book.heygoldie.com/BRUJAS" }
+  },
+  {
+    "title": "Curly cut",
+    "type": "image",
+    "src": "../../Curls.jpg",
+    "duration": 5000,
+    "placeholder": true,
+    "cta": { "label": "Book a curly cut", "href": "https://book.heygoldie.com/BRUJAS" }
+  },
+  {
+    "title": "Definition",
+    "type": "image",
+    "src": "../../Curls2.jpg",
+    "duration": 5000,
+    "placeholder": true,
+    "cta": { "label": "Book", "href": "https://book.heygoldie.com/BRUJAS" }
+  },
+  {
+    "title": "Silk press",
+    "type": "image",
+    "src": "../../SilkPress2.jpg",
+    "duration": 5000,
+    "placeholder": true,
+    "cta": { "label": "Book a silk press", "href": "https://book.heygoldie.com/BRUJAS" }
+  },
+  {
+    "title": "In the chair",
+    "type": "image",
+    "src": "../../SilkPress3.jpg",
+    "duration": 5000,
+    "placeholder": true,
+    "cta": { "label": "Book", "href": "https://book.heygoldie.com/BRUJAS" }
+  },
+  {
+    "title": "Before",
+    "type": "image",
+    "src": "../../Before1.jpg",
+    "duration": 5000,
+    "placeholder": true,
+    "cta": { "label": "Book", "href": "https://book.heygoldie.com/BRUJAS" }
+  },
+  {
+    "title": "Finish",
+    "type": "image",
+    "src": "../../SilkPress4.jpg",
+    "duration": 5000,
+    "placeholder": true,
+    "cta": { "label": "Book", "href": "https://book.heygoldie.com/BRUJAS" }
+  }
+]
+</script>
+<script src="stories.js" type="module"></script>
+</body>
+</html>
