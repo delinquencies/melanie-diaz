@@ -1,9 +1,7 @@
-// HTTP application (fetch-style: Request → Response). Runs on Node now; portable to Cloudflare Workers.
-import { readFile } from "node:fs/promises";
-import { join, normalize, extname, dirname } from "node:path";
-import { fileURLToPath } from "node:url";
+// HTTP application (fetch-style: Request → Response). Runtime-neutral: the Node adapter (src/server.js)
+// and the Cloudflare Worker (src/worker.js) both inject db, config, blob storage and static handling.
+import { Buffer } from "node:buffer";
 import { makeCipher, loadKey } from "./lib/security.js";
-import { loadConfig } from "./domain/config.js";
 import { submitIntake, listIntakes, setIntakeStatus } from "./domain/intake.js";
 import { listClients, clientProfile, addNote, addTreatment, exportClient, deleteClient, audit } from "./domain/clients.js";
 import { readPhoto } from "./domain/photos.js";
@@ -11,12 +9,10 @@ import { acquisitionReport } from "./domain/attribution.js";
 import { sandboxAvailability, createSandboxAppointment, setSandboxStatus } from "./domain/appointments.js";
 import { addTimeBlock, removeTimeBlock, unifiedView, startConnect, finishConnect, updateCalendar, syncBusy, integrationsStatus } from "./domain/calendar.js";
 import { bookingProviders, liveProvider } from "./providers/booking.js";
-import { login, logout, sessionOwner, sessionCookie, clearCookie, readCookie, makeThrottle, SESSION_COOKIE } from "./auth.js";
+import { login, logout, sessionOwner, sessionCookie, clearCookie, readCookie, makeThrottle, SESSION_COOKIE, createOwner } from "./auth.js";
+import { sha256 } from "./lib/security.js";
 
-const ROOT = join(dirname(fileURLToPath(import.meta.url)), "..");
-const MIME = { ".html": "text/html; charset=utf-8", ".js": "text/javascript; charset=utf-8", ".css": "text/css; charset=utf-8", ".svg": "image/svg+xml", ".json": "application/json" };
-
-const SECURITY_HEADERS = {
+export const SECURITY_HEADERS = {
   "content-security-policy": "default-src 'self'; img-src 'self' blob: data:; style-src 'self'; script-src 'self'; connect-src 'self'; frame-ancestors 'none'; form-action 'self'; base-uri 'none'; object-src 'none'",
   "x-content-type-options": "nosniff",
   "x-frame-options": "DENY",
@@ -24,10 +20,15 @@ const SECURITY_HEADERS = {
   "permissions-policy": "camera=(), microphone=(), geolocation=()",
 };
 
-export function createApp({ db, env = process.env, now = () => new Date(), fetch: fetchFn = globalThis.fetch, configDir = join(ROOT, "config"), storageDir = join(ROOT, "data", "uploads") }) {
+/**
+ * @param o.db         database adapter {all,get,run,tx}
+ * @param o.config     result of buildConfig()
+ * @param o.blobs      blob store {put,get,delete} for encrypted photos
+ * @param o.staticFile optional async (path) => Response|null
+ */
+export function createApp({ db, config, blobs, staticFile = async () => null, env = {}, now = () => new Date(), fetch: fetchFn = globalThis.fetch }) {
   const cipher = makeCipher(loadKey(env.SALON_OS_DATA_KEY));
-  const config = loadConfig(configDir);
-  const ctx = { db, cipher, config, env, now, fetch: fetchFn, storage: { cipher, dir: storageDir } };
+  const ctx = { db, cipher, config, env, now, fetch: fetchFn, storage: { cipher, blobs } };
   const secure = env.NODE_ENV === "production";
   const loginThrottle = makeThrottle({ max: 5, windowMs: 15 * 60000 });
   const intakeThrottle = makeThrottle({ max: 20, windowMs: 60 * 60000 });
@@ -36,20 +37,6 @@ export function createApp({ db, env = process.env, now = () => new Date(), fetch
     body == null ? null : typeof body === "string" ? body : JSON.stringify(body),
     { status, headers: { ...SECURITY_HEADERS, "cache-control": "no-store", ...(typeof body === "string" || body == null ? {} : { "content-type": "application/json" }), ...headers } });
   const err = (status, code, detail) => respond(status, { error: code, ...(detail ? { detail } : {}) });
-
-  async function staticFile(path) {
-    let rel;
-    if (path === "/" ) return respond(302, null, { location: "/book/" });
-    if (path === "/shared/intake-engine.js") rel = join("src", "shared", "intake-engine.js");
-    else if (path.startsWith("/book/") || path.startsWith("/admin/")) rel = join("public", path.endsWith("/") ? path + "index.html" : path);
-    else return null;
-    const full = normalize(join(ROOT, rel));
-    if (!full.startsWith(normalize(join(ROOT, rel.startsWith("src") ? "src" : "public")))) return err(400, "bad_path");
-    try {
-      const body = await readFile(full);
-      return new Response(body, { status: 200, headers: { ...SECURITY_HEADERS, "content-type": MIME[extname(full)] || "application/octet-stream", "cache-control": "no-cache" } });
-    } catch { return null; }
-  }
 
   const routes = [];
   const on = (method, pattern, handler, { admin = false } = {}) =>
@@ -73,6 +60,8 @@ export function createApp({ db, env = process.env, now = () => new Date(), fetch
   });
 
   on("POST", "/api/public/intake", async (req, p, ip) => {
+    // Kill switch: production ships with PUBLIC_INTAKE=off until Melanie approves the form.
+    if (env.PUBLIC_INTAKE === "off") return err(503, "intake_not_enabled");
     if (intakeThrottle.blocked(ip, now().getTime())) return err(429, "too_many_requests");
     intakeThrottle.fail(ip, now().getTime()); // count every submission attempt
     let form;
@@ -86,8 +75,27 @@ export function createApp({ db, env = process.env, now = () => new Date(), fetch
       photos.push({ fieldId: key.slice(6), bytes: Buffer.from(await value.arrayBuffer()) });
     }
     if (photos.length > 6) return err(400, "too_many_files");
-    const out = submitIntake(ctx, { ...payload, photos });
+    const out = await submitIntake(ctx, { ...payload, photos });
     return respond(201, { ok: true, submissionId: out.submissionId, next: out.next });
+  });
+
+  // ───────── One-time owner setup (deployed environments) ─────────
+  // Works only when SETUP_TOKEN is configured AND no owner exists yet. Delete the secret afterwards.
+  on("POST", "/api/setup/owner", async (req, p, ip) => {
+    const t = now().getTime();
+    if (loginThrottle.blocked(`setup:${ip}`, t)) return err(429, "too_many_attempts");
+    const expected = env.SETUP_TOKEN;
+    const given = (req.headers.get("authorization") || "").replace(/^Bearer\s+/i, "");
+    if (!expected || given.length !== expected.length || sha256(given) !== sha256(expected)) {
+      loginThrottle.fail(`setup:${ip}`, t);
+      return err(403, "forbidden");
+    }
+    if (db.get("SELECT 1 AS x FROM owners")) return err(409, "owner_exists");
+    const b = await req.json().catch(() => ({}));
+    try { createOwner(db, b.email, b.password, now().toISOString()); }
+    catch (e) { return err(400, "invalid_owner", e.message); }
+    audit(db, "system", "owner.created", null, now().toISOString());
+    return respond(201, { ok: true });
   });
 
   // ───────── Owner auth ─────────
@@ -126,12 +134,12 @@ export function createApp({ db, env = process.env, now = () => new Date(), fetch
   on("DELETE", "/api/admin/clients/:id", async (req, p, ip, owner) => {
     const body = await req.json().catch(() => ({}));
     if (body.confirm !== p.id) return err(400, "confirmation_required");
-    return deleteClient(ctx, p.id, `owner:${owner.id}`) ? respond(200, { ok: true }) : err(404, "not_found");
+    return (await deleteClient(ctx, p.id, `owner:${owner.id}`)) ? respond(200, { ok: true }) : err(404, "not_found");
   }, { admin: true });
-  on("GET", "/api/admin/photos/:id", (req, p) => {
+  on("GET", "/api/admin/photos/:id", async (req, p) => {
     const ph = db.get("SELECT * FROM photos WHERE id = ?", p.id);
     if (!ph) return err(404, "not_found");
-    return new Response(readPhoto(ctx.storage, ph.storage_key), { status: 200, headers: { ...SECURITY_HEADERS, "content-type": ph.mime, "cache-control": "private, no-store" } });
+    return new Response(await readPhoto(ctx.storage, ph.storage_key), { status: 200, headers: { ...SECURITY_HEADERS, "content-type": ph.mime, "cache-control": "private, no-store" } });
   }, { admin: true });
   on("GET", "/api/admin/intakes", (req) => respond(200, listIntakes(ctx, { status: new URL(req.url).searchParams.get("status") || undefined })), { admin: true });
   on("POST", "/api/admin/intakes/:id/status", async (req, p) => {

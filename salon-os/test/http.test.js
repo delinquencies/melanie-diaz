@@ -5,7 +5,7 @@ import { setup, jpegWithExif, validNewAnswers, ownerSession } from "./helpers.js
 const req = (path, opts = {}) => new Request("http://t" + path, opts);
 
 test("public catalog exposes Goldie deep links and deposit, not internal data", async () => {
-  const { app } = setup();
+  const { app } = await setup();
   const res = await app.handle(req("/api/public/catalog"));
   assert.equal(res.status, 200);
   assert.match(res.headers.get("content-security-policy"), /default-src 'self'/);
@@ -18,7 +18,7 @@ test("public catalog exposes Goldie deep links and deposit, not internal data", 
 });
 
 test("intake over HTTP (multipart with photo) → 201 and next step to Goldie", async () => {
-  const { app, db } = setup();
+  const { app, db } = await setup();
   const fd = new FormData();
   fd.append("payload", JSON.stringify({ formId: "client-intake", serviceId: "signature-silk-press", clientType: "new",
     answers: validNewAnswers({ silk_chemical_history: ["none"] }), consents: { storage: true, photos: true } }));
@@ -32,7 +32,7 @@ test("intake over HTTP (multipart with photo) → 201 and next step to Goldie", 
 });
 
 test("intake validation errors come back per field; honeypot stores nothing", async () => {
-  const { app, db } = setup();
+  const { app, db } = await setup();
   const bad = new FormData();
   bad.append("payload", JSON.stringify({ formId: "client-intake", serviceId: "signature-silk-press", clientType: "new", answers: { first_name: "A" }, consents: { storage: true } }));
   const r1 = await app.handle(req("/api/public/intake", { method: "POST", body: bad }));
@@ -46,7 +46,7 @@ test("intake validation errors come back per field; honeypot stores nothing", as
 });
 
 test("admin API requires a session; CSRF header required for changes; photos private", async () => {
-  const { app, db } = setup();
+  const { app, db } = await setup();
   assert.equal((await app.handle(req("/api/admin/clients"))).status, 401);
   assert.equal((await app.handle(req("/api/admin/photos/x"))).status, 401);
   const cookie = await ownerSession(app, db);
@@ -59,7 +59,7 @@ test("admin API requires a session; CSRF header required for changes; photos pri
 });
 
 test("login is throttled after 5 failures and cookie is HttpOnly", async () => {
-  const { app, db } = setup();
+  const { app, db } = await setup();
   await ownerSession(app, db);
   const bad = () => app.handle(req("/api/admin/login", { method: "POST", headers: { "content-type": "application/json" }, body: JSON.stringify({ email: "owner@example.com", password: "wrong-password!!" }) }), { ip: "9.9.9.9" });
   for (let i = 0; i < 5; i++) assert.equal((await bad()).status, 401);
@@ -69,7 +69,7 @@ test("login is throttled after 5 failures and cookie is HttpOnly", async () => {
 });
 
 test("Google connect explains missing credentials instead of pretending", async () => {
-  const { app, db } = setup();
+  const { app, db } = await setup();
   const cookie = await ownerSession(app, db);
   const res = await app.handle(req("/api/admin/oauth/google/start", { headers: { cookie } }));
   assert.equal(res.status, 409);
@@ -77,10 +77,31 @@ test("Google connect explains missing credentials instead of pretending", async 
 });
 
 test("static files served; traversal blocked; unknown API 404", async () => {
-  const { app } = setup();
+  const { app } = await setup();
   assert.equal((await app.handle(req("/book/"))).status, 200);
   assert.equal((await app.handle(req("/shared/intake-engine.js"))).status, 200);
   assert.notEqual((await app.handle(req("/book/../../config/catalog.json"))).status, 200);
   assert.notEqual((await app.handle(req("/admin/%2e%2e/%2e%2e/src/app.js"))).status, 200);
   assert.equal((await app.handle(req("/api/nope"))).status, 404);
+});
+
+test("production kill switch: intake disabled when PUBLIC_INTAKE=off", async () => {
+  const { app, db } = await setup({ env: { PUBLIC_INTAKE: "off" } });
+  const fd = new FormData();
+  fd.append("payload", JSON.stringify({ formId: "client-intake", serviceId: "signature-silk-press", clientType: "new", answers: validNewAnswers({ silk_chemical_history: ["none"] }), consents: { storage: true } }));
+  const res = await app.handle(req("/api/public/intake", { method: "POST", body: fd }));
+  assert.equal(res.status, 503);
+  assert.equal(db.get("SELECT COUNT(*) n FROM clients").n, 0);
+});
+
+test("one-time owner setup needs the token and only works once", async () => {
+  const token = "x".repeat(40);
+  const { app } = await setup({ env: { SETUP_TOKEN: token } });
+  const body = JSON.stringify({ email: "melanie@example.com", password: "a strong passphrase here" });
+  const call = (auth) => app.handle(req("/api/setup/owner", { method: "POST", headers: { authorization: auth, "content-type": "application/json" }, body }), { ip: "2.2.2.2" });
+  assert.equal((await call("Bearer wrong")).status, 403);
+  assert.equal((await call(`Bearer ${token}`)).status, 201);
+  assert.equal((await call(`Bearer ${token}`)).status, 409);
+  const { app: noToken } = await setup();
+  assert.equal((await noToken.handle(req("/api/setup/owner", { method: "POST", headers: { authorization: "Bearer " }, body }))).status, 403);
 });

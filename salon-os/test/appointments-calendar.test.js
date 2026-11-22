@@ -8,15 +8,15 @@ import { buildAuthUrl } from "../src/providers/calendar/google.js";
 
 const TUE_11 = "2026-11-24T17:00:00.000Z";
 
-test("service planning: totals, 25% deposit, duplicate haircut blocked", () => {
-  const { ctx } = setup();
+test("service planning: totals, 25% deposit, duplicate haircut blocked", async () => {
+  const { ctx } = await setup();
   const p = planServices(ctx.config, ["signature-silk-press"]);
   assert.equal(p.totalCents, 11000); assert.equal(p.depositCents, 2750); assert.equal(p.balanceCents, 8250);
   assert.throws(() => planServices(ctx.config, ["first-time-curly-experience", "dry-curly-cut"]), { code: "duplicate_included_service" });
 });
 
-test("sandbox booking: slot revalidated; double booking impossible; cancel frees time", () => {
-  const { ctx } = setup();
+test("sandbox booking: slot revalidated; double booking impossible; cancel frees time", async () => {
+  const { ctx } = await setup();
   const a = createSandboxAppointment(ctx, { serviceIds: ["signature-silk-press"], start: TUE_11 });
   assert.equal(a.sandbox, true);
   assert.throws(() => createSandboxAppointment(ctx, { serviceIds: ["signature-silk-press"], start: TUE_11 }), { code: "slot_unavailable" });
@@ -29,18 +29,18 @@ test("sandbox booking: slot revalidated; double booking impossible; cancel frees
   assert.throws(() => setSandboxStatus(ctx, a.id, "completed"), { code: "invalid_transition" });
 });
 
-test("sandbox never edits non-sandbox appointments", () => {
-  const { ctx, db } = setup();
+test("sandbox never edits non-sandbox appointments", async () => {
+  const { ctx, db } = await setup();
   db.run(`INSERT INTO appointments (id, source, status, starts_at, ends_at, service_ends_at, total_cents, created_at, updated_at)
           VALUES ('real1','manual','booked',?,?,?,0,?,?)`, TUE_11, "2026-11-24T18:00:00.000Z", "2026-11-24T18:00:00.000Z", NOW.toISOString(), NOW.toISOString());
   assert.throws(() => setSandboxStatus(ctx, "real1", "cancelled"), { code: "not_sandbox" });
 });
 
-test("eligibility: returning-only services need VERIFIED history within the window", () => {
-  const { ctx, db } = setup();
+test("eligibility: returning-only services need VERIFIED history within the window", async () => {
+  const { ctx, db } = await setup();
   const s = ctx.config.service("dry-curly-cut");
   assert.equal(checkEligibility(ctx, null, s).eligible, false);
-  const out = submitIntake(ctx, { formId: "client-intake", serviceId: "first-time-curly-experience", clientType: "new", answers: validNewAnswers(), consents: { storage: true } });
+  const out = await submitIntake(ctx, { formId: "client-intake", serviceId: "first-time-curly-experience", clientType: "new", answers: validNewAnswers(), consents: { storage: true } });
   const cid = out._clientId;
   assert.equal(checkEligibility(ctx, cid, s).reason, "returning_history_not_verified");
   // A sandbox "completed" appointment must NOT count as verified history
@@ -60,8 +60,8 @@ test("eligibility: returning-only services need VERIFIED history within the wind
   assert.equal(checkEligibility(ctx, cid, ctx.config.service("first-time-curly-reset")).reason, "first_time_service_for_returning_client");
 });
 
-test("vacations and personal busy time block sandbox availability", () => {
-  const { ctx } = setup();
+test("vacations and personal busy time block sandbox availability", async () => {
+  const { ctx } = await setup();
   addTimeBlock(ctx, { kind: "vacation", start: "2026-11-25T00:00:00Z", end: "2026-11-27T06:00:00Z", label: "Thanksgiving" });
   const days = sandboxAvailability(ctx, { serviceIds: ["dry-curly-cut"], date: "2026-11-25", days: 2 }).days;
   assert.equal(days[0].slots.length, 0); assert.equal(days[1].slots.length, 0);
@@ -81,7 +81,7 @@ test("Google: auth URL, state check, token storage encrypted, busy sync without 
     return new Response("{}", { status: 404 });
   };
   const env = { GOOGLE_CLIENT_ID: "cid", GOOGLE_CLIENT_SECRET: "sec", GOOGLE_REDIRECT_URI: "http://localhost/cb" };
-  const { ctx, db } = setup({ env, fetch: fakeFetch });
+  const { ctx, db } = await setup({ env, fetch: fakeFetch });
 
   const u = new URL(buildAuthUrl(env, "st"));
   assert.equal(u.searchParams.get("access_type"), "offline");

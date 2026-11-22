@@ -1,5 +1,6 @@
 // Encryption at rest (AES-256-GCM), password hashing (scrypt), tokens.
 import { createCipheriv, createDecipheriv, randomBytes, scryptSync, timingSafeEqual, createHash } from "node:crypto";
+import { Buffer } from "node:buffer";
 
 export const newId = (prefix = "") => prefix + randomBytes(12).toString("base64url");
 export const newToken = () => randomBytes(32).toString("base64url");

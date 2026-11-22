@@ -5,7 +5,7 @@ import { makeCipher, hashPassword, verifyPassword, loadKey } from "../src/lib/se
 import { zonedToUtc, utcToZoned, offsetMinutes } from "../src/lib/time.js";
 import { normalizeEmail, normalizePhone } from "../src/lib/contact.js";
 
-test("AES-GCM round trip and tamper detection", () => {
+test("AES-GCM round trip and tamper detection", async () => {
   const c = makeCipher(randomBytes(32));
   const blob = c.encryptJSON({ allergy: "coconut" });
   assert.ok(!blob.includes("coconut"));
@@ -17,19 +17,19 @@ test("AES-GCM round trip and tamper detection", () => {
   assert.deepEqual(c.decryptBytes(c.encryptBytes(bytes)), bytes);
 });
 
-test("data key must be 32 bytes", () => {
+test("data key must be 32 bytes", async () => {
   assert.throws(() => loadKey(undefined));
   assert.throws(() => loadKey(Buffer.alloc(16).toString("base64")));
 });
 
-test("password hashing", () => {
+test("password hashing", async () => {
   const h = hashPassword("a very long passphrase");
   assert.equal(verifyPassword("a very long passphrase", h), true);
   assert.equal(verifyPassword("wrong", h), false);
   assert.throws(() => hashPassword("short"));
 });
 
-test("America/Chicago conversions across DST", () => {
+test("America/Chicago conversions across DST", async () => {
   assert.equal(zonedToUtc("2026-11-24", "11:00").toISOString(), "2026-11-24T17:00:00.000Z"); // CST (-6)
   assert.equal(zonedToUtc("2027-07-13", "11:00").toISOString(), "2027-07-13T16:00:00.000Z"); // CDT (-5)
   assert.equal(offsetMinutes("America/Chicago", new Date("2027-03-13T18:00:00Z")), -360);
@@ -39,7 +39,7 @@ test("America/Chicago conversions across DST", () => {
   assert.deepEqual(utcToZoned(new Date("2026-11-24T17:00:00Z")), { date: "2026-11-24", time: "11:00", weekday: "tue" });
 });
 
-test("contact normalization", () => {
+test("contact normalization", async () => {
   assert.equal(normalizeEmail(" Ana@Example.COM "), "ana@example.com");
   assert.equal(normalizeEmail("nope"), undefined);
   assert.equal(normalizePhone("(281) 555-0100"), "+12815550100");

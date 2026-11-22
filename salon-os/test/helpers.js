@@ -2,19 +2,17 @@ import { mkdtempSync } from "node:fs";
 import { tmpdir } from "node:os";
 import { join } from "node:path";
 import { randomBytes } from "node:crypto";
-import { openDatabase } from "../src/db/database.js";
-import { createApp } from "../src/app.js";
+import { createNodeApp } from "../src/server.js";
 import { createOwner } from "../src/auth.js";
 
 // Sunday 22 Nov 2026, 10:00 CST
 export const NOW = new Date("2026-11-22T16:00:00Z");
 
-export function setup({ now = NOW, env = {}, fetch } = {}) {
-  const db = openDatabase(":memory:");
+export async function setup({ now = NOW, env = {}, fetch } = {}) {
   const storageDir = mkdtempSync(join(tmpdir(), "salonos-"));
   let clock = now;
-  const app = createApp({
-    db, storageDir, now: () => clock, fetch,
+  const { app, db } = await createNodeApp({
+    now: () => clock, fetch, uploadsDir: storageDir,
     env: { SALON_OS_DATA_KEY: randomBytes(32).toString("base64"), ...env },
   });
   return { app, ctx: app.ctx, db, storageDir, setNow: (d) => { clock = d; } };

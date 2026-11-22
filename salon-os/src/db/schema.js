@@ -1,4 +1,6 @@
--- Salon OS schema (SQLite; D1-compatible). Money = integer cents. Time = UTC ISO-8601 strings.
+export const SCHEMA_VERSION = 1;
+export const SCHEMA = `
+-- Salon OS schema (SQLite: Node node:sqlite locally, Cloudflare Durable Object SQLite in production). Money = integer cents. Time = UTC ISO-8601 strings.
 -- Three core records: client, appointment, transaction. Everything else hangs off them.
 
 PRAGMA foreign_keys = ON;
@@ -211,3 +213,4 @@ CREATE TABLE IF NOT EXISTS oauth_states (
   owner_id    TEXT NOT NULL,
   expires_at  TEXT NOT NULL
 );
+`;

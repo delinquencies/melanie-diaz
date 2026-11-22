@@ -1,14 +1,10 @@
-// Loads and validates configuration (catalog, schedule, versioned intake forms).
-import { readFileSync, readdirSync } from "node:fs";
-import { join } from "node:path";
-import { validateDefinition } from "../shared/intake-engine.js";
+// Builds and validates configuration (catalog, schedule, versioned intake forms).
+// Runtime-neutral: callers pass parsed JSON (Node reads files; the Worker bundles JSON imports).
+import { validateDefinition } from "../../public/shared/intake-engine.js";
 
-export function loadConfig(dir) {
-  const catalog = JSON.parse(readFileSync(join(dir, "catalog.json"), "utf8"));
-  const schedule = JSON.parse(readFileSync(join(dir, "schedule.json"), "utf8"));
+export function buildConfig({ catalog, schedule, forms: formList }) {
   const forms = {};
-  for (const file of readdirSync(join(dir, "forms")).filter((f) => f.endsWith(".json"))) {
-    const def = JSON.parse(readFileSync(join(dir, "forms", file), "utf8"));
+  for (const def of formList) {
     validateDefinition(def);
     (forms[def.id] ||= {})[def.version] = def;
   }

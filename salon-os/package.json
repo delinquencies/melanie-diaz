@@ -4,10 +4,15 @@
   "private": true,
   "description": "Salon OS for Melanie Diaz: clients, intake, appointments (sandbox), calendars, private dashboard.",
   "type": "module",
-  "engines": { "node": ">=22.13" },
+  "engines": {
+    "node": ">=22.13"
+  },
   "scripts": {
     "start": "node --disable-warning=ExperimentalWarning src/server.js",
     "create-owner": "node --disable-warning=ExperimentalWarning scripts/create-owner.js",
     "test": "node --disable-warning=ExperimentalWarning --test \"test/*.test.js\""
+  },
+  "devDependencies": {
+    "wrangler": "^4.166.0"
   }
 }

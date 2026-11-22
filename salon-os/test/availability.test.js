@@ -10,7 +10,7 @@ const schedule = {
 const now = new Date("2026-11-22T16:00:00Z"); // Sun 10:00 CST
 const local = (iso) => new Intl.DateTimeFormat("en-US", { timeZone: "America/Chicago", hour: "2-digit", minute: "2-digit", hourCycle: "h23" }).format(new Date(iso));
 
-test("closed days have no slots; Tuesday matches Goldie (80-min silk press → last 3:30 PM)", () => {
+test("closed days have no slots; Tuesday matches Goldie (80-min silk press → last 3:30 PM)", async () => {
   const days = computeSlots({ schedule, dateFrom: "2026-11-23", days: 2, serviceMin: 80, now });
   assert.equal(days[0].slots.length, 0); // Monday closed
   const tue = days[1].slots.map((s) => local(s.start));
@@ -19,27 +19,27 @@ test("closed days have no slots; Tuesday matches Goldie (80-min silk press → l
   assert.equal(tue.length, 10);
 });
 
-test("busy time and buffer (chair time) remove overlapping starts", () => {
+test("busy time and buffer (chair time) remove overlapping starts", async () => {
   const busy = [{ start: new Date("2026-11-24T19:00:00Z"), end: new Date("2026-11-24T20:00:00Z") }]; // 13:00–14:00 CST
   const tue = computeSlots({ schedule, dateFrom: "2026-11-24", days: 1, serviceMin: 60, chairMin: 75, busy, now })[0].slots.map((s) => local(s.start));
   assert.ok(!tue.includes("13:00") && !tue.includes("12:00") && !tue.includes("13:30"));
   assert.ok(tue.includes("11:30") && tue.includes("14:00"));
 });
 
-test("minimum notice and horizon", () => {
+test("minimum notice and horizon", async () => {
   const s = { ...schedule, minNoticeHours: 50, horizonDays: 3 };
   const days = computeSlots({ schedule: s, dateFrom: "2026-11-24", days: 3, serviceMin: 60, now });
   assert.equal(local(days[0].slots[0].start), "12:00"); // Sun 10:00 + 50 h = Tue 12:00
   assert.equal(days[2].slots.length, 0);                // Thu beyond 3-day horizon
 });
 
-test("extra opening on a closed day", () => {
+test("extra opening on a closed day", async () => {
   const extraOpen = [{ start: new Date("2026-11-23T16:00:00Z"), end: new Date("2026-11-23T18:00:00Z") }]; // Mon 10–12 CST
   const mon = computeSlots({ schedule, dateFrom: "2026-11-23", days: 1, serviceMin: 60, extraOpen, now })[0].slots.map((s) => local(s.start));
   assert.deepEqual(mon, ["10:00", "10:30", "11:00"]);
 });
 
-test("DST: Tuesday after spring-forward still starts at 11:00 local", () => {
+test("DST: Tuesday after spring-forward still starts at 11:00 local", async () => {
   const n = new Date("2027-03-10T12:00:00Z");
   const before = computeSlots({ schedule, dateFrom: "2027-03-13", days: 1, serviceMin: 60, now: n })[0].slots;
   const after = computeSlots({ schedule, dateFrom: "2027-03-16", days: 1, serviceMin: 60, now: n })[0].slots;

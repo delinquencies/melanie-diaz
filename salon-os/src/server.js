@@ -5,7 +5,8 @@ import { randomBytes } from "node:crypto";
 import { join, dirname } from "node:path";
 import { fileURLToPath } from "node:url";
 import { openDatabase } from "./db/database.js";
-import { createApp } from "./app.js";
+import { createApp, SECURITY_HEADERS } from "./app.js";
+import { loadConfigFromDir, fsBlobStore, fsStatic } from "./node/adapters.js";
 
 const ROOT = join(dirname(fileURLToPath(import.meta.url)), "..");
 const MAX_BODY = 30 * 1024 * 1024;
@@ -44,10 +45,20 @@ function ensureDevKey() {
   console.warn("Using a DEV data key from data/dev-data-key.txt (sandbox only).");
 }
 
+export async function createNodeApp({ dbFile = ":memory:", env = process.env, now, fetch, uploadsDir = join(ROOT, "data", "uploads") } = {}) {
+  const db = await openDatabase(dbFile);
+  const app = createApp({
+    db, env, now, fetch,
+    config: loadConfigFromDir(join(ROOT, "config")),
+    blobs: fsBlobStore(uploadsDir),
+    staticFile: fsStatic(join(ROOT, "public"), SECURITY_HEADERS),
+  });
+  return { app, db };
+}
+
 if (process.argv[1] === fileURLToPath(import.meta.url)) {
   ensureDevKey();
-  const db = openDatabase(process.env.SALON_OS_DB || join(ROOT, "data", "salon-os.db"));
-  const app = createApp({ db });
+  const { app } = await createNodeApp({ dbFile: process.env.SALON_OS_DB || join(ROOT, "data", "salon-os.db") });
   const port = Number(process.env.PORT || 8787);
   createServer(toNodeHandler(app)).listen(port, "127.0.0.1", () => {
     console.log(`Salon OS (sandbox) on http://127.0.0.1:${port}  ·  intake /book/  ·  dashboard /admin/`);

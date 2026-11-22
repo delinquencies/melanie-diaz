@@ -1,7 +1,7 @@
 // Client records: matching (new vs returning), profiles, professional notes, export, deletion.
 import { newId } from "../lib/security.js";
 import { normalizeEmail, normalizePhone } from "../lib/contact.js";
-import { fieldIndex } from "../shared/intake-engine.js";
+import { fieldIndex } from "../../public/shared/intake-engine.js";
 import { deletePhotoFile } from "./photos.js";
 
 export function audit(db, actor, action, subject, nowIso) {
@@ -159,16 +159,20 @@ export function exportClient(ctx, id) {
 }
 
 /** Hard delete: rows cascade; encrypted photo files removed. Audit keeps only the id + action. */
-export function deleteClient(ctx, id, actor) {
+export async function deleteClient(ctx, id, actor) {
   const { db } = ctx;
   const photos = db.all("SELECT storage_key FROM photos WHERE client_id = ?", id);
   const res = db.tx(() => {
     db.run("UPDATE appointments SET client_id = NULL WHERE client_id = ?", id);
     db.run("UPDATE transactions SET client_id = NULL WHERE client_id = ?", id);
+    // Explicit deletes (don't rely on ON DELETE CASCADE being enforced by every runtime).
+    for (const t of ["photos", "intake_submissions", "consents", "client_notes", "treatment_records", "client_acquisition"]) {
+      db.run(`DELETE FROM ${t} WHERE client_id = ?`, id);
+    }
     return db.run("DELETE FROM clients WHERE id = ?", id);
   });
   if (!res.changes) return false;
-  for (const p of photos) deletePhotoFile(ctx.storage, p.storage_key);
+  for (const p of photos) await deletePhotoFile(ctx.storage, p.storage_key).catch(() => {});
   audit(db, actor, "client.deleted", id, ctx.now().toISOString());
   return true;
 }

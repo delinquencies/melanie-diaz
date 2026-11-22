@@ -2,10 +2,11 @@
 // encrypt answers, store photos, record first-touch attribution. Goldie stays the booking authority.
 import { newId } from "../lib/security.js";
 import { cleanText } from "../lib/contact.js";
-import { validateAnswers } from "../shared/intake-engine.js";
+import { validateAnswers } from "../../public/shared/intake-engine.js";
 import { upsertFromIntake, audit } from "./clients.js";
 import { recordAcquisition, sanitizeCaptured } from "./attribution.js";
-import { storePhoto, deletePhotoFile } from "./photos.js";
+import { preparePhoto, deletePhotoFile } from "./photos.js";
+import { Buffer } from "node:buffer";
 
 const fail = (code, detail) => Object.assign(new Error(code), { code, detail, status: 400 });
 
@@ -14,7 +15,7 @@ const fail = (code, detail) => Object.assign(new Error(code), { code, detail, st
  * @param input { formId, formVersion?, serviceId, clientType, lang, answers, consents: {storage, photos},
  *                captured, photos: [{ fieldId, bytes: Buffer }] }
  */
-export function submitIntake(ctx, input) {
+export async function submitIntake(ctx, input) {
   const { db, cipher, config } = ctx;
   const nowIso = ctx.now().toISOString();
 
@@ -41,16 +42,24 @@ export function submitIntake(ctx, input) {
   const v = validateAnswers(form, { intakeTags: service?.intakeTags || [], clientType }, input.answers || {}, photoCounts);
   if (!v.ok) throw fail("validation", v.errors);
 
-  // Store photo files first (outside the DB transaction); remove them if the DB write fails.
-  const stored = [];
+  // 1) Validate + clean + encrypt every photo before uploading anything (one bad file → nothing stored).
+  let prepared;
   try {
-    for (const p of photos) {
+    prepared = photos.map((p) => {
       const field = form.sections.flatMap((s) => s.fields).find((f) => f.id === p.fieldId);
-      stored.push({ ...storePhoto(ctx.storage, p.bytes), kind: field.photoKind || "current" });
-    }
+      return { ...preparePhoto(cipher, Buffer.from(p.bytes)), kind: field.photoKind || "current" };
+    });
   } catch (err) {
-    for (const s of stored) deletePhotoFile(ctx.storage, s.storageKey);
     throw fail(err.code || "photo_invalid");
+  }
+  // 2) Upload; 3) write the DB. If either fails, remove whatever was uploaded.
+  const stored = [];
+  const cleanup = async () => { for (const s of stored) await deletePhotoFile(ctx.storage, s.storageKey).catch(() => {}); };
+  try {
+    for (const p of prepared) { await ctx.storage.blobs.put(p.storageKey, p.sealed); stored.push(p); }
+  } catch (err) {
+    await cleanup();
+    throw Object.assign(new Error("photo_storage_failed"), { code: "photo_storage_failed", status: 503 });
   }
 
   try {
@@ -92,7 +101,7 @@ export function submitIntake(ctx, input) {
       };
     });
   } catch (err) {
-    for (const s of stored) deletePhotoFile(ctx.storage, s.storageKey);
+    await cleanup();
     throw err;
   }
 }
@@ -109,5 +118,5 @@ export function listIntakes(ctx, { status } = {}) {
 
 export function setIntakeStatus(ctx, id, status) {
   if (!["new", "reviewed", "archived"].includes(status)) throw fail("invalid_status");
-  return ctx.db.run("UPDATE intake_submissions SET status = ? WHERE id = ?", status, id).changes === 1;
+  return ctx.db.run("UPDATE intake_submissions SET status = ? WHERE id = ?", status, id).changes > 0;
 }

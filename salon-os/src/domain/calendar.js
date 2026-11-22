@@ -17,7 +17,7 @@ export function addTimeBlock(ctx, { kind, start, end, label }) {
   return id;
 }
 
-export const removeTimeBlock = (ctx, id) => ctx.db.run("DELETE FROM time_blocks WHERE id = ?", id).changes === 1;
+export const removeTimeBlock = (ctx, id) => ctx.db.run("DELETE FROM time_blocks WHERE id = ?", id).changes > 0;
 
 /** Owner-only unified view. Personal calendar entries carry no titles (we never store them). */
 export function unifiedView(ctx, fromIso, toIso) {
@@ -82,7 +82,7 @@ export function updateCalendar(ctx, id, { kind, blocksAvailability }) {
   if (kind && !["personal", "business"].includes(kind)) throw fail("invalid_kind");
   const r = ctx.db.run("UPDATE calendars SET kind = COALESCE(?, kind), blocks_availability = COALESCE(?, blocks_availability) WHERE id = ?",
     kind || null, typeof blocksAvailability === "boolean" ? (blocksAvailability ? 1 : 0) : null, id);
-  return r.changes === 1;
+  return r.changes > 0;
 }
 
 /** Pull busy intervals for the next `days` days and replace the cached copy. */

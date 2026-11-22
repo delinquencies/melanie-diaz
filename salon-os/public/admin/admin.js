@@ -29,7 +29,22 @@ async function login() {
   view.innerHTML = `<h1>Sign in</h1><form id="f" class="grid2 narrow">
     <label>Email<input name="email" type="email" autocomplete="username" required></label>
     <label>Password<input name="password" type="password" autocomplete="current-password" required></label>
-    <button class="btn">Sign in</button><div id="m"></div></form>`;
+    <button class="btn">Sign in</button><div id="m"></div></form>
+    <details class="narrow"><summary>First-time setup (create the owner account)</summary>
+      <p class="muted">Only works once, and only with the setup token set during deployment.</p>
+      <form id="setup" class="grid2 narrow">
+        <label>Setup token<input name="token" type="password" autocomplete="off" required></label>
+        <label>Owner email<input name="email" type="email" autocomplete="username" required></label>
+        <label>Password (12+ characters)<input name="password" type="password" autocomplete="new-password" minlength="12" required></label>
+        <button class="btn ghost">Create owner</button><div id="sm"></div></form></details>`;
+  view.querySelector("#setup").addEventListener("submit", async (e) => {
+    e.preventDefault();
+    const d = Object.fromEntries(new FormData(e.target));
+    const res = await fetch("/api/setup/owner", { method: "POST", headers: { "content-type": "application/json", authorization: `Bearer ${d.token}` }, body: JSON.stringify({ email: d.email, password: d.password }) });
+    const b = await res.json().catch(() => ({}));
+    view.querySelector("#sm").innerHTML = res.ok ? `<p class="note">Owner created. Sign in above, then remove the SETUP_TOKEN secret.</p>`
+      : errBox(new Error({ forbidden: "Setup token not accepted", owner_exists: "An owner already exists", invalid_owner: b.detail || "Invalid email or password" }[b.error] || b.error || "Setup failed"));
+  });
   view.querySelector("#f").addEventListener("submit", async (e) => {
     e.preventDefault();
     const d = Object.fromEntries(new FormData(e.target));
