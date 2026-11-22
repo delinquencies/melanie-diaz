@@ -1,0 +1,3 @@
+# Private runtime data: database, encrypted uploads, dev keys. Never commit.
+data/
+.env

@@ -1,0 +1,179 @@
+{
+  "id": "client-intake",
+  "version": 1,
+  "status": "draft-es-needs-review",
+  "consent": {
+    "version": "2026-11-v1",
+    "storage": {
+      "en": "I agree that Melanie Diaz may store these answers to prepare for my appointment. They are kept private and only Melanie can see them. I can ask for a copy or for deletion at any time.",
+      "es": "Acepto que Melanie Diaz guarde estas respuestas para preparar mi cita. Se mantienen privadas y solo Melanie puede verlas. Puedo pedir una copia o su eliminación en cualquier momento."
+    },
+    "photos": {
+      "en": "I agree to share these photos with Melanie for my consultation. They are never posted publicly.",
+      "es": "Acepto compartir estas fotos con Melanie para mi consulta. Nunca se publican."
+    }
+  },
+  "sections": [
+    {
+      "id": "contact",
+      "title": { "en": "Your details", "es": "Tus datos" },
+      "appliesTo": "all",
+      "fields": [
+        { "id": "first_name", "type": "text", "required": true, "maxLength": 80, "label": { "en": "First name", "es": "Nombre" } },
+        { "id": "last_name", "type": "text", "required": false, "maxLength": 80, "label": { "en": "Last name", "es": "Apellido" } },
+        { "id": "email", "type": "email", "required": true, "label": { "en": "Email", "es": "Correo electrónico" } },
+        { "id": "phone", "type": "tel", "required": true, "label": { "en": "Mobile number", "es": "Celular" } },
+        { "id": "preferred_contact", "type": "radio", "required": false, "label": { "en": "Best way to reach you", "es": "¿Cómo prefieres que te contactemos?" },
+          "options": [
+            { "value": "text", "label": { "en": "Text", "es": "Mensaje de texto" } },
+            { "value": "call", "label": { "en": "Call", "es": "Llamada" } },
+            { "value": "email", "label": { "en": "Email", "es": "Correo" } },
+            { "value": "whatsapp", "label": { "en": "WhatsApp", "es": "WhatsApp" } }
+          ] }
+      ]
+    },
+    {
+      "id": "discovery",
+      "title": { "en": "How you found Melanie", "es": "Cómo conociste a Melanie" },
+      "appliesTo": "all",
+      "clientTypes": ["new"],
+      "fields": [
+        { "id": "heard_about", "type": "radio", "required": true, "label": { "en": "How did you hear about Melanie?", "es": "¿Cómo supiste de Melanie?" },
+          "options": [
+            { "value": "google_search", "label": { "en": "Google Search", "es": "Búsqueda en Google" } },
+            { "value": "google_maps", "label": { "en": "Google Maps", "es": "Google Maps" } },
+            { "value": "instagram", "label": { "en": "Instagram", "es": "Instagram" } },
+            { "value": "facebook", "label": { "en": "Facebook", "es": "Facebook" } },
+            { "value": "referral", "label": { "en": "Friend or family referral", "es": "Recomendación de familia o amistad" } },
+            { "value": "in_person", "label": { "en": "Saw her work or business in person", "es": "Vi su trabajo o negocio en persona" } },
+            { "value": "other", "label": { "en": "Other", "es": "Otro" } }
+          ] },
+        { "id": "referrer_name", "type": "text", "required": false, "maxLength": 120, "showIf": { "field": "heard_about", "equals": "referral" },
+          "label": { "en": "Who referred you? (optional)", "es": "¿Quién te recomendó? (opcional)" } },
+        { "id": "heard_about_other", "type": "text", "required": false, "maxLength": 120, "showIf": { "field": "heard_about", "equals": "other" },
+          "label": { "en": "Tell us where (optional)", "es": "Cuéntanos dónde (opcional)" } }
+      ]
+    },
+    {
+      "id": "hair",
+      "title": { "en": "About your hair", "es": "Sobre tu cabello" },
+      "appliesTo": "all",
+      "clientTypes": ["new"],
+      "fields": [
+        { "id": "goals", "type": "textarea", "required": true, "maxLength": 1000, "label": { "en": "What are you hoping for from this appointment?", "es": "¿Qué esperas de esta cita?" } },
+        { "id": "hair_history", "type": "textarea", "required": false, "maxLength": 1500, "label": { "en": "Anything Melanie should know about your hair's history? (cuts, damage, treatments)", "es": "¿Algo que Melanie deba saber sobre la historia de tu cabello? (cortes, daño, tratamientos)" } },
+        { "id": "has_sensitivities", "type": "radio", "required": true, "label": { "en": "Any product allergies or scalp sensitivities?", "es": "¿Alergias a productos o sensibilidad en el cuero cabelludo?" },
+          "options": [
+            { "value": "no", "label": { "en": "No", "es": "No" } },
+            { "value": "yes", "label": { "en": "Yes", "es": "Sí" } },
+            { "value": "unsure", "label": { "en": "Not sure", "es": "No estoy segura/o" } }
+          ] },
+        { "id": "sensitivity_details", "type": "textarea", "required": true, "sensitive": true, "maxLength": 800, "showIf": { "field": "has_sensitivities", "equals": "yes" },
+          "label": { "en": "Please describe (ingredients, reactions)", "es": "Descríbelo por favor (ingredientes, reacciones)" } }
+      ]
+    },
+    {
+      "id": "curly",
+      "title": { "en": "Your curls", "es": "Tus rizos" },
+      "appliesTo": ["curly"],
+      "clientTypes": ["new"],
+      "fields": [
+        { "id": "curl_routine", "type": "textarea", "required": false, "maxLength": 800, "label": { "en": "Your current routine and products", "es": "Tu rutina y productos actuales" } },
+        { "id": "curl_concerns", "type": "multiselect", "required": false, "label": { "en": "Main concerns", "es": "Preocupaciones principales" },
+          "options": [
+            { "value": "frizz", "label": { "en": "Frizz", "es": "Frizz" } },
+            { "value": "dryness", "label": { "en": "Dryness", "es": "Resequedad" } },
+            { "value": "definition", "label": { "en": "Definition", "es": "Definición" } },
+            { "value": "shrinkage", "label": { "en": "Shrinkage", "es": "Encogimiento" } },
+            { "value": "breakage", "label": { "en": "Breakage", "es": "Quiebre" } },
+            { "value": "shape", "label": { "en": "Shape / volume", "es": "Forma / volumen" } },
+            { "value": "scalp", "label": { "en": "Scalp", "es": "Cuero cabelludo" } }
+          ] },
+        { "id": "shape_goals", "type": "textarea", "required": false, "maxLength": 800, "label": { "en": "Shape and styling goals", "es": "Forma y estilo que buscas" } }
+      ]
+    },
+    {
+      "id": "silk",
+      "title": { "en": "Before your silk press", "es": "Antes de tu silk press" },
+      "appliesTo": ["silk-press"],
+      "clientTypes": ["new"],
+      "fields": [
+        { "id": "silk_chemical_history", "type": "multiselect", "required": true, "sensitive": true, "label": { "en": "Chemical treatments in the last 12 months", "es": "Tratamientos químicos en los últimos 12 meses" },
+          "options": [
+            { "value": "none", "label": { "en": "None", "es": "Ninguno" } },
+            { "value": "relaxer", "label": { "en": "Relaxer", "es": "Relajante" } },
+            { "value": "keratin", "label": { "en": "Keratin / smoothing", "es": "Keratina / alisado" } },
+            { "value": "color", "label": { "en": "Color", "es": "Tinte" } },
+            { "value": "bleach", "label": { "en": "Bleach / lightening", "es": "Decoloración" } },
+            { "value": "unsure", "label": { "en": "Not sure", "es": "No estoy segura/o" } }
+          ] },
+        { "id": "silk_heat_concerns", "type": "textarea", "required": false, "maxLength": 600, "label": { "en": "Any heat damage or concerns?", "es": "¿Daño por calor o alguna preocupación?" } },
+        { "id": "silk_desired", "type": "textarea", "required": false, "maxLength": 600, "label": { "en": "The finish you want", "es": "El acabado que deseas" } }
+      ]
+    },
+    {
+      "id": "color",
+      "title": { "en": "Color history", "es": "Historial de color" },
+      "appliesTo": ["color"],
+      "clientTypes": ["new", "returning"],
+      "fields": [
+        { "id": "color_previous", "type": "multiselect", "required": true, "sensitive": true, "label": { "en": "What's on your hair now?", "es": "¿Qué tiene tu cabello ahora?" },
+          "options": [
+            { "value": "none", "label": { "en": "Nothing / natural", "es": "Nada / natural" } },
+            { "value": "box_dye", "label": { "en": "Box dye", "es": "Tinte de caja" } },
+            { "value": "salon_color", "label": { "en": "Salon color", "es": "Color de salón" } },
+            { "value": "bleach", "label": { "en": "Bleach / highlights", "es": "Decoloración / mechas" } },
+            { "value": "henna", "label": { "en": "Henna", "es": "Henna" } }
+          ] },
+        { "id": "color_last_when", "type": "text", "required": false, "maxLength": 80, "showIf": { "field": "color_previous", "in": ["box_dye", "salon_color", "bleach", "henna"] },
+          "label": { "en": "When was the last color or bleach?", "es": "¿Cuándo fue el último tinte o decoloración?" } },
+        { "id": "color_desired", "type": "textarea", "required": true, "maxLength": 800, "label": { "en": "Describe the color you want", "es": "Describe el color que quieres" } }
+      ]
+    },
+    {
+      "id": "chemical",
+      "title": { "en": "Chemical service screening", "es": "Revisión para servicio químico" },
+      "appliesTo": ["chemical"],
+      "clientTypes": ["new", "returning"],
+      "fields": [
+        { "id": "chem_history", "type": "multiselect", "required": true, "sensitive": true, "label": { "en": "Processing in the last 12 months", "es": "Procesos en los últimos 12 meses" },
+          "options": [
+            { "value": "none", "label": { "en": "None", "es": "Ninguno" } },
+            { "value": "relaxer", "label": { "en": "Relaxer", "es": "Relajante" } },
+            { "value": "keratin", "label": { "en": "Keratin / smoothing", "es": "Keratina / alisado" } },
+            { "value": "color", "label": { "en": "Color", "es": "Tinte" } },
+            { "value": "bleach", "label": { "en": "Bleach", "es": "Decoloración" } },
+            { "value": "perm", "label": { "en": "Perm / texturizer", "es": "Permanente / texturizante" } }
+          ] },
+        { "id": "chem_consult_ack", "type": "checkbox", "required": true, "label": { "en": "I understand this service needs Melanie's consultation and approval first.", "es": "Entiendo que este servicio necesita la consulta y aprobación de Melanie primero." } }
+      ]
+    },
+    {
+      "id": "returning",
+      "title": { "en": "Since your last visit", "es": "Desde tu última visita" },
+      "appliesTo": "all",
+      "clientTypes": ["returning"],
+      "fields": [
+        { "id": "changes_since", "type": "textarea", "required": false, "maxLength": 800, "label": { "en": "Anything new? (treatments, concerns, goals)", "es": "¿Algo nuevo? (tratamientos, preocupaciones, metas)" } },
+        { "id": "new_sensitivity", "type": "textarea", "required": false, "sensitive": true, "maxLength": 600, "label": { "en": "Any new allergies or sensitivities?", "es": "¿Alergias o sensibilidades nuevas?" } }
+      ]
+    },
+    {
+      "id": "photos",
+      "title": { "en": "Photos (optional)", "es": "Fotos (opcional)" },
+      "appliesTo": "all",
+      "fields": [
+        { "id": "photos_current", "type": "photo", "required": false, "maxFiles": 3, "photoKind": "current", "label": { "en": "Your hair today", "es": "Tu cabello hoy" } },
+        { "id": "photos_inspiration", "type": "photo", "required": false, "maxFiles": 3, "photoKind": "inspiration", "label": { "en": "Inspiration", "es": "Inspiración" } }
+      ]
+    },
+    {
+      "id": "notes",
+      "title": { "en": "Anything else", "es": "Algo más" },
+      "appliesTo": "all",
+      "fields": [
+        { "id": "notes", "type": "textarea", "required": false, "maxLength": 1000, "label": { "en": "Notes for Melanie (optional)", "es": "Notas para Melanie (opcional)" } }
+      ]
+    }
+  ]
+}

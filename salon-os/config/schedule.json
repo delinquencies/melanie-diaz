@@ -1,0 +1,20 @@
+{
+  "_source": "Goldie public config snapshot 2026-11-22. Used ONLY by the native sandbox engine; Goldie stays authoritative.",
+  "timezone": "America/Chicago",
+  "hours": {
+    "sun": null,
+    "mon": null,
+    "tue": ["11:00", "17:00"],
+    "wed": ["11:00", "17:00"],
+    "thu": ["11:00", "17:00"],
+    "fri": ["11:00", "17:05"],
+    "sat": ["10:00", "17:00"]
+  },
+  "slotIntervalMin": 30,
+  "bufferMin": 0,
+  "minNoticeHours": 0,
+  "horizonDays": 365,
+  "depositPercent": 25,
+  "cancelWindowHours": 24,
+  "_flags": ["fri closes 17:05 in Goldie (typo?)", "bufferMin/minNoticeHours 0 mirror Goldie; Melanie to decide", "horizon: Goldie config 12 months vs ~39 days observed"]
+}
