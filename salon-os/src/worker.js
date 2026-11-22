@@ -15,6 +15,34 @@ import intakeV1 from "../config/forms/intake.v1.json";
 const config = buildConfig({ catalog, schedule, forms: [intakeV1] });
 const MAX_BODY = 30 * 1024 * 1024;
 
+/** Blob store inside the Durable Object's SQLite (rows are capped at 2 MB, so chunk at 1 MB). */
+const CHUNK = 1024 * 1024;
+function sqliteBlobStore(db) {
+  return {
+    async put(key, bytes) {
+      const u8 = bytes instanceof Uint8Array ? bytes : new Uint8Array(bytes);
+      db.tx(() => {
+        db.run("DELETE FROM blob_chunks WHERE blob_key = ?", key);
+        for (let i = 0, n = 0; i < u8.length; i += CHUNK, n++) {
+          // Copy into a fresh, exactly-sized buffer (Buffer.slice is a view into a shared pool).
+          const part = new Uint8Array(u8.subarray(i, i + CHUNK));
+          db.run("INSERT INTO blob_chunks (blob_key, idx, data) VALUES (?,?,?)", key, n, part.buffer);
+        }
+      });
+    },
+    async get(key) {
+      const rows = db.all("SELECT data FROM blob_chunks WHERE blob_key = ? ORDER BY idx", key);
+      if (!rows.length) return null;
+      const parts = rows.map((r) => new Uint8Array(r.data));
+      const out = new Uint8Array(parts.reduce((n, p) => n + p.length, 0));
+      let o = 0;
+      for (const p of parts) { out.set(p, o); o += p.length; }
+      return out;
+    },
+    async delete(key) { db.run("DELETE FROM blob_chunks WHERE blob_key = ?", key); },
+  };
+}
+
 function r2Store(bucket) {
   return {
     put: (key, bytes) => bucket.put(key, bytes),
@@ -27,7 +55,9 @@ export class SalonOS extends DurableObject {
   constructor(ctx, env) {
     super(ctx, env);
     this.db = openDurableDatabase(ctx.storage);
-    this.app = createApp({ db: this.db, env, config, blobs: r2Store(env.PHOTOS) });
+    // R2 when bound (enable R2 on the account to use it); otherwise encrypted chunks in this DO's SQLite.
+    const blobs = env.PHOTOS ? r2Store(env.PHOTOS) : sqliteBlobStore(this.db);
+    this.app = createApp({ db: this.db, env, config, blobs });
   }
 
   async fetch(request) {

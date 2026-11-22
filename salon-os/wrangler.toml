@@ -8,7 +8,7 @@ compatibility_flags = ["nodejs_compat"]
 # Private by default: no public *.workers.dev URL.
 # Attach a custom domain (e.g. os.melanie-diaz.com) and put Cloudflare Access in front of it — see SALON_OS.md.
 workers_dev = false
-# routes = [{ pattern = "os.melanie-diaz.com", custom_domain = true }]
+routes = [{ pattern = "os.melanie-diaz.com", custom_domain = true }]
 
 [assets]
 directory = "./public"
@@ -22,9 +22,11 @@ class_name = "SalonOS"
 tag = "v1"
 new_sqlite_classes = ["SalonOS"]
 
-[[r2_buckets]]
-binding = "PHOTOS"
-bucket_name = "melanie-diaz-salon-os-photos"
+# Photos: stored encrypted inside the Durable Object's SQLite by default.
+# To move them to R2 later: enable R2 on the account, create the bucket, then uncomment:
+# [[r2_buckets]]
+# binding = "PHOTOS"
+# bucket_name = "melanie-diaz-salon-os-photos"
 
 [triggers]
 crons = ["*/30 * * * *"]   # Google Calendar free/busy sync (no-op until a calendar is connected)

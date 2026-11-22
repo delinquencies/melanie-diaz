@@ -1,6 +1,13 @@
 # Salon OS — living implementation doc
 
-_Last updated: 2026-11-22._ Keep this file short and current. It replaces separate plan/status files.
+_Last updated: 2026-11-22 (deployed)._ Keep this file short and current. It replaces separate plan/status files.
+
+## ▶ Resume here (paused 2026-11-22)
+State: **live and private** at https://os.melanie-diaz.com behind Cloudflare Access (3 emails). **No owner account yet**, so nobody can log in to the dashboard. The setup token was removed while pausing.
+1. Owner setup: `cd salon-os && npx wrangler secret put SETUP_TOKEN` (new random value) → sign in through Access at `/admin/` → *First-time setup* → then `npx wrangler secret delete SETUP_TOKEN`.
+2. Move `SALON_OS_DATA_KEY` from `salon-os/data/PRODUCTION-SECRETS-move-to-password-manager.txt` into a password manager, then delete that file.
+3. Cloudflare Pages: turn off preview builds for non-main branches (the design branch is pushed).
+4. Then: connect Google Calendar; Melanie reviews the intake form.
 
 ## Boundaries (non-negotiable)
 - **Goldie is the live booking authority.** Salon OS never creates, changes or reads live Goldie bookings; there is no supported Goldie API.
@@ -24,7 +31,7 @@ _Last updated: 2026-11-22._ Keep this file short and current. It replaces separa
 | Eligibility (sandbox) | ✅ | First-time vs returning; Dry Curly Cut needs a **verified** First-Time Experience/Reset within 6 months; duplicate haircut blocked; owner override |
 | Google Calendar | ✅ code · ⛔ not connected | OAuth (read-only, free/busy only), cron sync every 30 min on Cloudflare. Needs credentials. |
 | Owner dashboard | ✅ | Login, first-time setup, Today, Calendar, Intakes, Clients, Booking sandbox, Marketing, Settings |
-| **Cloudflare build** | ✅ **ready, not deployed** | Worker + Durable Object SQLite + R2 + Static Assets. Verified locally in Cloudflare's runtime (`wrangler dev`): setup, login, intake with photo → R2, GPS stripped, 3 concurrent bookings → 1 accepted / 2 rejected, client delete removes photos, cron runs. |
+| **Deployment** | ✅ **live, private** | https://os.melanie-diaz.com (Worker `melanie-diaz-salon-os`, free plan). Behind Cloudflare Access app **Salon OS** → policy **Salon OS owners** (3 emails). Anonymous requests verified to be redirected to Access login. Photos stored encrypted in the Durable Object (R2 not enabled on the account). `PUBLIC_INTAKE=off`. Main site verified unaffected. |
 | Financials / retail / ad spend | ⏳ schema only | by design |
 
 Tests: `cd salon-os && npm test` → **41 passing** on Node.
@@ -38,7 +45,7 @@ Tests: `cd salon-os && npm test` → **41 passing** on Node.
 6. **Session cookie `SameSite=Lax`** (OAuth return), CSRF blocked by the required `x-salon-os` header.
 7. **Single owner account** for now.
 
-## Deploy runbook (Cloudflare) — you run these; nothing here touches melanie-diaz.com
+## Deploy runbook (Cloudflare) — done 2026-11-22; kept for redeploys/rebuilds
 Run from `salon-os/`. Each command is safe to read before running.
 
 1. **Sign in** (opens your browser; you log in to Cloudflare yourself):

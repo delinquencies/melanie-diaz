@@ -208,6 +208,14 @@ CREATE TABLE IF NOT EXISTS audit_log (
   at        TEXT NOT NULL
 );
 
+-- Encrypted blobs (photos) stored in 1 MB chunks when no object store (R2) is configured.
+CREATE TABLE IF NOT EXISTS blob_chunks (
+  blob_key  TEXT NOT NULL,
+  idx       INTEGER NOT NULL,
+  data      BLOB NOT NULL,
+  PRIMARY KEY (blob_key, idx)
+);
+
 CREATE TABLE IF NOT EXISTS oauth_states (
   state       TEXT PRIMARY KEY,
   owner_id    TEXT NOT NULL,
