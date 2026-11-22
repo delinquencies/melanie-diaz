@@ -1,0 +1,63 @@
+/* =====================================================================
+   Scroll reveal + masked line rise + swipe rail
+   COMPONENT_INVENTORY §4–6
+   ===================================================================== */
+
+/* ---- Reveal (D&D vw-reveal, slightly quicker). Only hidden when JS is on. ---- */
+.js-reveal [data-reveal]{
+  opacity:0; translate:0 24px;
+  transition:opacity var(--dur-reveal) var(--ease-out), translate var(--dur-reveal) var(--ease-out);
+  transition-delay:calc(var(--i, 0) * var(--stagger));
+}
+.js-reveal [data-reveal].is-in{ opacity:1; translate:0 0; }
+
+/* ---- Masked line rise (GDY rise-up), hero headline only ---- */
+.rise .line{ display:block; overflow:clip; padding-bottom:.04em; }
+.rise .line > span{ display:block; }
+.js-reveal .rise .line > span{
+  translate:0 110%;
+  transition:translate .8s var(--ease-rise);
+  transition-delay:calc(300ms + var(--i, 0) * 90ms);
+}
+.js-reveal .rise.is-in .line > span{ translate:0 0; }
+
+@media (prefers-reduced-motion:reduce){
+  .js-reveal [data-reveal],
+  .js-reveal .rise .line > span{ opacity:1; translate:none; transition:none; }
+}
+
+/* ---- Swipe rail: native scroll-snap, peek of the next item on phones ---- */
+.rail{ position:relative; }
+.rail__track{
+  display:grid; grid-auto-flow:column;
+  grid-auto-columns:var(--rail-item, 84%);
+  gap:var(--rail-gap, 12px);
+  overflow-x:auto; overscroll-behavior-x:contain;
+  scroll-snap-type:x mandatory;
+  scroll-padding-inline:var(--gutter);
+  padding-inline:var(--gutter);
+  margin-inline:calc(var(--gutter) * -1);
+  scrollbar-width:none;
+  list-style:none; margin-block:0; padding-block:0;
+}
+.rail__track::-webkit-scrollbar{ display:none; }
+.rail__track > *{ scroll-snap-align:start; min-width:0; }
+.rail__track:focus-visible{ outline:2px solid currentColor; outline-offset:4px; }
+
+.rail__controls{ display:none; }
+.rail__dots{ display:flex; justify-content:center; gap:6px; margin-top:var(--s-4); }
+.rail__dots span{ width:6px; height:6px; border-radius:var(--pill); background:currentColor; opacity:.25; transition:opacity .2s; }
+.rail__dots span.is-on{ opacity:1; }
+
+@media (min-width:600px){ .rail__track{ --rail-item:var(--rail-item-md, 46%); } }
+@media (min-width:1024px){
+  .rail__track{ --rail-item:var(--rail-item-lg, calc((100% - 3 * var(--rail-gap, 12px)) / 4)); margin-inline:0; padding-inline:0; scroll-padding-inline:0; }
+  .rail__dots{ display:none; }
+  .rail__controls{ display:flex; justify-content:flex-end; gap:var(--s-2); margin-top:var(--s-5); }
+  .rail__btn{
+    width:var(--tap); height:var(--tap); display:grid; place-items:center; cursor:pointer;
+    border:1.5px solid currentColor; background:transparent; border-radius:var(--radius);
+  }
+  .rail__btn:disabled{ opacity:.3; cursor:default; }
+  .rail__btn svg{ width:18px; height:18px; fill:none; stroke:currentColor; stroke-width:1.8; }
+}

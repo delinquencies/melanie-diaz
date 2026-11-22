@@ -1,0 +1,11 @@
+{
+  "_about": "Single switch for where 'Book' goes. See docs/COMPONENT_INVENTORY.md §9a. To move to custom booking later: set provider to 'custom' and ship a script that defines window.MDBooking.open({ serviceId }). Until that hook exists, every Book link falls back to Goldie.",
+  "provider": "goldie",
+  "goldie": {
+    "url": "https://book.heygoldie.com/BRUJAS",
+    "serviceUrls": {}
+  },
+  "custom": {
+    "fallbackUrl": "https://book.heygoldie.com/BRUJAS"
+  }
+}

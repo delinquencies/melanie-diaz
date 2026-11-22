@@ -26,6 +26,23 @@
 ```
 `@import` chains are fine at this size. If request count matters later, a single hand-run `cat` into `site.css` is enough, so we never need a bundler.
 
+## Ground rules (from the owner, 2026-11-21)
+1. **Mobile first.** Each step is built and checked at **375×812 first**, then tablet and desktop. A component isn't done until it works one-handed on a phone.
+2. **Swappable booking.** All Book CTAs go through the booking adapter (COMPONENT_INVENTORY §9a). Moving to custom booking later = a new provider + `data/booking.json` change, not a markup rewrite.
+
+## Status (2026-11-21)
+Built as shared, mobile-first components, previewed on `prototypes/components/` (not the homepage):
+- `assets/css/tokens.css`, `base.css`: ink & bone tokens, Montserrat roles, grid, buttons, split.
+- Header + mobile menu + per-section contrast copies (`header.css`, `header.js`).
+- Scroll reveal, masked line rise, swipe rail (`motion-rail.css/js`).
+- Services from `data/services.json` (EN/ES verbatim from the current site) with a Book button on every row and sticky category chips (`services.css/js`).
+- Booking adapter (`booking.js`, `data/booking.json`): Goldie today, custom-ready.
+- Hero (stacked on phones so text never covers the portrait; overlay variant for wide media; video-ready) and mobile bottom Book bar (`hero-bookbar.css/js`).
+- Stories viewer prototype (`prototypes/stories/`), not yet moved onto the shared tokens/files.
+Not started: reviews (blocked on data), FAQ, editorial gallery, homepage assembly, ES page.
+
+**Chosen direction (2026-11-21):** `prototypes/lead/` — A's split-name hero → C's poster service blocks (from `services.json`) → circle stories, under the sticky contrast header. New shared pieces: `assets/css/components/poster.css`, `assets/js/fit.js`, an `accent` section ground, and `--font-display` tokens. The page carries a **demo panel** (`prototypes/lead/demo.js`, client tool, remove before launch): 16 accents (neutral, soft/earthy, deep, acid), 9 dark-section colours, 9 light-section colours, 15 headline fonts and 13 body fonts, with automatic text-colour choice on accents, a WCAG contrast readout, Shuffle, Reset, and "Copy choice" to send back the exact combination. Only `--ink` and `--bone` are hand-set; lines, scrims and tonal steps derive from them via `color-mix()`.
+
 ## Build sequence
 
 ### Step 0 — Housekeeping (½ day)

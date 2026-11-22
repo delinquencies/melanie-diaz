@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+  <meta name="robots" content="noindex, nofollow" />
+  <meta name="theme-color" content="#f1ebe0" />
+  <title>Lead-in · Melanie Diaz</title>
+
+  <link rel="preload" href="/melanie.jpg" as="image" fetchpriority="high" />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300..800&display=swap" rel="stylesheet">
+
+  <!-- stories component first, so the shared base can override its page chrome -->
+  <link rel="stylesheet" href="/prototypes/stories/stories.css" />
+  <link rel="stylesheet" href="/assets/css/tokens.css" />
+  <link rel="stylesheet" href="/assets/css/base.css" />
+  <link rel="stylesheet" href="/assets/css/components/header.css" />
+  <link rel="stylesheet" href="/assets/css/components/motion-rail.css" />
+  <link rel="stylesheet" href="/assets/css/components/poster.css" />
+
+  <style>
+    /* stories on an ink band: the ring's inner gap takes the band colour */
+    .stories-band{ --paper:var(--ink); padding-block:var(--s-8); }
+    .stories-band .stories{ margin-top:0; }
+    .stories-band .stories__title{ font-family:var(--font-display); font-stretch:var(--display-stretch); font-weight:var(--display-heavy); text-transform:uppercase; letter-spacing:-.01em; }
+    .stories-band .story__label{ color:var(--bone); }
+
+    /* story rings follow the accent palette */
+    :root{ --ring-a:var(--accent-1); --ring-b:var(--accent-2); }
+
+    .end{ padding:var(--s-7) var(--gutter) 96px; text-align:center; font-size:.8125rem; }
+  </style>
+</head>
+<body>
+<a class="skip-link" href="#main">Skip to content</a>
+
+<!-- ================= Sticky header with contrast copies ================= -->
+<header class="site-header" data-site-header>
+  <div class="site-header__bar container">
+    <div class="site-header__start">
+      <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="site-menu">
+        <span class="nav-toggle__lines" aria-hidden="true"></span>
+      </button>
+      <nav class="site-header__links" aria-label="Main">
+        <a href="#services">Services</a>
+        <a href="#stories">Stories</a>
+      </nav>
+    </div>
+    <a class="wordmark" href="#main">Melanie Diaz</a>
+    <div class="site-header__end">
+      <a class="lang-link" href="/es/" hreflang="es" lang="es">Español</a>
+      <a class="btn btn--solid header-book" href="https://book.heygoldie.com/BRUJAS" data-book data-source="header">Book</a>
+    </div>
+  </div>
+</header>
+<button class="menu-scrim" type="button" tabindex="-1" aria-hidden="true"></button>
+<div class="site-menu" id="site-menu">
+  <ul class="site-menu__list" role="list">
+    <li><a href="#services">Services</a></li>
+    <li><a href="#stories">Stories</a></li>
+    <li><a href="/es/" hreflang="es" lang="es">Español</a></li>
+  </ul>
+  <div class="site-menu__foot">
+    <a class="btn btn--solid btn--block" href="https://book.heygoldie.com/BRUJAS" data-book data-source="menu">Book an appointment</a>
+    <div class="site-menu__contact">
+      <a href="tel:+12817079653">Call</a>
+      <a href="https://wa.me/12817079653">WhatsApp</a>
+      <a href="https://www.instagram.com/brujassb">Instagram</a>
+    </div>
+  </div>
+</div>
+
+<main id="main" tabindex="-1">
+
+  <!-- ================= 1 · Hero: name split across the photo edge ================= -->
+  <section class="hero-split" data-ground="light" data-nav-ground>
+    <div class="hero-split__img">
+      <img src="/melanie.jpg" alt="Melanie Diaz" fetchpriority="high">
+      <div class="hero-split__tag"><p class="eyebrow">Curly hair specialist · Baytown, TX</p></div>
+    </div>
+    <h1 class="split-name" aria-label="Melanie Diaz">
+      <span class="split-name__word split-name__top" data-fit="uniform" data-fit-max="170" data-fit-twin=".split-name__word" aria-hidden="true"><span data-line>Melanie</span><span data-line>Diaz</span></span>
+      <span class="split-name__word split-name__bot" aria-hidden="true"><span data-line>Melanie</span><span data-line>Diaz</span></span>
+    </h1>
+    <div class="hero-split__below">
+      <p class="body-l">Thoughtful cuts and styling for curls, coils, and confidence—based in Baytown, welcoming Greater Houston and beyond.</p>
+      <a class="btn btn--solid btn--block" href="https://book.heygoldie.com/BRUJAS" data-book data-source="hero">Book an appointment</a>
+    </div>
+  </section>
+
+  <!-- ================= 2 · Services as poster blocks (rendered from /data/services.json) ================= -->
+  <div id="services" data-poster-services></div>
+  <noscript><p class="end"><a href="https://book.heygoldie.com/BRUJAS">See services &amp; book</a></p></noscript>
+
+  <!-- ================= 3 · Circle stories ================= -->
+  <section class="stories-band" id="stories" data-ground="dark" data-nav-ground>
+    <div class="container">
+      <div class="stories" aria-labelledby="storiesTitle" data-stories>
+        <h2 id="storiesTitle" class="stories__title">Stories</h2>
+        <ul class="stories__row" role="list"></ul>
+      </div>
+    </div>
+  </section>
+
+  <p class="end">Lead-in prototype · hero → services → stories. Ink &amp; bone are proposals; accents undecided.</p>
+</main>
+
+<!-- Story viewer (from prototypes/stories) -->
+<div class="viewer" id="storyViewer" role="dialog" aria-modal="true" aria-label="Stories" hidden>
+  <div class="viewer__track" tabindex="-1"></div>
+  <button class="viewer__btn viewer__close" type="button" aria-label="Close stories"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18"/></svg></button>
+  <div class="viewer__tools">
+    <button class="viewer__btn viewer__mute" type="button" aria-pressed="true" aria-label="Unmute">
+      <svg class="i-muted" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 9h4l5-4v14l-5-4H4z"/><path d="M17 9l4 6M21 9l-4 6"/></svg>
+      <svg class="i-sound" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 9h4l5-4v14l-5-4H4z"/><path d="M17 8.5a5 5 0 010 7M19.5 6a8.5 8.5 0 010 12"/></svg>
+    </button>
+  </div>
+  <div class="viewer__nav">
+    <button class="viewer__btn viewer__prev" type="button" aria-label="Previous story"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 15l6-6 6 6"/></svg></button>
+    <button class="viewer__btn viewer__next" type="button" aria-label="Next story"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg></button>
+  </div>
+  <p class="viewer__status" aria-live="polite"></p>
+</div>
+<script type="application/json" id="storiesData">
+[
+  { "title": "Natural curls", "type": "video", "src": "../../Final.mp4", "poster": "../../SilkPressFinal.jpg", "cta": { "label": "Book", "href": "https://book.heygoldie.com/BRUJAS" } },
+  { "title": "Curly cut", "type": "image", "src": "../../Curls.jpg", "duration": 5000, "placeholder": true, "cta": { "label": "Book a curly cut", "href": "https://book.heygoldie.com/BRUJAS" } },
+  { "title": "Definition", "type": "image", "src": "../../Curls2.jpg", "duration": 5000, "placeholder": true, "cta": { "label": "Book", "href": "https://book.heygoldie.com/BRUJAS" } },
+  { "title": "Silk press", "type": "image", "src": "../../SilkPress2.jpg", "duration": 5000, "placeholder": true, "cta": { "label": "Book a silk press", "href": "https://book.heygoldie.com/BRUJAS" } },
+  { "title": "In the chair", "type": "image", "src": "../../SilkPress3.jpg", "duration": 5000, "placeholder": true, "cta": { "label": "Book", "href": "https://book.heygoldie.com/BRUJAS" } },
+  { "title": "Before", "type": "image", "src": "../../Before1.jpg", "duration": 5000, "placeholder": true, "cta": { "label": "Book", "href": "https://book.heygoldie.com/BRUJAS" } },
+  { "title": "Finish", "type": "image", "src": "../../SilkPress4.jpg", "duration": 5000, "placeholder": true, "cta": { "label": "Book", "href": "https://book.heygoldie.com/BRUJAS" } }
+]
+</script>
+
+
+<script type="module" src="/assets/js/booking.js"></script>
+<script type="module" src="/assets/js/header.js"></script>
+<script src="/assets/js/fit.js"></script>
+<script type="module" src="/prototypes/stories/stories.js"></script>
+<script type="module">
+  /* ---- Services as poster blocks, from the single data source ---- */
+  const host = document.querySelector("[data-poster-services]");
+  const esc = (s) => String(s).replace(/[&<>"']/g, (c) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[c]));
+  const dur = (m) => { const h = Math.floor(m / 60), r = m % 60; return h ? (r ? `${h} hr ${r} min` : `${h} hr`) : `${r} min`; };
+  // "Silk press & smoothing" → heavy "Silk press" + light "& smoothing"
+  const lines = (name) => {
+    const [a, b] = name.split(/\s(?=&)/);
+    const heavy = a.length > 9 && a.includes(" ") ? a.split(" ") : [a];
+    return heavy.map((w) => `<span data-line>${esc(w)}</span>`).join("") + (b ? `<span data-line class="light">${esc(b)}</span>` : "");
+  };
+
+  // hero (bone) → accent → ink → bone → accent → stories (ink): runs of colour, hard cuts
+  const GROUNDS = ["accent", "dark", "light", "accent"];
+  const data = await fetch("/data/services.json").then((r) => r.json());
+  const cats = data.categories.map((c) => ({ c, items: data.services.filter((s) => s.category === c.id) })).filter((g) => g.items.length);
+  host.innerHTML = cats.map(({ c, items }, i) => `
+    <section class="poster-block" data-ground="${GROUNDS[i % GROUNDS.length]}" data-nav-ground aria-labelledby="pb-${c.id}">
+      <div class="poster-block__inner">
+        <div>
+          <p class="meta-rule"><span>0${i + 1} · Services</span><span>${items.length} ${items.length > 1 ? "options" : "option"}</span></p>
+          <h2 class="poster" id="pb-${c.id}" data-fit="lines" data-fit-max="150">${lines(c.name.en)}</h2>
+        </div>
+        <ul class="poster-svc" role="list">
+          ${items.map((s) => `
+            <li>
+              <div>
+                <p class="poster-svc__name">${esc(s.name.en)}</p>
+                <p class="poster-svc__meta">${dur(s.durationMin)} · ${s.priceIsFrom ? "from " : ""}$${s.priceFrom}</p>
+              </div>
+              <a class="btn btn--solid" href="https://book.heygoldie.com/BRUJAS" data-book data-service="${esc(s.id)}" data-source="services">Book</a>
+              <p class="poster-svc__desc">${esc(s.description.en)}</p>
+            </li>`).join("")}
+        </ul>
+      </div>
+    </section>`).join("");
+
+  window.mdNavCopies?.();
+  window.mdFit?.();
+  window.MDBookingAdapter?.ready.then(() => window.MDBookingAdapter.applyAll(host));
+
+</script>
+<!-- Client demo panel: fonts + colours (exploration tool; remove before launch) -->
+<script type="module" src="demo.js"></script>
+</body>
+</html>

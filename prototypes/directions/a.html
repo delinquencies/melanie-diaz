@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex">
+<title>Direction A · Duck &amp; Dry structure</title>
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300..800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/assets/css/tokens.css"><link rel="stylesheet" href="/assets/css/base.css">
+<style>
+  /* --- compact header --- */
+  .hd{position:sticky;top:0;z-index:10;height:56px;display:grid;grid-template-columns:44px 1fr auto;align-items:center;gap:8px;padding:0 16px;background:var(--bone);border-bottom:1px solid var(--line)}
+  .hd__menu{width:22px;height:12px;border-top:1.5px solid;border-bottom:1.5px solid}
+  .hd__name{justify-self:center;font-weight:800;letter-spacing:.06em;text-transform:uppercase;font-size:.9375rem}
+  .hd .btn{min-height:40px;padding:0 14px}
+
+  /* --- hero: name straddles the photo edge (D&D split wordmark) --- */
+  .hero{position:relative;background:var(--bone)}
+  .hero__img{position:relative;height:440px;overflow:hidden}
+  .hero__img img{width:100%;height:100%;object-fit:cover;object-position:50% 25%}
+  .hero__img::after{content:"";position:absolute;inset:0;background:linear-gradient(to top,rgba(22,19,15,.45),rgba(22,19,15,0) 45%)}
+  .hero__tag{position:absolute;left:0;right:0;top:46%;text-align:center;color:var(--bone);z-index:2}
+  .hero__tag .eyebrow{font-weight:500}
+  /* in-flow, shifted up by half its height: centred on the photo edge, and it
+     reserves its own space so nothing below can collide with it at any width */
+  .straddle{position:relative;z-index:3;display:grid;grid-template-columns:minmax(0,1fr);padding:0 16px;transform:translateY(-50%);margin-bottom:-12px}
+  .straddle__word{grid-area:1/1;min-width:0;text-align:center;
+    font-weight:800;text-transform:uppercase;line-height:.84;letter-spacing:-.03em;font-size:64px}
+  .straddle__word [data-line]{margin-inline:auto}
+  .straddle__top{color:rgba(241,235,224,.55);clip-path:inset(0 0 50% 0)}
+  .straddle__bot{color:var(--ink);clip-path:inset(50% 0 0 0)}
+  .hero__below{padding:0 16px;text-align:center;margin-top:-40px}
+  .hero__below .btn{margin-top:20px}
+
+  /* --- stories row --- */
+  .stories{display:flex;gap:10px;overflow-x:auto;padding:28px 16px 8px;scrollbar-width:none}
+  .stories a{flex:0 0 auto;display:grid;justify-items:center;gap:6px;text-decoration:none;font-size:.6875rem;font-weight:500}
+  .ring{padding:2px;border-radius:999px;background:linear-gradient(to top right,var(--accent-1),var(--ink))}
+  .ring span{display:block;padding:2px;border-radius:999px;background:var(--bone)}
+  .ring img{width:66px;height:66px;border-radius:999px;object-fit:cover}
+
+  /* --- service tiles (D&D services section) --- */
+  .tiles{padding:40px 16px 56px;display:grid;gap:36px}
+  .tile__img{position:relative;aspect-ratio:3/4;overflow:hidden}
+  .tile__img img{width:100%;height:100%;object-fit:cover}
+  .tile__label{position:absolute;inset:auto 22% 22% 22%;aspect-ratio:1;border:1.5px solid var(--bone);display:grid;place-items:center;
+    color:var(--bone);font-weight:300;font-size:1.75rem;line-height:1;text-transform:uppercase;text-align:center;letter-spacing:.02em}
+  .rows{margin-top:16px}
+  .rows li{display:flex;justify-content:space-between;align-items:baseline;padding:12px 0;border-bottom:1px solid var(--line);font-size:.8125rem;font-weight:700;letter-spacing:.06em;text-transform:uppercase}
+  .rows li span{font-weight:300;letter-spacing:0;text-transform:none;font-size:.9375rem}
+  .tile .btn{margin-top:16px}
+  .flag{position:fixed;left:8px;bottom:8px;z-index:20;background:var(--ink);color:var(--bone);font-size:.625rem;letter-spacing:.12em;text-transform:uppercase;padding:4px 8px}
+</style>
+</head>
+<body>
+<header class="hd">
+  <span class="hd__menu" aria-hidden="true"></span>
+  <span class="hd__name">Melanie Diaz</span>
+  <a class="btn btn--solid" href="https://book.heygoldie.com/BRUJAS" data-book data-source="hero">Book</a>
+</header>
+
+<section class="hero">
+  <div class="hero__img">
+    <img src="/melanie.jpg" alt="Melanie Diaz">
+    <div class="hero__tag"><p class="eyebrow">Curly hair specialist · Baytown, TX</p></div>
+  </div>
+  <div class="straddle" aria-hidden="true">
+    <div class="straddle__word straddle__top" data-fit="uniform" data-fit-twin=".straddle__word"><span data-line>Melanie</span><span data-line>Diaz</span></div>
+    <div class="straddle__word straddle__bot"><span data-line>Melanie</span><span data-line>Diaz</span></div>
+  </div>
+  <h1 class="visually-hidden">Melanie Diaz — curly hair specialist, Baytown TX</h1>
+  <div class="hero__below">
+    <p class="body-l">Thoughtful cuts and styling for curls, coils, and confidence.</p>
+    <a class="btn btn--solid btn--block" href="https://book.heygoldie.com/BRUJAS" data-book data-source="hero">Book an appointment</a>
+  </div>
+</section>
+
+<nav class="stories" aria-label="Stories">
+  <a href="/prototypes/stories/"><span class="ring"><span><img src="/Curls2.jpg" alt=""></span></span>Curls</a>
+  <a href="/prototypes/stories/"><span class="ring"><span><img src="/SilkPressFinal.jpg" alt=""></span></span>Silk press</a>
+  <a href="/prototypes/stories/"><span class="ring"><span><img src="/Curls.jpg" alt=""></span></span>Definition</a>
+  <a href="/prototypes/stories/"><span class="ring"><span><img src="/SilkPress3.jpg" alt=""></span></span>In the chair</a>
+  <a href="/prototypes/stories/"><span class="ring"><span><img src="/Before1.jpg" alt=""></span></span>Before</a>
+</nav>
+
+<section class="tiles">
+  <article class="tile">
+    <div class="tile__img"><img src="/Curls2.jpg" alt="Curly hair result"><span class="tile__label">Curls</span></div>
+    <ul class="rows" role="list">
+      <li>Curly dry cut <span>from $50</span></li>
+      <li>Curly cut &amp; define <span>from $100</span></li>
+    </ul>
+    <a class="btn btn--solid btn--block" href="https://book.heygoldie.com/BRUJAS" data-book>Book curls</a>
+  </article>
+  <article class="tile">
+    <div class="tile__img"><img src="/SilkPressFinal.jpg" alt="Silk press result"><span class="tile__label">Silk<br>press</span></div>
+    <ul class="rows" role="list">
+      <li>Silk press + trim <span>from $100</span></li>
+      <li>Relaxer <span>from $150</span></li>
+    </ul>
+    <a class="btn btn--solid btn--block" href="https://book.heygoldie.com/BRUJAS" data-book>Book silk press</a>
+  </article>
+</section>
+<span class="flag">A · Duck &amp; Dry structure</span>
+<script src="/assets/js/fit.js"></script>
+</body>
+</html>

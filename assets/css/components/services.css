@@ -1,0 +1,57 @@
+/* =====================================================================
+   Services & booking list — COMPONENT_INVENTORY §9. Mobile first.
+   Phone: sticky category chips under the header, then rows with a Book
+   button on every row (thumb-reachable, 44px+).
+   ===================================================================== */
+.svc-chips{
+  position:sticky; top:var(--header-h); z-index:5;
+  margin-inline:calc(var(--gutter) * -1);
+  background:var(--ground-bg, var(--bone));
+  border-bottom:1px solid var(--line);
+}
+.svc-chips ul{
+  display:flex; gap:var(--s-2); overflow-x:auto; scrollbar-width:none;
+  padding:var(--s-3) var(--gutter);
+}
+.svc-chips ul::-webkit-scrollbar{ display:none; }
+.svc-chips a{
+  display:inline-flex; align-items:center; white-space:nowrap;
+  min-height:var(--tap); padding:0 var(--s-4);
+  border:1px solid var(--line); border-radius:var(--pill);
+  font-size:var(--fs-small); font-weight:500; text-decoration:none;
+}
+.svc-chips a:active{ background:var(--bone-2); }
+
+.svc-groups{ display:grid; gap:var(--s-7); margin-top:var(--s-6); }
+.svc-group{ scroll-margin-top:calc(var(--header-h) + 64px); }
+.svc-group__title{ padding-bottom:var(--s-3); border-bottom:1.5px solid currentColor; }
+
+.svc{
+  display:grid; grid-template-columns:1fr auto; gap:var(--s-4); align-items:start;
+  padding:var(--s-5) 0; border-bottom:1px solid var(--line);
+}
+/* phone: price sits under the name so the Book button keeps its own column */
+.svc__head{ display:block; }
+.svc__name{ font-size:var(--fs-title); font-weight:600; line-height:1.25; }
+.svc__price{ font-weight:500; font-variant-numeric:tabular-nums; white-space:nowrap; margin-top:2px; }
+.svc__meta{ font-size:var(--fs-small); font-weight:500; letter-spacing:.04em; opacity:.7; margin-top:2px; }
+.svc__desc{ font-weight:300; margin-top:var(--s-2); max-width:36rem; }
+.svc__book{ min-width:88px; align-self:center; }
+
+@media (min-width:600px){
+  .svc__head{ display:flex; justify-content:space-between; align-items:baseline; gap:var(--s-3); }
+  .svc__price{ margin-top:0; }
+}
+
+@media (min-width:1024px){
+  .svc-chips{ position:static; margin-inline:0; border:0; }
+  .svc-chips ul{ padding-inline:0; }
+  .svc-groups{ grid-template-columns:1fr 1fr; column-gap:var(--s-8); row-gap:var(--s-7); }
+  .svc{ grid-template-columns:1fr auto; }
+}
+
+[data-services]:empty::before{ content:""; display:block; min-height:60vh; }
+[data-services-error]::after{
+  content:"Services couldn't load — use the Book button to see the full menu.";
+  display:block; padding:var(--s-5) 0;
+}

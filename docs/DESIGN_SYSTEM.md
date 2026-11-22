@@ -2,8 +2,9 @@
 
 This is a proposal derived from [DESIGN_RESEARCH.md](DESIGN_RESEARCH.md). Every rule cites the observation it comes from. Values marked **TBD** are deliberately left open. **"Ink and Bone" is the colour direction**: near-black ink on warm bone, not a typeface. **Accent colours are still undecided**, and exact ink and bone hex values are proposals for you to confirm.
 
-Guiding principles, taken from what the references actually do:
-1. **Booking is never more than one tap away.** A persistent Book button sits in the header on every viewport (Duck & Dry mobile header).
+Guiding principles:
+0. **Mobile first, always (owner's rule).** Most customers are on phones. Every component is designed, built and signed off at **375px first**. CSS uses `min-width` media queries only, so the phone layout is the base and desktop is the enhancement. Primary actions sit in the **thumb zone** (bottom of the screen), and nothing important is hover-only.
+1. **Booking is never more than one tap away**, and it goes through **one booking adapter**, so a future custom booking system can replace Goldie without editing every button (see COMPONENT_INVENTORY §9). A persistent Book button sits in the header on every viewport (Duck & Dry mobile header).
 2. **Few tokens, used strictly.** Ink + bone + one tonal step, and **one typeface (Montserrat) in fixed roles**. Duck & Dry uses one teal + one family in 3 roles; Hershesons uses one family at one weight.
 3. **Photography and video carry colour; the UI stays neutral** (Hershesons).
 4. **Contrast comes from blocking whole sections, not from decoration** (Bleach London).

@@ -115,6 +115,20 @@ Two parts, both styled with our tokens (D&D shows how to tame a widget, Research
   - *Live:* Google Places API via a tiny serverless function (Cloudflare Worker) or a widget (Trustindex/Elfsight). This adds a dependency and likely a consent requirement (D&D's didn't render without consent).
 - **Never** placeholder or invented reviews, even in prototypes. Use an empty-state frame instead.
 
+## 9a. Booking Adapter ⚪ — built: `assets/js/booking.js` + `data/booking.json`
+
+**Why:** today every Book button goes to Goldie. We want to be able to switch to a **custom booking flow later** without hunting down every button.
+- Every booking CTA is a plain link that works without JS: `<a href="https://book.heygoldie.com/BRUJAS" data-book data-service="silk-press-trim">Book</a>`.
+- `data/booking.json` names the active provider:
+  ```json
+  { "provider": "goldie", "goldie": { "url": "https://book.heygoldie.com/BRUJAS", "serviceUrls": {} } }
+  ```
+- `booking.js` loads the config once and decides what each `[data-book]` does:
+  - **`goldie`:** rewrites `href` to a per-service deep link if one is configured, otherwise the main Goldie URL.
+  - **`custom`** (future): intercepts the click and calls `window.MDBooking.open({ serviceId })`, a hook the future in-house flow implements. If that hook isn't present, the link falls back to Goldie, so booking never breaks.
+- **Service data is booking-ready:** `data/services.json` stores a stable `id`, `durationMin`, `priceFrom`, `priceIsFrom` and `category` for each service. A custom flow needs exactly these.
+- An analytics hook (`md:book` CustomEvent with `serviceId` and `source`) fires on every Book tap, so conversion can be measured once analytics is chosen.
+
 ## 9. Services & Booking ⚪ (current `service-card` rail 🟡)
 
 **Reference:** D&D service tiles: portrait image + outlined label box + price rows + Book button (Research 1.1 #2); D&D price-row typography (`BLOW DRYS from £44`).

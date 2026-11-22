@@ -1,0 +1,83 @@
+/* =====================================================================
+   Poster blocks + split name (Direction A hero + Direction C posters)
+   COMPONENT_INVENTORY §3, §12. Mobile first.
+   ===================================================================== */
+
+/* ---------- Poster type (lines fitted edge to edge by fit.js) ---------- */
+.poster{
+  font-family:var(--font-display); font-stretch:var(--display-stretch);
+  text-transform:uppercase; line-height:.86; letter-spacing:-.02em;
+}
+.poster [data-line]{ font-weight:var(--display-heavy); }
+.poster .light{ font-weight:var(--display-light); letter-spacing:.01em; }
+
+.meta-rule{
+  display:flex; justify-content:space-between; gap:var(--s-4);
+  font-size:.6875rem; font-weight:500; letter-spacing:.14em; text-transform:uppercase;
+  border-top:1.5px solid currentColor; border-bottom:1.5px solid currentColor;
+  padding:var(--s-2) 0; margin-bottom:var(--s-4);
+}
+
+/* ---------- Hero: name split across the photo edge (D&D) ---------- */
+.hero-split{ position:relative; padding-top:var(--header-h); }
+/* phone: short enough that the Book button lands on the first screen */
+.hero-split__img{ position:relative; overflow:hidden; height:52vh; height:min(52svh, 520px); }
+.hero-split__img img{ width:100%; height:100%; object-fit:cover; object-position:var(--focus, 50% 22%); }
+.hero-split__img::after{
+  content:""; position:absolute; inset:0;
+  background:linear-gradient(to top, color-mix(in srgb, var(--ink) 40%, transparent), color-mix(in srgb, var(--ink) 0%, transparent) 40%);
+}
+/* top of the photo, so it can never collide with the split name at the bottom edge */
+.hero-split__tag{
+  position:absolute; left:0; right:0; top:var(--s-5); z-index:1; text-align:center; color:var(--bone);
+  text-shadow:0 1px 12px color-mix(in srgb, var(--ink) 45%, transparent);
+}
+.hero-split__tag .eyebrow{ font-weight:500; }
+
+/* in flow, shifted up half its height → centred on the photo edge, reserving its space */
+.split-name{
+  position:relative; z-index:2; display:grid; grid-template-columns:minmax(0,1fr);
+  padding:0 var(--gutter); transform:translateY(-50%);
+}
+.split-name__word{
+  grid-area:1/1; min-width:0; text-align:center;
+  font-family:var(--font-display); font-stretch:var(--display-stretch); font-weight:var(--display-heavy);
+  text-transform:uppercase; line-height:.84; letter-spacing:-.03em; font-size:64px;
+}
+.split-name__word [data-line]{ margin-inline:auto; }
+.split-name__top{ color:color-mix(in srgb, var(--bone) 60%, transparent); clip-path:inset(0 0 50% 0); }
+.split-name__bot{ color:var(--ink); clip-path:inset(50% 0 0 0); }
+
+.hero-split__below{
+  padding:0 var(--gutter) var(--s-8); margin-top:calc(var(--s-6) * -1);
+  display:grid; gap:var(--s-4); justify-items:center; text-align:center;
+}
+.hero-split__below .body-l{ max-width:26rem; }
+.hero-split__below .btn{ width:100%; max-width:26rem; }
+
+@media (min-width:1024px){
+  .hero-split__img{ height:min(68svh, 720px); }
+  .split-name{ max-width:1100px; margin-inline:auto; }
+}
+
+/* ---------- Service poster blocks (Direction C) ---------- */
+.poster-block{ padding:var(--s-6) var(--gutter) var(--s-7); }
+.poster-block__inner{ max-width:var(--container); margin-inline:auto; }
+.poster-block .poster{ margin-bottom:var(--s-5); }
+
+.poster-svc{ border-top:1px solid currentColor; }
+.poster-svc li{
+  display:grid; grid-template-columns:1fr auto; gap:var(--s-2) var(--s-4); align-items:center;
+  padding:var(--s-4) 0; border-bottom:1px solid currentColor;
+}
+.poster-svc__name{ font-weight:600; font-size:1.0625rem; line-height:1.25; }
+.poster-svc__meta{ font-size:.8125rem; font-weight:500; letter-spacing:.04em; opacity:.75; margin-top:2px; }
+.poster-svc__desc{ grid-column:1 / -1; font-weight:300; font-size:.9375rem; line-height:1.5; }
+.poster-svc .btn{ min-width:92px; grid-row:1; grid-column:2; }
+
+@media (min-width:1024px){
+  .poster-block{ padding-block:var(--s-8); }
+  .poster-block__inner{ display:grid; grid-template-columns:5fr 6fr; gap:var(--s-8); align-items:start; }
+  .poster-block .poster{ position:sticky; top:calc(var(--header-h) + var(--s-6)); margin:0; }
+  .poster-svc__desc{ grid-column:1; }
+}

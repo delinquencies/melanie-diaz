@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex">
+<title>Design directions · compare</title>
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300..800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/assets/css/tokens.css"><link rel="stylesheet" href="/assets/css/base.css">
+<style>
+  body{background:var(--bone-2)}
+  .top{padding:24px 20px 8px;max-width:1240px;margin:0 auto}
+  .top h1{font-weight:800;text-transform:uppercase;font-size:clamp(1.5rem,4vw,2.25rem);line-height:1}
+  .top p{font-weight:300;margin-top:8px;max-width:46rem}
+  .row{display:flex;gap:28px;overflow-x:auto;padding:20px;max-width:1240px;margin:0 auto;scroll-snap-type:x mandatory}
+  .col{flex:0 0 auto;scroll-snap-align:center;display:grid;gap:12px;width:375px}
+  .col h2{font-weight:800;text-transform:uppercase;font-size:1rem;letter-spacing:.04em}
+  .col p{font-size:.875rem;font-weight:300;line-height:1.5}
+  .phone{width:375px;height:740px;border:10px solid var(--ink);border-radius:36px;overflow:hidden;background:var(--ink)}
+  .phone iframe{width:100%;height:100%;border:0;display:block;background:var(--bone)}
+  .col a{font-size:.8125rem;font-weight:600}
+</style>
+</head>
+<body>
+<header class="top">
+  <h1>Three directions · phone first</h1>
+  <p>First screen plus one scroll of each, at 375px. Scroll inside each phone. Same content and ink &amp; bone palette in all three; only the design differs. Accent colours are still placeholders.</p>
+</header>
+<main class="row">
+  <section class="col">
+    <h2>A · Duck &amp; Dry structure</h2>
+    <p>Name straddles the photo edge. Stories row right under it. Services as photo tiles with price rows. Calm, proven, premium.</p>
+    <div class="phone"><iframe src="a.html" title="Direction A"></iframe></div>
+    <a href="a.html">Open full screen →</a>
+  </section>
+  <section class="col">
+    <h2>B · Stories-led</h2>
+    <p>Feels like an app. Stories first, a live video card, swipe service cards, and a bottom tab bar with Book in the thumb's centre.</p>
+    <div class="phone"><iframe src="b.html" title="Direction B"></iframe></div>
+    <a href="b.html">Open full screen →</a>
+  </section>
+  <section class="col">
+    <h2>C · Poster / editorial</h2>
+    <p>Solid ink and bone blocks, headlines fitted edge to edge at poster scale, hard-cropped photos. Most distinctive.</p>
+    <div class="phone"><iframe src="c.html" title="Direction C"></iframe></div>
+    <a href="c.html">Open full screen →</a>
+  </section>
+</main>
+</body>
+</html>

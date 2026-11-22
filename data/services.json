@@ -1,0 +1,150 @@
+{
+  "_meta": {
+    "source": "Copied verbatim from index.html (EN) and es/index.html (ES), live site 2026-11-21.",
+    "currency": "USD",
+    "notes": [
+      "Category grouping is a PROPOSAL for layout, not confirmed by Melanie.",
+      "silk-press-trim: homepage says $100+, /links/ says $100. Using $100+ until confirmed.",
+      "No color services are listed on the current site; none are added here until Melanie provides them.",
+      "Category names (EN/ES) are new layout proposals; all service names/descriptions are verbatim."
+    ]
+  },
+  "categories": [
+    {
+      "id": "curls",
+      "name": {
+        "en": "Curls",
+        "es": "Rizos"
+      }
+    },
+    {
+      "id": "smooth",
+      "name": {
+        "en": "Silk press & smoothing",
+        "es": "Silk press y relajante"
+      }
+    },
+    {
+      "id": "cuts-styling",
+      "name": {
+        "en": "Cuts & styling",
+        "es": "Cortes y peinado"
+      }
+    },
+    {
+      "id": "treatments",
+      "name": {
+        "en": "Treatments",
+        "es": "Tratamientos"
+      }
+    }
+  ],
+  "services": [
+    {
+      "id": "curly-dry-cut",
+      "category": "curls",
+      "name": {
+        "en": "Curly dry cut",
+        "es": "Corte en seco para rizos"
+      },
+      "description": {
+        "en": "Shape and balance tailored to your curls. Curly cut on dry hair—wash and styling not included.",
+        "es": "Forma y equilibrio para tus rizos. Corte en pelo seco—sin lavado ni peinado incluido."
+      },
+      "durationMin": 60,
+      "priceFrom": 50,
+      "priceIsFrom": true
+    },
+    {
+      "id": "curly-cut-define",
+      "category": "curls",
+      "name": {
+        "en": "Curly cut & define",
+        "es": "Corte rizado + definición"
+      },
+      "description": {
+        "en": "Curly cut with wash, deep hydration, curl-defining products, and diffused drying.",
+        "es": "Corte con lavado, hidratación, productos para definir rizos y secado con difusor."
+      },
+      "durationMin": 120,
+      "priceFrom": 100,
+      "priceIsFrom": true
+    },
+    {
+      "id": "silk-press-trim",
+      "category": "smooth",
+      "name": {
+        "en": "Silk press + trim",
+        "es": "Silk press + recorte"
+      },
+      "description": {
+        "en": "Smoothing service for natural hair—a silky, straight finish without relaxers. Includes shampoo, blow-dry, trim, and flat iron for shine and movement.",
+        "es": "Alisado suave para pelo natural—acabado lacio y brillante sin relajante químico. Incluye champú, secado, recorte y plancha."
+      },
+      "durationMin": 90,
+      "priceFrom": 100,
+      "priceIsFrom": true,
+      "_unconfirmed": "price ($100 vs $100+)"
+    },
+    {
+      "id": "relaxer",
+      "category": "smooth",
+      "name": {
+        "en": "Relaxer",
+        "es": "Relajante"
+      },
+      "description": {
+        "en": "Relaxer service to soften and straighten hair, calm frizz, and leave hair smooth, shiny, and manageable.",
+        "es": "Servicio de relajante para alisar, calmar el frizz y dejar el pelo manejable y con brillo."
+      },
+      "durationMin": 135,
+      "priceFrom": 150,
+      "priceIsFrom": true
+    },
+    {
+      "id": "haircut",
+      "category": "cuts-styling",
+      "name": {
+        "en": "Haircut",
+        "es": "Corte"
+      },
+      "description": {
+        "en": "Precision haircut for curly, wavy, or straight hair. Wash and styling not included.",
+        "es": "Corte de precisión para pelo rizado, ondulado o lacio. Sin lavado ni peinado incluido."
+      },
+      "durationMin": 40,
+      "priceFrom": 50,
+      "priceIsFrom": true
+    },
+    {
+      "id": "blowdry-wash",
+      "category": "cuts-styling",
+      "name": {
+        "en": "Blow-dry with wash",
+        "es": "Secado con lavado"
+      },
+      "description": {
+        "en": "Shampoo, conditioning, and blow-dry styling.",
+        "es": "Champú, acondicionador y brushing."
+      },
+      "durationMin": 60,
+      "priceFrom": 50,
+      "priceIsFrom": true
+    },
+    {
+      "id": "shampoo",
+      "category": "treatments",
+      "name": {
+        "en": "Shampoo treatment",
+        "es": "Champú tratamiento"
+      },
+      "description": {
+        "en": "Targeted cleansing: hydrating, repairing, clarifying, or balancing for oilier scalps.",
+        "es": "Lavado según tu necesidad: hidratación, reparación, purificación o equilibrio."
+      },
+      "durationMin": 15,
+      "priceFrom": 25,
+      "priceIsFrom": true
+    }
+  ]
+}

@@ -1,0 +1,88 @@
+/* =====================================================================
+   Editorial hero (image first, video-ready) + mobile Book bar
+   COMPONENT_INVENTORY §3 and §9. Mobile first.
+   ===================================================================== */
+/* Two variants:
+   .hero--stacked (default for portraits/close-ups): phone = photo block, then
+     copy on ink below it, so text never covers a face. Desktop = 50/50 split.
+   .hero--overlay (for wide scenery/video): text over media with a scrim. */
+.hero{
+  position:relative; isolation:isolate; overflow:clip;
+  display:grid;
+}
+.hero__media{ position:relative; overflow:hidden; }
+.hero__media img,
+.hero__media video{
+  position:absolute; inset:0; width:100%; height:100%;
+  object-fit:cover; object-position:var(--focus, 50% 30%);
+}
+.hero__media video{ opacity:0; transition:opacity .6s ease; }
+.hero__media video.is-playing{ opacity:1; }
+.hero__copy{ display:grid; gap:var(--s-4); }
+
+/* ---- stacked (phone first) ---- */
+.hero--stacked .hero__media{
+  aspect-ratio:4 / 5;
+  /* keep the Book button above the fold on a ~800px-tall phone */
+  max-height:48vh; max-height:48svh; width:100%;
+}
+.hero--stacked .hero__copy{
+  padding-top:var(--s-6);
+  padding-bottom:calc(var(--s-7) + env(safe-area-inset-bottom));
+}
+
+/* ---- overlay ---- */
+.hero--overlay{
+  min-height:88vh; min-height:min(88svh, 780px);
+  align-items:end; padding-top:var(--header-h);
+}
+.hero--overlay .hero__media{ position:absolute; inset:0; z-index:-2; }
+.hero--overlay::after{
+  content:""; position:absolute; inset:0; z-index:-1;
+  background:linear-gradient(to top, var(--scrim-strong) 0%, color-mix(in srgb, var(--ink) 25%, transparent) 45%, color-mix(in srgb, var(--ink) 0%, transparent) 70%);
+}
+.hero--overlay .hero__copy{ padding-bottom:calc(var(--s-6) + env(safe-area-inset-bottom)); }
+.hero__lede{ max-width:30rem; }
+.hero__actions{ display:grid; gap:var(--s-3); margin-top:var(--s-2); }
+.hero__pause{
+  position:absolute; right:var(--gutter); bottom:var(--s-4); z-index:1;
+  width:var(--tap); height:var(--tap); border-radius:var(--pill);
+  border:1px solid color-mix(in srgb, var(--bone) 50%, transparent); background:color-mix(in srgb, var(--ink) 35%, transparent); color:var(--bone);
+  display:none; place-items:center; cursor:pointer;
+}
+.hero.has-video .hero__pause{ display:grid; }
+.hero__pause svg{ width:16px; height:16px; fill:currentColor; }
+
+@media (min-width:600px){
+  .hero__actions{ display:flex; flex-wrap:wrap; }
+  .hero__actions .btn--block{ width:auto; flex:0 0 auto; padding-inline:var(--s-6); }
+}
+@media (min-width:1024px){
+  .hero--stacked{
+    grid-template-columns:1fr 1fr; align-items:end;
+    min-height:min(100svh, 900px); padding-top:var(--header-h);
+  }
+  .hero--stacked .hero__media{ order:2; aspect-ratio:auto; max-height:none; height:100%; }
+  .hero--stacked .hero__copy{ padding:var(--s-8) var(--s-8) var(--s-8) var(--gutter); max-width:none; }
+  .hero--overlay{ min-height:0; aspect-ratio:2.4 / 1; max-height:calc(100svh - 40px); }
+  .hero--overlay .hero__copy{ padding-bottom:var(--s-8); }
+}
+
+/* ---------------------------------------------------------------------
+   Mobile Book bar — thumb zone. Appears after the hero leaves the screen,
+   hides over the contact/footer area and while the menu is open.
+   Desktop never shows it (the header Book button is always visible there).
+   --------------------------------------------------------------------- */
+.bookbar{
+  position:fixed; left:0; right:0; bottom:0; z-index:80;
+  padding:var(--s-3) var(--gutter) calc(var(--s-3) + env(safe-area-inset-bottom));
+  background:color-mix(in srgb, var(--bone) 94%, transparent);
+  -webkit-backdrop-filter:saturate(1.2) blur(10px); backdrop-filter:saturate(1.2) blur(10px);
+  border-top:1px solid var(--line);
+  transform:translateY(110%);
+  transition:transform .3s var(--ease-out);
+}
+.bookbar.is-shown{ transform:none; }
+.bookbar .btn{ min-height:52px; }
+@media (min-width:1024px){ .bookbar{ display:none; } }
+@media (prefers-reduced-motion:reduce){ .bookbar{ transition:none; } }

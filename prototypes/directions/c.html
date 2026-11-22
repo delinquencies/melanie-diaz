@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex">
+<title>Direction C · Poster / editorial</title>
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300..800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/assets/css/tokens.css"><link rel="stylesheet" href="/assets/css/base.css">
+<style>
+  .hd{position:sticky;top:0;z-index:10;height:52px;display:flex;align-items:center;justify-content:space-between;padding:0 16px;background:var(--ink);color:var(--bone)}
+  .hd__name{font-weight:800;letter-spacing:.06em;text-transform:uppercase;font-size:.875rem}
+  .hd .btn{min-height:38px;padding:0 14px;background:var(--bone);color:var(--ink);border-color:var(--bone)}
+
+  .block{padding:20px 16px 28px}
+  .ink{background:var(--ink);color:var(--bone)}
+  .bone{background:var(--bone);color:var(--ink)}
+  .bone2{background:var(--bone-2);color:var(--ink)}
+
+  /* poster lockup: each line fitted to the column width (fit.js, mode "lines") */
+  .poster{text-transform:uppercase;line-height:.86;letter-spacing:-.025em}
+  .poster [data-line]{font-weight:800}
+  .poster .light{font-weight:300;letter-spacing:.02em}
+  .meta{display:flex;justify-content:space-between;font-size:.6875rem;font-weight:500;letter-spacing:.14em;text-transform:uppercase;border-top:1.5px solid currentColor;border-bottom:1.5px solid currentColor;padding:8px 0;margin-bottom:14px}
+  .block .btn--block{margin-top:20px}
+
+  /* hard-cropped photo with a poster label cut into it */
+  .crop{position:relative}
+  .crop img{width:100%;aspect-ratio:4/5;object-fit:cover;object-position:50% 30%}
+  .crop__label{position:absolute;left:0;bottom:0;background:var(--bone);color:var(--ink);padding:12px 16px 10px;width:72%}
+
+  .svc{display:grid;grid-template-columns:1fr auto;align-items:end;gap:12px;margin-top:14px;padding-top:12px;border-top:1px solid currentColor}
+  .svc p{font-weight:500;font-size:.875rem}
+  .svc .btn{min-height:44px}
+  .flag{position:fixed;left:8px;bottom:8px;z-index:20;background:var(--bone);color:var(--ink);font-size:.625rem;letter-spacing:.12em;text-transform:uppercase;padding:4px 8px;border:1px solid var(--ink)}
+</style>
+</head>
+<body>
+<header class="hd">
+  <span class="hd__name">Melanie Diaz</span>
+  <a class="btn" href="https://book.heygoldie.com/BRUJAS" data-book>Book</a>
+</header>
+
+<section class="block ink" data-ground="dark">
+  <p class="meta"><span>Melanie Diaz</span><span>Baytown, TX</span></p>
+  <h1 class="poster" data-fit="lines">
+    <span data-line>Curls,</span>
+    <span data-line class="light">coils &amp;</span>
+    <span data-line>confidence</span>
+  </h1>
+  <a class="btn btn--solid btn--block" href="https://book.heygoldie.com/BRUJAS" data-book>Book an appointment</a>
+</section>
+
+<section class="crop">
+  <img src="/melanie.jpg" alt="Melanie Diaz">
+  <div class="crop__label poster" data-fit="lines">
+    <span data-line class="light">Curly hair</span>
+    <span data-line>specialist</span>
+  </div>
+</section>
+
+<section class="block bone" data-ground="light">
+  <p class="meta"><span>01 · Curls</span><span>2 hr</span></p>
+  <h2 class="poster" data-fit="lines">
+    <span data-line>Curly cut</span>
+    <span data-line class="light">&amp; define</span>
+  </h2>
+  <div class="svc">
+    <p>Wash, deep hydration, curl-defining products, diffused drying. From $100.</p>
+    <a class="btn btn--solid" href="https://book.heygoldie.com/BRUJAS" data-book>Book</a>
+  </div>
+</section>
+
+<section class="block ink" data-ground="dark">
+  <p class="meta"><span>02 · Silk press</span><span>1 hr 30</span></p>
+  <h2 class="poster" data-fit="lines">
+    <span data-line>Silk</span>
+    <span data-line>press</span>
+    <span data-line class="light">+ trim</span>
+  </h2>
+  <div class="svc">
+    <p>A silky, straight finish without relaxers. From $100.</p>
+    <a class="btn btn--solid" href="https://book.heygoldie.com/BRUJAS" data-book>Book</a>
+  </div>
+</section>
+<span class="flag">C · Poster / editorial</span>
+<script src="/assets/js/fit.js"></script>
+</body>
+</html>
