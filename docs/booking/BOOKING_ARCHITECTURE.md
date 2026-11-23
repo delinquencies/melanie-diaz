@@ -15,7 +15,7 @@ The website becomes a fast, bilingual "storefront" that explains services and el
 For example Square Appointments, GlossGenius, Vagaro or Acuity. Same storefront idea, different engine. It means migrating clients, future appointments and deposits.
 
 ### Path 3 — Build an independent booking engine
-Our own availability engine, database, Stripe payments, email/SMS, admin calendar and client records, for example on Cloudflare Workers + D1 + Stripe + Resend/Twilio.
+Our own availability engine, database, Square payments, email/SMS, admin calendar and client records, for example on Cloudflare Workers + Square + Resend/Twilio. (Payments provider decided 2026-11-22: Square, not Stripe.)
 
 ## 2. Comparison
 
@@ -25,11 +25,11 @@ Our own availability engine, database, Stripe payments, email/SMS, admin calenda
 | Eligibility enforcement (first-time vs returning, 6-month window) | **Guidance only** on the site + Melanie's review. Goldie has no rule engine [Observed]. | Varies. Some platforms support "new client only" services or intake forms. **Unverified per vendor.** | Full enforcement possible. |
 | Spanish booking flow | Website: yes. Goldie UI: **unverified**. | Varies (unverified). | Full control. |
 | Double-booking safety | Goldie's 10-minute hold + single inventory [Observed]. | Vendor-provided. | **Ours to get right** (races, DST, holds). High risk. |
-| Payments / PCI | Goldie + Stripe | Vendor | Stripe Checkout keeps us out of PCI scope; refunds, disputes and receipts are on us. |
+| Payments / PCI | Goldie + Stripe | Vendor | Square hosted checkout / Web Payments SDK keeps us out of PCI scope; refunds, disputes and receipts are on us. |
 | Migration effort | **None** | Medium: export, re-enter services, move future bookings and deposits, retrain Melanie, new links | High: all of Path 2 plus building and testing everything |
 | Build effort (my estimate) | **~2–4 days of website work** | ~1–2 weeks incl. migration & parallel run | **~6–12 weeks** for a solid version, plus an admin app |
 | Ongoing maintenance | Near zero (keep catalog in sync) | Near zero | **Continuous**: security, payments, SMS compliance (10DLC), backups, bugs, on-call when booking breaks |
-| Monthly software cost | Goldie: Starter free (**20 appointments/month cap**), Pro $19.99, Pro Plus $39.99 [Doc] + Stripe fees (client currently pays a fee) | Square Appointments: free for solo (per vendor claims); GlossGenius ~$24–28; Vagaro ~$24–30; Acuity ~$16–20 [Doc], plus processing fees | Hosting ~$0–10; Stripe ~2.9% + 30¢ per online charge (standard rate, verify); SMS a few cents per message plus carrier registration; email ~$0–20 |
+| Monthly software cost | Goldie: Starter free (**20 appointments/month cap**), Pro $19.99, Pro Plus $39.99 [Doc] + Stripe fees (client currently pays a fee) | Square Appointments: free for solo (per vendor claims); GlossGenius ~$24–28; Vagaro ~$24–30; Acuity ~$16–20 [Doc], plus processing fees | Hosting ~$0–10; Square processing fees per charge (check Square's current rates); SMS a few cents per message plus carrier registration; email ~$0–20 |
 | Risk to Melanie's income if it breaks | Low | Low–medium during migration | **High.** Bugs mean lost or double bookings. |
 | Reversibility | Fully reversible | Reversible with effort | Hard to unwind |
 

@@ -1,15 +1,16 @@
 /* =====================================================================
    Design tokens — docs/DESIGN_SYSTEM.md
-   "Ink and Bone" colour direction. Hex values are PROPOSALS (unconfirmed).
-   Accent tokens are deliberately placeholders: accents are undecided.
+   DESIGN DECISIONS (owner-approved 2026-11-22):
+     accent Sage #A3B18A · dark Ink (warm black) #16130F · light Pure white #FFFFFF
+     headlines Fraunces · body Outfit · hero photo in black & white
    Mobile-first: base values are the phone values; fluid clamp() scales up.
    ===================================================================== */
 :root{
   /* ---- colour ---- */
-  /* Only --ink and --bone are set by hand; everything else derives from them,
-     so swapping either one recolours lines, scrims and tonal steps too. */
+  /* Only --ink and --bone (the light ground) are set by hand; everything else derives
+     from them, so swapping either one recolours lines, scrims and tonal steps too. */
   --ink:#16130f;
-  --bone:#f1ebe0;
+  --bone:#ffffff;              /* light sections: pure white */
   --ink-2:color-mix(in oklab, var(--ink) 86%, var(--bone));
   --bone-2:color-mix(in oklab, var(--bone) 91%, var(--ink));
   --line:color-mix(in srgb, var(--ink) 14%, transparent);
@@ -17,15 +18,15 @@
   --on-ink:var(--bone);
   --scrim-strong:color-mix(in srgb, var(--ink) 62%, transparent);
   --scrim-soft:color-mix(in srgb, var(--ink) 18%, transparent);
-  --accent-1:#8f857a;   /* PLACEHOLDER — accent undecided */
-  --accent-2:#16130f;   /* PLACEHOLDER — accent undecided (2nd stop of story ring) */
-  --on-accent:var(--ink); /* text on an accent ground: ink or bone, whichever contrasts more */
+  --accent-1:#a3b18a;   /* Sage */
+  --accent-2:#56664a;   /* deep sage: 2nd stop of the story ring */
+  --on-accent:var(--ink); /* ink on sage ≈ 8:1 (AAA) */
 
   /* ---- type ---- */
-  --font:"Montserrat", system-ui, -apple-system, "Segoe UI", sans-serif;
-  /* display role (headlines, posters, split name). Swappable while fonts are explored. */
-  --font-display:var(--font);
-  --display-stretch:normal;     /* e.g. 125% for an expanded width axis */
+  --font:"Outfit", system-ui, -apple-system, "Segoe UI", sans-serif;
+  /* display role (headlines, posters, split name) */
+  --font-display:"Fraunces", Georgia, "Times New Roman", serif;
+  --display-stretch:normal;
   --display-heavy:800;
   --display-light:300;
   --fs-display-xl:clamp(3rem, 12vw + .5rem, 7.5rem);

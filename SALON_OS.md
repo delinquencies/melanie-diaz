@@ -44,6 +44,8 @@ Tests: `cd salon-os && npm test` → **41 passing** on Node.
 5. **Google is never the appointment database** (free/busy only). Connected calendars default to "personal, blocks salon time".
 6. **Session cookie `SameSite=Lax`** (OAuth return), CSRF blocked by the required `x-salon-os` header.
 7. **Single owner account** for now.
+9. **Website design (approved 2026-11-22):** accent **Sage `#A3B18A`** (deep sage `#56664A` for story rings), dark sections **Ink `#16130F`**, light sections **pure white `#FFFFFF`**, headlines **Fraunces**, body **Outfit**, hero photo **black & white**. Set in `assets/css/tokens.css`; the demo panel defaults to it. Not yet applied to the live site or Salon OS screens.
+8. **Payments provider: Square (not Stripe)** — decided 2026-11-22. Any future native deposits, balances, tips, refunds and in-person card payments go through Square (Square's hosted checkout / Web Payments SDK online; Square Reader or Tap to Pay in person; Square webhooks record transactions in Salon OS). Goldie's own checkout (Stripe today) is unchanged while Goldie stays live. Not yet built; needs Melanie's Square account.
 
 ## Deploy runbook (Cloudflare) — done 2026-11-22; kept for redeploys/rebuilds
 Run from `salon-os/`. Each command is safe to read before running.
@@ -102,4 +104,4 @@ Run from `salon-os/`. Each command is safe to read before running.
 3. Manual appointment entry in the dashboard (unlocks verified history, repeat-booking and LTV).
 4. Transactions UI (deposits, balances, tips, refunds, expenses; collected vs booked).
 5. Retail and ad-spend tables → cost per acquisition.
-6. Only then consider native booking + Stripe (needs payment provider approval and the migration plan).
+6. Only then consider native booking + **Square** payments (Square is the chosen provider; needs the migration plan).

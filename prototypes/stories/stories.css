@@ -1,20 +1,19 @@
-/* Prototype tokens: "Ink and Bone" foundation from docs/DESIGN_SYSTEM.md §1 (values proposed, not final).
-   --ring-a / --ring-b are TEMPORARY placeholders; accents are undecided. */
+/* Prototype tokens: approved design (2026-11-22) — Ink #16130F, pure white, Sage ring, Outfit body. */
 :root{
   --ink:#16130f;
-  --bone:#f1ebe0;
-  --bone-2:#e6ddce;
+  --bone:#ffffff;
+  --bone-2:#ececeb;
   --paper:var(--bone);     /* page ground */
   --surface:var(--bone-2); /* cards / placeholders */
   --line:rgba(22,19,15,.14);
-  --ring-a:#a39a8c;   /* placeholder accent 1 (warm grey, not a palette choice) */
-  --ring-b:#16130f;   /* placeholder accent 2 */
+  --ring-a:#a3b18a;   /* Sage (approved) */
+  --ring-b:#56664a;   /* deep sage */
   --ring: linear-gradient(to top right, var(--ring-a), var(--ring-b));
   --story-size:100px;
   --story-gap:8px;
   --focus:#16130f;
   --ease-out:cubic-bezier(.22,.61,.36,1);
-  --font:"Montserrat", system-ui, sans-serif;
+  --font:"Outfit", system-ui, sans-serif;
 }
 @media (max-width:512px){ :root{ --story-size:70px; } }
 

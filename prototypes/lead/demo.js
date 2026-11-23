@@ -89,7 +89,7 @@ const store = {
   get(k, d) { try { return localStorage.getItem("md-demo-" + k) || d; } catch { return d; } },
   set(k, v) { try { localStorage.setItem("md-demo-" + k, v); } catch {} },
 };
-const loaded = new Set(["Montserrat:wght@300..800"]);
+const loaded = new Set(); // page preloads Fraunces + Outfit; anything else loads on demand
 function loadFont(spec) {
   if (!spec || loaded.has(spec)) return Promise.resolve();
   loaded.add(spec);
@@ -115,9 +115,9 @@ const mixHex = (a, b, t) => { // a→b by t (sRGB, good enough for a readout)
 const state = {
   accent: store.get("accent", "sage"),
   dark: store.get("dark", "ink"),
-  light: store.get("light", "bone"),
-  display: store.get("display", "montserrat"),
-  body: store.get("body", "montserrat"),
+  light: store.get("light", "white"),
+  display: store.get("display", "fraunces"),
+  body: store.get("body", "outfit"),
 };
 
 /* ---------------- apply ---------------- */
@@ -232,7 +232,7 @@ panel.addEventListener("click", async (e) => {
   const pick = e.target.closest("[data-pick]");
   if (pick) { state[pick.dataset.kind] = pick.dataset.pick; apply(); return; }
   const act = e.target.closest("[data-act]")?.dataset.act;
-  if (act === "reset") Object.assign(state, { accent: "sage", dark: "ink", light: "bone", display: "montserrat", body: "montserrat" });
+  if (act === "reset") Object.assign(state, { accent: "sage", dark: "ink", light: "white", display: "fraunces", body: "outfit" });
   if (act === "shuffle") {
     const r = (l) => l[Math.floor(Math.random() * l.length)].id;
     Object.assign(state, { accent: r(ACCENTS), dark: r(DARKS), light: r(LIGHTS), display: r(DISPLAY_FONTS), body: r(BODY_FONTS) });
