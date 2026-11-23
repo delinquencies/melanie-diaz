@@ -1,5 +1,29 @@
 # Implementation Plan
 
+## Current release plan — 2026-11-23 audit override
+
+Read [DESIGN_DIRECTION_AUDIT.md](DESIGN_DIRECTION_AUDIT.md) first for evidence, component decisions and the next three tasks. The older sequence below is retained as project history; this section takes precedence where it conflicts.
+
+- **Approved identity is settled:** Fraunces headlines, Outfit body, Sage `#A3B18A`, deep sage `#56664A`, Ink `#16130F`, pure white and a monochrome hero. `tokens.css` implements it. Montserrat, warm-bone selection, undecided accents and a new type-specimen/GDY-reference exploration are no longer blockers.
+- **Refine `prototypes/lead/` in place.** Reuse the component preview's split, work rail and contact/footer structures. Do not create another concept or require every optional component to be finished before composing the page.
+- **Protect the main-only catalog correction:** design HEAD `8818335` lacks main commit `a09e5c5` (approved eight-service links menu). The prototype JSON and public EN/ES retain the older seven-service catalog. Reconcile explicitly in implementation; no merge or price change was made by this audit.
+- **Narrative:** introduction → selected color results → compact expertise/services → Melanie's story → verified trust content → optional editorial → visit/contact/final booking. Omit unavailable sections cleanly.
+- **Conversion:** keep header, introductory, useful service-specific and closing actions. Remove routine About/story booking prompts; omit the duplicate mobile bottom bar while header Book stays fixed. Preserve `booking.js`, Goldie and plain-link fallback. Do not activate public Salon OS intake.
+- **Release scope:** image-only hero and static selected work are sufficient. Stories, video, review cards and FAQ depend on real approved content; they do not block the core site. A plain Google-profile link can stand in for unavailable review data without inventing a rating.
+
+| Priority | Sequence / dependency | Completion gate |
+| --- | --- | --- |
+| P0 | Task 1: refine lead typography, hierarchy and complete narrative | No clipped headings or hidden horizontal overflow at 375/768/1440 and zoom; real work appears before the long menu. |
+| P0 | Task 2: reconcile catalog with main and owner-confirmed facts; consolidate existing service renderer | One reviewed source for EN/ES/links, static/no-JS service information, honest Goldie handoff. Business data changes require confirmation. Structural work can proceed while facts are pending. |
+| P0 | Task 3: harden header/menu and integrate existing public EN/ES/links routes | Accessible navigation/focus/contrast, preserved Formspree/map/contact/hreflang, working fallback links, no missing referenced assets. Depends on Task 1 and confirmed Task 2 content for final integration. |
+| P0 | Release verification and owner review | Real mobile/browser checks, keyboard/screen reader, no-JS/reduced-motion/fetch failures, output exclusions confirmed; no deployment without separate authorization. |
+| P1 | Measured media/font/performance polish; real review cards; optional hardened/localized stories | Useful approved content and accessible controls; preserve the lightweight stack. |
+| P2 | Education/editorial and broader beauty-brand extensions | Actual business need/content; no premature shop, account or new platform. |
+
+Exact files, dependencies, acceptance criteria and testing instructions are in audit §8. The audit itself changes documentation and adds visual evidence only; historical research, SALON_OS and production code remain intact.
+
+## Historical component-first plan (2026-11-21)
+
 **Principle:** keep the current stack (static HTML, one stylesheet, vanilla JS, Cloudflare). Add no framework and no bundler. Build components in isolation first (`prototypes/`), then assemble the homepage only after the components are approved.
 
 ## Current state (from the audit)

@@ -1,0 +1,2700 @@
+[
+  {
+    "name": "lead",
+    "title": "Lead-in · Melanie Diaz",
+    "width": 375,
+    "scrollWidth": 387,
+    "height": 3380,
+    "fonts": [
+      {
+        "family": "Fraunces",
+        "status": "unloaded"
+      },
+      {
+        "family": "Fraunces",
+        "status": "unloaded"
+      },
+      {
+        "family": "Fraunces",
+        "status": "loaded"
+      },
+      {
+        "family": "Outfit",
+        "status": "unloaded"
+      },
+      {
+        "family": "Outfit",
+        "status": "loaded"
+      },
+      {
+        "family": "Fraunces",
+        "status": "unloaded"
+      },
+      {
+        "family": "Fraunces",
+        "status": "unloaded"
+      },
+      {
+        "family": "Fraunces",
+        "status": "loaded"
+      },
+      {
+        "family": "Outfit",
+        "status": "unloaded"
+      },
+      {
+        "family": "Outfit",
+        "status": "unloaded"
+      }
+    ],
+    "bodyFont": "Outfit, system-ui, -apple-system, \"Segoe UI\", sans-serif",
+    "bookLinks": [
+      {
+        "text": "Book",
+        "source": "header",
+        "adapter": true,
+        "y": 8
+      },
+      {
+        "text": "Book an appointment",
+        "source": "menu",
+        "adapter": true,
+        "y": 272
+      },
+      {
+        "text": "Book an appointment",
+        "source": "hero",
+        "adapter": true,
+        "y": 677
+      },
+      {
+        "text": "Book",
+        "source": "services",
+        "service": "curly-dry-cut",
+        "adapter": true,
+        "y": 1007
+      },
+      {
+        "text": "Book",
+        "source": "services",
+        "service": "curly-cut-define",
+        "adapter": true,
+        "y": 1137
+      },
+      {
+        "text": "Book",
+        "source": "services",
+        "service": "silk-press-trim",
+        "adapter": true,
+        "y": 1683
+      },
+      {
+        "text": "Book",
+        "source": "services",
+        "service": "relaxer",
+        "adapter": true,
+        "y": 1835
+      },
+      {
+        "text": "Book",
+        "source": "services",
+        "service": "haircut",
+        "adapter": true,
+        "y": 2314
+      },
+      {
+        "text": "Book",
+        "source": "services",
+        "service": "blowdry-wash",
+        "adapter": true,
+        "y": 2444
+      },
+      {
+        "text": "Book",
+        "source": "services",
+        "service": "shampoo",
+        "adapter": true,
+        "y": 2752
+      }
+    ],
+    "headings": [
+      {
+        "text": "MelanieDiaz\n      MelanieDiaz",
+        "font": "Outfit, system-ui, -apple-system, \"Segoe UI\", sans-serif",
+        "y": 417,
+        "height": 131
+      },
+      {
+        "text": "Curls",
+        "font": "Fraunces, Outfit, system-ui, -apple-system, \"Segoe UI\", sans-serif",
+        "y": 876,
+        "height": 90
+      },
+      {
+        "text": "Silkpress& smoothing",
+        "font": "Fraunces, Outfit, system-ui, -apple-system, \"Segoe UI\", sans-serif",
+        "y": 1383,
+        "height": 259
+      },
+      {
+        "text": "Cuts& styling",
+        "font": "Fraunces, Outfit, system-ui, -apple-system, \"Segoe UI\", sans-serif",
+        "y": 2103,
+        "height": 170
+      },
+      {
+        "text": "Treatments",
+        "font": "Fraunces, Outfit, system-ui, -apple-system, \"Segoe UI\", sans-serif",
+        "y": 2668,
+        "height": 43
+      },
+      {
+        "text": "Stories",
+        "font": "Fraunces, Outfit, system-ui, -apple-system, \"Segoe UI\", sans-serif",
+        "y": 2978,
+        "height": 35
+      }
+    ],
+    "menuOpen": "true",
+    "menuEsc": "false",
+    "storyOpen": true,
+    "storyBackClosed": true,
+    "focusReturned": true,
+    "reducedMotionStory": {
+      "paused": false,
+      "imageAnimation": "none"
+    },
+    "errors": [],
+    "failed": [
+      {
+        "url": "http://127.0.0.1:8766/Final.mp4",
+        "error": "net::ERR_ABORTED"
+      }
+    ]
+  },
+  {
+    "name": "components",
+    "title": "Component preview · Melanie Diaz",
+    "width": 375,
+    "scrollWidth": 375,
+    "height": 5706,
+    "fonts": [
+      {
+        "family": "Fraunces",
+        "status": "unloaded"
+      },
+      {
+        "family": "Fraunces",
+        "status": "unloaded"
+      },
+      {
+        "family": "Fraunces",
+        "status": "loaded"
+      },
+      {
+        "family": "Outfit",
+        "status": "unloaded"
+      },
+      {
+        "family": "Outfit",
+        "status": "loaded"
+      }
+    ],
+    "bodyFont": "Outfit, system-ui, -apple-system, \"Segoe UI\", sans-serif",
+    "bookLinks": [
+      {
+        "text": "Book",
+        "source": "header",
+        "adapter": true,
+        "y": 8
+      },
+      {
+        "text": "Book an appointment",
+        "source": "menu",
+        "adapter": true,
+        "y": 392
+      },
+      {
+        "text": "Book an appointment",
+        "source": "hero",
+        "adapter": true,
+        "y": 675
+      },
+      {
+        "text": "Book",
+        "source": "services",
+        "service": "curly-dry-cut",
+        "adapter": true,
+        "y": 1232
+      },
+      {
+        "text": "Book",
+        "source": "services",
+        "service": "curly-cut-define",
+        "adapter": true,
+        "y": 1438
+      },
+      {
+        "text": "Book",
+        "source": "services",
+        "service": "silk-press-trim",
+        "adapter": true,
+        "y": 1759
+      },
+      {
+        "text": "Book",
+        "source": "services",
+        "service": "relaxer",
+        "adapter": true,
+        "y": 2016
+      },
+      {
+        "text": "Book",
+        "source": "services",
+        "service": "haircut",
+        "adapter": true,
+        "y": 2312
+      },
+      {
+        "text": "Book",
+        "source": "services",
+        "service": "blowdry-wash",
+        "adapter": true,
+        "y": 2505
+      },
+      {
+        "text": "Book",
+        "source": "services",
+        "service": "shampoo",
+        "adapter": true,
+        "y": 2775
+      },
+      {
+        "text": "Book now",
+        "source": "about",
+        "adapter": true,
+        "y": 3895
+      },
+      {
+        "text": "Book an appointment",
+        "source": "contact",
+        "adapter": true,
+        "y": 5025
+      },
+      {
+        "text": "Book an appointment",
+        "source": "bookbar",
+        "adapter": true,
+        "y": 833
+      }
+    ],
+    "headings": [
+      {
+        "text": "Melanie\n        Diaz",
+        "font": "Fraunces, Georgia, \"Times New Roman\", serif",
+        "y": 453,
+        "height": 102
+      },
+      {
+        "text": "What Melanie offers",
+        "font": "Fraunces, Georgia, \"Times New Roman\", serif",
+        "y": 926,
+        "height": 64
+      },
+      {
+        "text": "Care, style, and healthy hair first.",
+        "font": "Fraunces, Georgia, \"Times New Roman\", serif",
+        "y": 3531,
+        "height": 96
+      },
+      {
+        "text": "A look at the work",
+        "font": "Fraunces, Georgia, \"Times New Roman\", serif",
+        "y": 4090,
+        "height": 64
+      },
+      {
+        "text": "Let’s get you in the chair",
+        "font": "Fraunces, Georgia, \"Times New Roman\", serif",
+        "y": 4826,
+        "height": 64
+      }
+    ],
+    "errors": [],
+    "failed": []
+  },
+  {
+    "name": "homepage",
+    "title": "Melanie Diaz | Curly Hair Specialist — Baytown & Greater Houston, TX",
+    "width": 375,
+    "scrollWidth": 375,
+    "height": 5701,
+    "fonts": [
+      {
+        "family": "Cormorant Garamond",
+        "status": "unloaded"
+      },
+      {
+        "family": "Cormorant Garamond",
+        "status": "unloaded"
+      },
+      {
+        "family": "Cormorant Garamond",
+        "status": "unloaded"
+      },
+      {
+        "family": "Cormorant Garamond",
+        "status": "unloaded"
+      },
+      {
+        "family": "Cormorant Garamond",
+        "status": "unloaded"
+      },
+      {
+        "family": "Cormorant Garamond",
+        "status": "unloaded"
+      },
+      {
+        "family": "Cormorant Garamond",
+        "status": "unloaded"
+      },
+      {
+        "family": "Cormorant Garamond",
+        "status": "unloaded"
+      },
+      {
+        "family": "Cormorant Garamond",
+        "status": "unloaded"
+      },
+      {
+        "family": "Cormorant Garamond",
+        "status": "loaded"
+      },
+      {
+        "family": "Inter",
+        "status": "unloaded"
+      },
+      {
+        "family": "Inter",
+        "status": "unloaded"
+      },
+      {
+        "family": "Inter",
+        "status": "unloaded"
+      },
+      {
+        "family": "Inter",
+        "status": "unloaded"
+      },
+      {
+        "family": "Inter",
+        "status": "unloaded"
+      },
+      {
+        "family": "Inter",
+        "status": "unloaded"
+      },
+      {
+        "family": "Inter",
+        "status": "loaded"
+      },
+      {
+        "family": "Inter",
+        "status": "unloaded"
+      },
+      {
+        "family": "Inter",
+        "status": "unloaded"
+      },
+      {
+        "family": "Inter",
+        "status": "unloaded"
+      },
+      {
+        "family": "Inter",
+        "status": "unloaded"
+      },
+      {
+        "family": "Inter",
+        "status": "unloaded"
+      },
+      {
+        "family": "Inter",
+        "status": "unloaded"
+      },
+      {
+        "family": "Inter",
+        "status": "unloaded"
+      },
+      {
+        "family": "Inter",
+        "status": "unloaded"
+      },
+      {
+        "family": "Inter",
+        "status": "unloaded"
+      },
+      {
+        "family": "Inter",
+        "status": "unloaded"
+      },
+      {
+        "family": "Inter",
+        "status": "unloaded"
+      },
+      {
+        "family": "Inter",
+        "status": "unloaded"
+      },
+      {
+        "family": "Inter",
+        "status": "unloaded"
+      },
+      {
+        "family": "Inter",
+        "status": "unloaded"
+      },
+      {
+        "family": "League Spartan",
+        "status": "unloaded"
+      },
+      {
+        "family": "League Spartan",
+        "status": "unloaded"
+      },
+      {
+        "family": "League Spartan",
+        "status": "loaded"
+      },
+      {
+        "family": "Libre Baskerville",
+        "status": "unloaded"
+      },
+      {
+        "family": "Libre Baskerville",
+        "status": "loaded"
+      },
+      {
+        "family": "Libre Baskerville",
+        "status": "unloaded"
+      },
+      {
+        "family": "Libre Baskerville",
+        "status": "unloaded"
+      },
+      {
+        "family": "Mea Culpa",
+        "status": "unloaded"
+      },
+      {
+        "family": "Mea Culpa",
+        "status": "unloaded"
+      },
+      {
+        "family": "Mea Culpa",
+        "status": "loaded"
+      }
+    ],
+    "bodyFont": "\"Libre Baskerville\", serif",
+    "bookLinks": [
+      {
+        "text": "Book now",
+        "adapter": false,
+        "y": 494
+      },
+      {
+        "text": "Book your appointment",
+        "adapter": false,
+        "y": 1368
+      },
+      {
+        "text": "Book now",
+        "adapter": false,
+        "y": 2208
+      }
+    ],
+    "headings": [
+      {
+        "text": "Melanie\n          Diaz",
+        "font": "\"League Spartan\", sans-serif",
+        "y": 241,
+        "height": 100
+      },
+      {
+        "text": "What Melanie offers",
+        "font": "\"Cormorant Garamond\", serif",
+        "y": 928,
+        "height": 34
+      },
+      {
+        "text": "Care, style, and healthy hair first.",
+        "font": "\"Cormorant Garamond\", serif",
+        "y": 1625,
+        "height": 69
+      },
+      {
+        "text": "A look at the work",
+        "font": "\"Cormorant Garamond\", serif",
+        "y": 2845,
+        "height": 34
+      },
+      {
+        "text": "Let’s get you in the chair",
+        "font": "\"Cormorant Garamond\", serif",
+        "y": 3730,
+        "height": 69
+      }
+    ],
+    "errors": [],
+    "failed": []
+  },
+  {
+    "name": "spanish",
+    "title": "Melanie Diaz | Rizos y pelo rizado en Baytown y Houston | Estilista boricua",
+    "width": 375,
+    "scrollWidth": 375,
+    "height": 5499,
+    "fonts": [
+      {
+        "family": "Cormorant Garamond",
+        "status": "unloaded"
+      },
+      {
+        "family": "Cormorant Garamond",
+        "status": "unloaded"
+      },
+      {
+        "family": "Cormorant Garamond",
+        "status": "unloaded"
+      },
+      {
+        "family": "Cormorant Garamond",
+        "status": "unloaded"
+      },
+      {
+        "family": "Cormorant Garamond",
+        "status": "unloaded"
+      },
+      {
+        "family": "Cormorant Garamond",
+        "status": "unloaded"
+      },
+      {
+        "family": "Cormorant Garamond",
+        "status": "unloaded"
+      },
+      {
+        "family": "Cormorant Garamond",
+        "status": "unloaded"
+      },
+      {
+        "family": "Cormorant Garamond",
+        "status": "unloaded"
+      },
+      {
+        "family": "Cormorant Garamond",
+        "status": "loaded"
+      },
+      {
+        "family": "Inter",
+        "status": "unloaded"
+      },
+      {
+        "family": "Inter",
+        "status": "unloaded"
+      },
+      {
+        "family": "Inter",
+        "status": "unloaded"
+      },
+      {
+        "family": "Inter",
+        "status": "unloaded"
+      },
+      {
+        "family": "Inter",
+        "status": "unloaded"
+      },
+      {
+        "family": "Inter",
+        "status": "unloaded"
+      },
+      {
+        "family": "Inter",
+        "status": "loaded"
+      },
+      {
+        "family": "Inter",
+        "status": "unloaded"
+      },
+      {
+        "family": "Inter",
+        "status": "unloaded"
+      },
+      {
+        "family": "Inter",
+        "status": "unloaded"
+      },
+      {
+        "family": "Inter",
+        "status": "unloaded"
+      },
+      {
+        "family": "Inter",
+        "status": "unloaded"
+      },
+      {
+        "family": "Inter",
+        "status": "unloaded"
+      },
+      {
+        "family": "Inter",
+        "status": "unloaded"
+      },
+      {
+        "family": "Inter",
+        "status": "unloaded"
+      },
+      {
+        "family": "Inter",
+        "status": "unloaded"
+      },
+      {
+        "family": "Inter",
+        "status": "unloaded"
+      },
+      {
+        "family": "Inter",
+        "status": "unloaded"
+      },
+      {
+        "family": "Inter",
+        "status": "unloaded"
+      },
+      {
+        "family": "Inter",
+        "status": "unloaded"
+      },
+      {
+        "family": "Inter",
+        "status": "unloaded"
+      },
+      {
+        "family": "League Spartan",
+        "status": "unloaded"
+      },
+      {
+        "family": "League Spartan",
+        "status": "unloaded"
+      },
+      {
+        "family": "League Spartan",
+        "status": "loaded"
+      },
+      {
+        "family": "Libre Baskerville",
+        "status": "unloaded"
+      },
+      {
+        "family": "Libre Baskerville",
+        "status": "loaded"
+      },
+      {
+        "family": "Libre Baskerville",
+        "status": "unloaded"
+      },
+      {
+        "family": "Libre Baskerville",
+        "status": "unloaded"
+      },
+      {
+        "family": "Mea Culpa",
+        "status": "unloaded"
+      },
+      {
+        "family": "Mea Culpa",
+        "status": "unloaded"
+      },
+      {
+        "family": "Mea Culpa",
+        "status": "loaded"
+      }
+    ],
+    "bodyFont": "\"Libre Baskerville\", serif",
+    "bookLinks": [
+      {
+        "text": "Reservar",
+        "adapter": false,
+        "y": 517
+      },
+      {
+        "text": "Reserva tu cita",
+        "adapter": false,
+        "y": 1348
+      },
+      {
+        "text": "Reservar",
+        "adapter": false,
+        "y": 2135
+      }
+    ],
+    "headings": [
+      {
+        "text": "Melanie\n          Diaz",
+        "font": "\"League Spartan\", sans-serif",
+        "y": 238,
+        "height": 100
+      },
+      {
+        "text": "Lo que ofrece Melanie",
+        "font": "\"Cormorant Garamond\", serif",
+        "y": 928,
+        "height": 34
+      },
+      {
+        "text": "Cuidado, estilo y pelo sano primero",
+        "font": "\"Cormorant Garamond\", serif",
+        "y": 1604,
+        "height": 69
+      },
+      {
+        "text": "Un vistazo al trabajo",
+        "font": "\"Cormorant Garamond\", serif",
+        "y": 2719,
+        "height": 34
+      },
+      {
+        "text": "Te esperamos en la silla",
+        "font": "\"Cormorant Garamond\", serif",
+        "y": 3603,
+        "height": 34
+      }
+    ],
+    "errors": [],
+    "failed": []
+  },
+  {
+    "name": "links",
+    "title": "Melanie Diaz | Links — Book, services & social",
+    "width": 375,
+    "scrollWidth": 375,
+    "height": 828,
+    "fonts": [
+      {
+        "family": "Josefin Sans",
+        "status": "unloaded"
+      },
+      {
+        "family": "Josefin Sans",
+        "status": "unloaded"
+      },
+      {
+        "family": "Josefin Sans",
+        "status": "loaded"
+      },
+      {
+        "family": "Josefin Sans",
+        "status": "unloaded"
+      },
+      {
+        "family": "Josefin Sans",
+        "status": "unloaded"
+      },
+      {
+        "family": "Josefin Sans",
+        "status": "loaded"
+      },
+      {
+        "family": "Josefin Sans",
+        "status": "unloaded"
+      },
+      {
+        "family": "Josefin Sans",
+        "status": "unloaded"
+      },
+      {
+        "family": "Josefin Sans",
+        "status": "loaded"
+      },
+      {
+        "family": "Pacifico",
+        "status": "unloaded"
+      },
+      {
+        "family": "Pacifico",
+        "status": "unloaded"
+      },
+      {
+        "family": "Pacifico",
+        "status": "unloaded"
+      },
+      {
+        "family": "Pacifico",
+        "status": "unloaded"
+      },
+      {
+        "family": "Pacifico",
+        "status": "loaded"
+      },
+      {
+        "family": "Zalando Sans",
+        "status": "unloaded"
+      },
+      {
+        "family": "Zalando Sans",
+        "status": "unloaded"
+      },
+      {
+        "family": "Zalando Sans",
+        "status": "unloaded"
+      },
+      {
+        "family": "Zalando Sans",
+        "status": "unloaded"
+      },
+      {
+        "family": "Zalando Sans",
+        "status": "unloaded"
+      },
+      {
+        "family": "Zalando Sans",
+        "status": "unloaded"
+      },
+      {
+        "family": "Zalando Sans",
+        "status": "unloaded"
+      },
+      {
+        "family": "Zalando Sans",
+        "status": "unloaded"
+      },
+      {
+        "family": "Zalando Sans",
+        "status": "loaded"
+      }
+    ],
+    "bodyFont": "Inter, system-ui, sans-serif",
+    "bookLinks": [
+      {
+        "text": "Book Now",
+        "adapter": false,
+        "y": 383
+      }
+    ],
+    "headings": [
+      {
+        "text": "Melanie Diaz",
+        "font": "Pacifico, cursive",
+        "y": 160,
+        "height": 98
+      }
+    ],
+    "errors": [],
+    "failed": []
+  },
+  {
+    "name": "lead",
+    "title": "Lead-in · Melanie Diaz",
+    "width": 768,
+    "scrollWidth": 772,
+    "height": 3683,
+    "fonts": [
+      {
+        "family": "Fraunces",
+        "status": "unloaded"
+      },
+      {
+        "family": "Fraunces",
+        "status": "unloaded"
+      },
+      {
+        "family": "Fraunces",
+        "status": "loaded"
+      },
+      {
+        "family": "Outfit",
+        "status": "unloaded"
+      },
+      {
+        "family": "Outfit",
+        "status": "loaded"
+      },
+      {
+        "family": "Fraunces",
+        "status": "unloaded"
+      },
+      {
+        "family": "Fraunces",
+        "status": "unloaded"
+      },
+      {
+        "family": "Fraunces",
+        "status": "loaded"
+      },
+      {
+        "family": "Outfit",
+        "status": "unloaded"
+      },
+      {
+        "family": "Outfit",
+        "status": "unloaded"
+      }
+    ],
+    "bodyFont": "Outfit, system-ui, -apple-system, \"Segoe UI\", sans-serif",
+    "bookLinks": [
+      {
+        "text": "Book",
+        "source": "header",
+        "adapter": true,
+        "y": 8
+      },
+      {
+        "text": "Book an appointment",
+        "source": "menu",
+        "adapter": true,
+        "y": 272
+      },
+      {
+        "text": "Book an appointment",
+        "source": "hero",
+        "adapter": true,
+        "y": 872
+      },
+      {
+        "text": "Book",
+        "source": "services",
+        "service": "curly-dry-cut",
+        "adapter": true,
+        "y": 1242
+      },
+      {
+        "text": "Book",
+        "source": "services",
+        "service": "curly-cut-define",
+        "adapter": true,
+        "y": 1349
+      },
+      {
+        "text": "Book",
+        "source": "services",
+        "service": "silk-press-trim",
+        "adapter": true,
+        "y": 1960
+      },
+      {
+        "text": "Book",
+        "source": "services",
+        "service": "relaxer",
+        "adapter": true,
+        "y": 2090
+      },
+      {
+        "text": "Book",
+        "source": "services",
+        "service": "haircut",
+        "adapter": true,
+        "y": 2606
+      },
+      {
+        "text": "Book",
+        "source": "services",
+        "service": "blowdry-wash",
+        "adapter": true,
+        "y": 2713
+      },
+      {
+        "text": "Book",
+        "source": "services",
+        "service": "shampoo",
+        "adapter": true,
+        "y": 3068
+      }
+    ],
+    "headings": [
+      {
+        "text": "MelanieDiaz\n      MelanieDiaz",
+        "font": "Outfit, system-ui, -apple-system, \"Segoe UI\", sans-serif",
+        "y": 390,
+        "height": 275
+      },
+      {
+        "text": "Curls",
+        "font": "Fraunces, Outfit, system-ui, -apple-system, \"Segoe UI\", sans-serif",
+        "y": 1072,
+        "height": 129
+      },
+      {
+        "text": "Silkpress& smoothing",
+        "font": "Fraunces, Outfit, system-ui, -apple-system, \"Segoe UI\", sans-serif",
+        "y": 1572,
+        "height": 347
+      },
+      {
+        "text": "Cuts& styling",
+        "font": "Fraunces, Outfit, system-ui, -apple-system, \"Segoe UI\", sans-serif",
+        "y": 2314,
+        "height": 251
+      },
+      {
+        "text": "Treatments",
+        "font": "Fraunces, Outfit, system-ui, -apple-system, \"Segoe UI\", sans-serif",
+        "y": 2936,
+        "height": 91
+      },
+      {
+        "text": "Stories",
+        "font": "Fraunces, Outfit, system-ui, -apple-system, \"Segoe UI\", sans-serif",
+        "y": 3272,
+        "height": 35
+      }
+    ],
+    "errors": [],
+    "failed": []
+  },
+  {
+    "name": "components",
+    "title": "Component preview · Melanie Diaz",
+    "width": 768,
+    "scrollWidth": 768,
+    "height": 5775,
+    "fonts": [
+      {
+        "family": "Fraunces",
+        "status": "unloaded"
+      },
+      {
+        "family": "Fraunces",
+        "status": "unloaded"
+      },
+      {
+        "family": "Fraunces",
+        "status": "loaded"
+      },
+      {
+        "family": "Outfit",
+        "status": "unloaded"
+      },
+      {
+        "family": "Outfit",
+        "status": "loaded"
+      }
+    ],
+    "bodyFont": "Outfit, system-ui, -apple-system, \"Segoe UI\", sans-serif",
+    "bookLinks": [
+      {
+        "text": "Book",
+        "source": "header",
+        "adapter": true,
+        "y": 8
+      },
+      {
+        "text": "Book an appointment",
+        "source": "menu",
+        "adapter": true,
+        "y": 392
+      },
+      {
+        "text": "Book an appointment",
+        "source": "hero",
+        "adapter": true,
+        "y": 813
+      },
+      {
+        "text": "Book",
+        "source": "services",
+        "service": "curly-dry-cut",
+        "adapter": true,
+        "y": 1277
+      },
+      {
+        "text": "Book",
+        "source": "services",
+        "service": "curly-cut-define",
+        "adapter": true,
+        "y": 1422
+      },
+      {
+        "text": "Book",
+        "source": "services",
+        "service": "silk-press-trim",
+        "adapter": true,
+        "y": 1644
+      },
+      {
+        "text": "Book",
+        "source": "services",
+        "service": "relaxer",
+        "adapter": true,
+        "y": 1801
+      },
+      {
+        "text": "Book",
+        "source": "services",
+        "service": "haircut",
+        "adapter": true,
+        "y": 2023
+      },
+      {
+        "text": "Book",
+        "source": "services",
+        "service": "blowdry-wash",
+        "adapter": true,
+        "y": 2155
+      },
+      {
+        "text": "Book",
+        "source": "services",
+        "service": "shampoo",
+        "adapter": true,
+        "y": 2363
+      },
+      {
+        "text": "Book now",
+        "source": "about",
+        "adapter": true,
+        "y": 3890
+      },
+      {
+        "text": "Book an appointment",
+        "source": "contact",
+        "adapter": true,
+        "y": 5108
+      },
+      {
+        "text": "Book an appointment",
+        "source": "bookbar",
+        "adapter": true,
+        "y": 921
+      }
+    ],
+    "headings": [
+      {
+        "text": "Melanie\n        Diaz",
+        "font": "Fraunces, Georgia, \"Times New Roman\", serif",
+        "y": 496,
+        "height": 192
+      },
+      {
+        "text": "What Melanie offers",
+        "font": "Fraunces, Georgia, \"Times New Roman\", serif",
+        "y": 1006,
+        "height": 54
+      },
+      {
+        "text": "Care, style, and healthy hair first.",
+        "font": "Fraunces, Georgia, \"Times New Roman\", serif",
+        "y": 3584,
+        "height": 108
+      },
+      {
+        "text": "A look at the work",
+        "font": "Fraunces, Georgia, \"Times New Roman\", serif",
+        "y": 4096,
+        "height": 54
+      },
+      {
+        "text": "Let’s get you in the chair",
+        "font": "Fraunces, Georgia, \"Times New Roman\", serif",
+        "y": 4887,
+        "height": 108
+      }
+    ],
+    "errors": [],
+    "failed": []
+  },
+  {
+    "name": "homepage",
+    "title": "Melanie Diaz | Curly Hair Specialist — Baytown & Greater Houston, TX",
+    "width": 768,
+    "scrollWidth": 768,
+    "height": 5837,
+    "fonts": [
+      {
+        "family": "Cormorant Garamond",
+        "status": "unloaded"
+      },
+      {
+        "family": "Cormorant Garamond",
+        "status": "unloaded"
+      },
+      {
+        "family": "Cormorant Garamond",
+        "status": "unloaded"
+      },
+      {
+        "family": "Cormorant Garamond",
+        "status": "unloaded"
+      },
+      {
+        "family": "Cormorant Garamond",
+        "status": "unloaded"
+      },
+      {
+        "family": "Cormorant Garamond",
+        "status": "unloaded"
+      },
+      {
+        "family": "Cormorant Garamond",
+        "status": "unloaded"
+      },
+      {
+        "family": "Cormorant Garamond",
+        "status": "unloaded"
+      },
+      {
+        "family": "Cormorant Garamond",
+        "status": "unloaded"
+      },
+      {
+        "family": "Cormorant Garamond",
+        "status": "loaded"
+      },
+      {
+        "family": "Inter",
+        "status": "unloaded"
+      },
+      {
+        "family": "Inter",
+        "status": "unloaded"
+      },
+      {
+        "family": "Inter",
+        "status": "unloaded"
+      },
+      {
+        "family": "Inter",
+        "status": "unloaded"
+      },
+      {
+        "family": "Inter",
+        "status": "unloaded"
+      },
+      {
+        "family": "Inter",
+        "status": "unloaded"
+      },
+      {
+        "family": "Inter",
+        "status": "loaded"
+      },
+      {
+        "family": "Inter",
+        "status": "unloaded"
+      },
+      {
+        "family": "Inter",
+        "status": "unloaded"
+      },
+      {
+        "family": "Inter",
+        "status": "unloaded"
+      },
+      {
+        "family": "Inter",
+        "status": "unloaded"
+      },
+      {
+        "family": "Inter",
+        "status": "unloaded"
+      },
+      {
+        "family": "Inter",
+        "status": "unloaded"
+      },
+      {
+        "family": "Inter",
+        "status": "unloaded"
+      },
+      {
+        "family": "Inter",
+        "status": "unloaded"
+      },
+      {
+        "family": "Inter",
+        "status": "unloaded"
+      },
+      {
+        "family": "Inter",
+        "status": "unloaded"
+      },
+      {
+        "family": "Inter",
+        "status": "unloaded"
+      },
+      {
+        "family": "Inter",
+        "status": "unloaded"
+      },
+      {
+        "family": "Inter",
+        "status": "unloaded"
+      },
+      {
+        "family": "Inter",
+        "status": "unloaded"
+      },
+      {
+        "family": "League Spartan",
+        "status": "unloaded"
+      },
+      {
+        "family": "League Spartan",
+        "status": "unloaded"
+      },
+      {
+        "family": "League Spartan",
+        "status": "loaded"
+      },
+      {
+        "family": "Libre Baskerville",
+        "status": "unloaded"
+      },
+      {
+        "family": "Libre Baskerville",
+        "status": "loaded"
+      },
+      {
+        "family": "Libre Baskerville",
+        "status": "unloaded"
+      },
+      {
+        "family": "Libre Baskerville",
+        "status": "unloaded"
+      },
+      {
+        "family": "Mea Culpa",
+        "status": "unloaded"
+      },
+      {
+        "family": "Mea Culpa",
+        "status": "unloaded"
+      },
+      {
+        "family": "Mea Culpa",
+        "status": "loaded"
+      }
+    ],
+    "bodyFont": "\"Libre Baskerville\", serif",
+    "bookLinks": [
+      {
+        "text": "Book now",
+        "adapter": false,
+        "y": 620
+      },
+      {
+        "text": "Book your appointment",
+        "adapter": false,
+        "y": 2143
+      },
+      {
+        "text": "Book now",
+        "adapter": false,
+        "y": 2952
+      }
+    ],
+    "headings": [
+      {
+        "text": "Melanie\n          Diaz",
+        "font": "\"League Spartan\", sans-serif",
+        "y": 307,
+        "height": 144
+      },
+      {
+        "text": "What Melanie offers",
+        "font": "\"Cormorant Garamond\", serif",
+        "y": 1016,
+        "height": 45
+      },
+      {
+        "text": "Care, style, and healthy hair first.",
+        "font": "\"Cormorant Garamond\", serif",
+        "y": 2400,
+        "height": 90
+      },
+      {
+        "text": "A look at the work",
+        "font": "\"Cormorant Garamond\", serif",
+        "y": 3204,
+        "height": 45
+      },
+      {
+        "text": "Let’s get you in the chair",
+        "font": "\"Cormorant Garamond\", serif",
+        "y": 4083,
+        "height": 45
+      }
+    ],
+    "errors": [],
+    "failed": []
+  },
+  {
+    "name": "spanish",
+    "title": "Melanie Diaz | Rizos y pelo rizado en Baytown y Houston | Estilista boricua",
+    "width": 768,
+    "scrollWidth": 768,
+    "height": 5768,
+    "fonts": [
+      {
+        "family": "Cormorant Garamond",
+        "status": "unloaded"
+      },
+      {
+        "family": "Cormorant Garamond",
+        "status": "unloaded"
+      },
+      {
+        "family": "Cormorant Garamond",
+        "status": "unloaded"
+      },
+      {
+        "family": "Cormorant Garamond",
+        "status": "unloaded"
+      },
+      {
+        "family": "Cormorant Garamond",
+        "status": "unloaded"
+      },
+      {
+        "family": "Cormorant Garamond",
+        "status": "unloaded"
+      },
+      {
+        "family": "Cormorant Garamond",
+        "status": "unloaded"
+      },
+      {
+        "family": "Cormorant Garamond",
+        "status": "unloaded"
+      },
+      {
+        "family": "Cormorant Garamond",
+        "status": "unloaded"
+      },
+      {
+        "family": "Cormorant Garamond",
+        "status": "loaded"
+      },
+      {
+        "family": "Inter",
+        "status": "unloaded"
+      },
+      {
+        "family": "Inter",
+        "status": "unloaded"
+      },
+      {
+        "family": "Inter",
+        "status": "unloaded"
+      },
+      {
+        "family": "Inter",
+        "status": "unloaded"
+      },
+      {
+        "family": "Inter",
+        "status": "unloaded"
+      },
+      {
+        "family": "Inter",
+        "status": "unloaded"
+      },
+      {
+        "family": "Inter",
+        "status": "loaded"
+      },
+      {
+        "family": "Inter",
+        "status": "unloaded"
+      },
+      {
+        "family": "Inter",
+        "status": "unloaded"
+      },
+      {
+        "family": "Inter",
+        "status": "unloaded"
+      },
+      {
+        "family": "Inter",
+        "status": "unloaded"
+      },
+      {
+        "family": "Inter",
+        "status": "unloaded"
+      },
+      {
+        "family": "Inter",
+        "status": "unloaded"
+      },
+      {
+        "family": "Inter",
+        "status": "unloaded"
+      },
+      {
+        "family": "Inter",
+        "status": "unloaded"
+      },
+      {
+        "family": "Inter",
+        "status": "unloaded"
+      },
+      {
+        "family": "Inter",
+        "status": "unloaded"
+      },
+      {
+        "family": "Inter",
+        "status": "unloaded"
+      },
+      {
+        "family": "Inter",
+        "status": "unloaded"
+      },
+      {
+        "family": "Inter",
+        "status": "unloaded"
+      },
+      {
+        "family": "Inter",
+        "status": "unloaded"
+      },
+      {
+        "family": "League Spartan",
+        "status": "unloaded"
+      },
+      {
+        "family": "League Spartan",
+        "status": "unloaded"
+      },
+      {
+        "family": "League Spartan",
+        "status": "loaded"
+      },
+      {
+        "family": "Libre Baskerville",
+        "status": "unloaded"
+      },
+      {
+        "family": "Libre Baskerville",
+        "status": "loaded"
+      },
+      {
+        "family": "Libre Baskerville",
+        "status": "unloaded"
+      },
+      {
+        "family": "Libre Baskerville",
+        "status": "unloaded"
+      },
+      {
+        "family": "Mea Culpa",
+        "status": "unloaded"
+      },
+      {
+        "family": "Mea Culpa",
+        "status": "unloaded"
+      },
+      {
+        "family": "Mea Culpa",
+        "status": "loaded"
+      }
+    ],
+    "bodyFont": "\"Libre Baskerville\", serif",
+    "bookLinks": [
+      {
+        "text": "Reservar",
+        "adapter": false,
+        "y": 620
+      },
+      {
+        "text": "Reserva tu cita",
+        "adapter": false,
+        "y": 2174
+      },
+      {
+        "text": "Reservar",
+        "adapter": false,
+        "y": 2903
+      }
+    ],
+    "headings": [
+      {
+        "text": "Melanie\n          Diaz",
+        "font": "\"League Spartan\", sans-serif",
+        "y": 307,
+        "height": 144
+      },
+      {
+        "text": "Lo que ofrece Melanie",
+        "font": "\"Cormorant Garamond\", serif",
+        "y": 1016,
+        "height": 45
+      },
+      {
+        "text": "Cuidado, estilo y pelo sano primero",
+        "font": "\"Cormorant Garamond\", serif",
+        "y": 2430,
+        "height": 90
+      },
+      {
+        "text": "Un vistazo al trabajo",
+        "font": "\"Cormorant Garamond\", serif",
+        "y": 3156,
+        "height": 45
+      },
+      {
+        "text": "Te esperamos en la silla",
+        "font": "\"Cormorant Garamond\", serif",
+        "y": 4035,
+        "height": 45
+      }
+    ],
+    "errors": [],
+    "failed": []
+  },
+  {
+    "name": "links",
+    "title": "Melanie Diaz | Links — Book, services & social",
+    "width": 768,
+    "scrollWidth": 768,
+    "height": 900,
+    "fonts": [
+      {
+        "family": "Josefin Sans",
+        "status": "unloaded"
+      },
+      {
+        "family": "Josefin Sans",
+        "status": "unloaded"
+      },
+      {
+        "family": "Josefin Sans",
+        "status": "loaded"
+      },
+      {
+        "family": "Josefin Sans",
+        "status": "unloaded"
+      },
+      {
+        "family": "Josefin Sans",
+        "status": "unloaded"
+      },
+      {
+        "family": "Josefin Sans",
+        "status": "loaded"
+      },
+      {
+        "family": "Josefin Sans",
+        "status": "unloaded"
+      },
+      {
+        "family": "Josefin Sans",
+        "status": "unloaded"
+      },
+      {
+        "family": "Josefin Sans",
+        "status": "loaded"
+      },
+      {
+        "family": "Pacifico",
+        "status": "unloaded"
+      },
+      {
+        "family": "Pacifico",
+        "status": "unloaded"
+      },
+      {
+        "family": "Pacifico",
+        "status": "unloaded"
+      },
+      {
+        "family": "Pacifico",
+        "status": "unloaded"
+      },
+      {
+        "family": "Pacifico",
+        "status": "loaded"
+      },
+      {
+        "family": "Zalando Sans",
+        "status": "unloaded"
+      },
+      {
+        "family": "Zalando Sans",
+        "status": "unloaded"
+      },
+      {
+        "family": "Zalando Sans",
+        "status": "unloaded"
+      },
+      {
+        "family": "Zalando Sans",
+        "status": "unloaded"
+      },
+      {
+        "family": "Zalando Sans",
+        "status": "unloaded"
+      },
+      {
+        "family": "Zalando Sans",
+        "status": "unloaded"
+      },
+      {
+        "family": "Zalando Sans",
+        "status": "unloaded"
+      },
+      {
+        "family": "Zalando Sans",
+        "status": "unloaded"
+      },
+      {
+        "family": "Zalando Sans",
+        "status": "loaded"
+      }
+    ],
+    "bodyFont": "Inter, system-ui, sans-serif",
+    "bookLinks": [
+      {
+        "text": "Book Now",
+        "adapter": false,
+        "y": 412
+      }
+    ],
+    "headings": [
+      {
+        "text": "Melanie Diaz",
+        "font": "Pacifico, cursive",
+        "y": 160,
+        "height": 127
+      }
+    ],
+    "errors": [],
+    "failed": []
+  },
+  {
+    "name": "lead",
+    "title": "Lead-in · Melanie Diaz",
+    "width": 1440,
+    "scrollWidth": 1440,
+    "height": 3231,
+    "fonts": [
+      {
+        "family": "Fraunces",
+        "status": "unloaded"
+      },
+      {
+        "family": "Fraunces",
+        "status": "unloaded"
+      },
+      {
+        "family": "Fraunces",
+        "status": "loaded"
+      },
+      {
+        "family": "Outfit",
+        "status": "unloaded"
+      },
+      {
+        "family": "Outfit",
+        "status": "loaded"
+      },
+      {
+        "family": "Fraunces",
+        "status": "unloaded"
+      },
+      {
+        "family": "Fraunces",
+        "status": "unloaded"
+      },
+      {
+        "family": "Fraunces",
+        "status": "loaded"
+      },
+      {
+        "family": "Outfit",
+        "status": "unloaded"
+      },
+      {
+        "family": "Outfit",
+        "status": "unloaded"
+      }
+    ],
+    "bodyFont": "Outfit, system-ui, -apple-system, \"Segoe UI\", sans-serif",
+    "bookLinks": [
+      {
+        "text": "Book",
+        "source": "header",
+        "adapter": true,
+        "y": 18
+      },
+      {
+        "text": "Book an appointment",
+        "source": "menu",
+        "adapter": true,
+        "y": 0
+      },
+      {
+        "text": "Book an appointment",
+        "source": "hero",
+        "adapter": true,
+        "y": 1050
+      },
+      {
+        "text": "Book",
+        "source": "services",
+        "service": "curly-dry-cut",
+        "adapter": true,
+        "y": 1247
+      },
+      {
+        "text": "Book",
+        "source": "services",
+        "service": "curly-cut-define",
+        "adapter": true,
+        "y": 1377
+      },
+      {
+        "text": "Book",
+        "source": "services",
+        "service": "silk-press-trim",
+        "adapter": true,
+        "y": 1636
+      },
+      {
+        "text": "Book",
+        "source": "services",
+        "service": "relaxer",
+        "adapter": true,
+        "y": 1789
+      },
+      {
+        "text": "Book",
+        "source": "services",
+        "service": "haircut",
+        "adapter": true,
+        "y": 2158
+      },
+      {
+        "text": "Book",
+        "source": "services",
+        "service": "blowdry-wash",
+        "adapter": true,
+        "y": 2288
+      },
+      {
+        "text": "Book",
+        "source": "services",
+        "service": "shampoo",
+        "adapter": true,
+        "y": 2556
+      }
+    ],
+    "headings": [
+      {
+        "text": "MelanieDiaz\n      MelanieDiaz",
+        "font": "Outfit, system-ui, -apple-system, \"Segoe UI\", sans-serif",
+        "y": 549,
+        "height": 286
+      },
+      {
+        "text": "Curls",
+        "font": "Fraunces, Outfit, system-ui, -apple-system, \"Segoe UI\", sans-serif",
+        "y": 1282,
+        "height": 129
+      },
+      {
+        "text": "Silkpress& smoothing",
+        "font": "Fraunces, Outfit, system-ui, -apple-system, \"Segoe UI\", sans-serif",
+        "y": 1671,
+        "height": 343
+      },
+      {
+        "text": "Cuts& styling",
+        "font": "Fraunces, Outfit, system-ui, -apple-system, \"Segoe UI\", sans-serif",
+        "y": 2193,
+        "height": 219
+      },
+      {
+        "text": "Treatments",
+        "font": "Fraunces, Outfit, system-ui, -apple-system, \"Segoe UI\", sans-serif",
+        "y": 2591,
+        "height": 85
+      },
+      {
+        "text": "Stories",
+        "font": "Fraunces, Outfit, system-ui, -apple-system, \"Segoe UI\", sans-serif",
+        "y": 2804,
+        "height": 51
+      }
+    ],
+    "errors": [],
+    "failed": []
+  },
+  {
+    "name": "components",
+    "title": "Component preview · Melanie Diaz",
+    "width": 1440,
+    "scrollWidth": 1440,
+    "height": 4881,
+    "fonts": [
+      {
+        "family": "Fraunces",
+        "status": "unloaded"
+      },
+      {
+        "family": "Fraunces",
+        "status": "unloaded"
+      },
+      {
+        "family": "Fraunces",
+        "status": "loaded"
+      },
+      {
+        "family": "Outfit",
+        "status": "unloaded"
+      },
+      {
+        "family": "Outfit",
+        "status": "loaded"
+      }
+    ],
+    "bodyFont": "Outfit, system-ui, -apple-system, \"Segoe UI\", sans-serif",
+    "bookLinks": [
+      {
+        "text": "Book",
+        "source": "header",
+        "adapter": true,
+        "y": 18
+      },
+      {
+        "text": "Book an appointment",
+        "source": "menu",
+        "adapter": true,
+        "y": 0
+      },
+      {
+        "text": "Book an appointment",
+        "source": "hero",
+        "adapter": true,
+        "y": 784
+      },
+      {
+        "text": "Book",
+        "source": "services",
+        "service": "curly-dry-cut",
+        "adapter": true,
+        "y": 1329
+      },
+      {
+        "text": "Book",
+        "source": "services",
+        "service": "curly-cut-define",
+        "adapter": true,
+        "y": 1489
+      },
+      {
+        "text": "Book",
+        "source": "services",
+        "service": "silk-press-trim",
+        "adapter": true,
+        "y": 1342
+      },
+      {
+        "text": "Book",
+        "source": "services",
+        "service": "relaxer",
+        "adapter": true,
+        "y": 1515
+      },
+      {
+        "text": "Book",
+        "source": "services",
+        "service": "haircut",
+        "adapter": true,
+        "y": 1751
+      },
+      {
+        "text": "Book",
+        "source": "services",
+        "service": "blowdry-wash",
+        "adapter": true,
+        "y": 1898
+      },
+      {
+        "text": "Book",
+        "source": "services",
+        "service": "shampoo",
+        "adapter": true,
+        "y": 1751
+      },
+      {
+        "text": "Book now",
+        "source": "about",
+        "adapter": true,
+        "y": 2803
+      },
+      {
+        "text": "Book an appointment",
+        "source": "contact",
+        "adapter": true,
+        "y": 4174
+      },
+      {
+        "text": "Book an appointment",
+        "source": "bookbar",
+        "adapter": true,
+        "y": 0
+      }
+    ],
+    "headings": [
+      {
+        "text": "Melanie\n        Diaz",
+        "font": "Fraunces, Georgia, \"Times New Roman\", serif",
+        "y": 425,
+        "height": 230
+      },
+      {
+        "text": "What Melanie offers",
+        "font": "Fraunces, Georgia, \"Times New Roman\", serif",
+        "y": 1052,
+        "height": 60
+      },
+      {
+        "text": "Care, style, and healthy hair first.",
+        "font": "Fraunces, Georgia, \"Times New Roman\", serif",
+        "y": 2420,
+        "height": 180
+      },
+      {
+        "text": "A look at the work",
+        "font": "Fraunces, Georgia, \"Times New Roman\", serif",
+        "y": 3280,
+        "height": 60
+      },
+      {
+        "text": "Let’s get you in the chair",
+        "font": "Fraunces, Georgia, \"Times New Roman\", serif",
+        "y": 4248,
+        "height": 120
+      }
+    ],
+    "errors": [],
+    "failed": []
+  },
+  {
+    "name": "homepage",
+    "title": "Melanie Diaz | Curly Hair Specialist — Baytown & Greater Houston, TX",
+    "width": 1440,
+    "scrollWidth": 1440,
+    "height": 5723,
+    "fonts": [
+      {
+        "family": "Cormorant Garamond",
+        "status": "unloaded"
+      },
+      {
+        "family": "Cormorant Garamond",
+        "status": "unloaded"
+      },
+      {
+        "family": "Cormorant Garamond",
+        "status": "unloaded"
+      },
+      {
+        "family": "Cormorant Garamond",
+        "status": "unloaded"
+      },
+      {
+        "family": "Cormorant Garamond",
+        "status": "unloaded"
+      },
+      {
+        "family": "Cormorant Garamond",
+        "status": "unloaded"
+      },
+      {
+        "family": "Cormorant Garamond",
+        "status": "unloaded"
+      },
+      {
+        "family": "Cormorant Garamond",
+        "status": "unloaded"
+      },
+      {
+        "family": "Cormorant Garamond",
+        "status": "unloaded"
+      },
+      {
+        "family": "Cormorant Garamond",
+        "status": "loaded"
+      },
+      {
+        "family": "Inter",
+        "status": "unloaded"
+      },
+      {
+        "family": "Inter",
+        "status": "unloaded"
+      },
+      {
+        "family": "Inter",
+        "status": "unloaded"
+      },
+      {
+        "family": "Inter",
+        "status": "unloaded"
+      },
+      {
+        "family": "Inter",
+        "status": "unloaded"
+      },
+      {
+        "family": "Inter",
+        "status": "unloaded"
+      },
+      {
+        "family": "Inter",
+        "status": "loaded"
+      },
+      {
+        "family": "Inter",
+        "status": "unloaded"
+      },
+      {
+        "family": "Inter",
+        "status": "unloaded"
+      },
+      {
+        "family": "Inter",
+        "status": "unloaded"
+      },
+      {
+        "family": "Inter",
+        "status": "unloaded"
+      },
+      {
+        "family": "Inter",
+        "status": "unloaded"
+      },
+      {
+        "family": "Inter",
+        "status": "unloaded"
+      },
+      {
+        "family": "Inter",
+        "status": "unloaded"
+      },
+      {
+        "family": "Inter",
+        "status": "unloaded"
+      },
+      {
+        "family": "Inter",
+        "status": "unloaded"
+      },
+      {
+        "family": "Inter",
+        "status": "unloaded"
+      },
+      {
+        "family": "Inter",
+        "status": "unloaded"
+      },
+      {
+        "family": "Inter",
+        "status": "unloaded"
+      },
+      {
+        "family": "Inter",
+        "status": "unloaded"
+      },
+      {
+        "family": "Inter",
+        "status": "unloaded"
+      },
+      {
+        "family": "League Spartan",
+        "status": "unloaded"
+      },
+      {
+        "family": "League Spartan",
+        "status": "unloaded"
+      },
+      {
+        "family": "League Spartan",
+        "status": "loaded"
+      },
+      {
+        "family": "Libre Baskerville",
+        "status": "unloaded"
+      },
+      {
+        "family": "Libre Baskerville",
+        "status": "loaded"
+      },
+      {
+        "family": "Libre Baskerville",
+        "status": "unloaded"
+      },
+      {
+        "family": "Libre Baskerville",
+        "status": "unloaded"
+      },
+      {
+        "family": "Mea Culpa",
+        "status": "unloaded"
+      },
+      {
+        "family": "Mea Culpa",
+        "status": "unloaded"
+      },
+      {
+        "family": "Mea Culpa",
+        "status": "loaded"
+      }
+    ],
+    "bodyFont": "\"Libre Baskerville\", serif",
+    "bookLinks": [
+      {
+        "text": "Book now",
+        "adapter": false,
+        "y": 632
+      },
+      {
+        "text": "Book your appointment",
+        "adapter": false,
+        "y": 1895
+      },
+      {
+        "text": "Book now",
+        "adapter": false,
+        "y": 2614
+      }
+    ],
+    "headings": [
+      {
+        "text": "Melanie\n          Diaz",
+        "font": "\"League Spartan\", sans-serif",
+        "y": 287,
+        "height": 175
+      },
+      {
+        "text": "What Melanie offers",
+        "font": "\"Cormorant Garamond\", serif",
+        "y": 1016,
+        "height": 53
+      },
+      {
+        "text": "Care, style, and healthy hair first.",
+        "font": "\"Cormorant Garamond\", serif",
+        "y": 2151,
+        "height": 107
+      },
+      {
+        "text": "A look at the work",
+        "font": "\"Cormorant Garamond\", serif",
+        "y": 2867,
+        "height": 53
+      },
+      {
+        "text": "Let’s get you in the chair",
+        "font": "\"Cormorant Garamond\", serif",
+        "y": 3982,
+        "height": 53
+      }
+    ],
+    "errors": [],
+    "failed": []
+  },
+  {
+    "name": "spanish",
+    "title": "Melanie Diaz | Rizos y pelo rizado en Baytown y Houston | Estilista boricua",
+    "width": 1440,
+    "scrollWidth": 1440,
+    "height": 5729,
+    "fonts": [
+      {
+        "family": "Cormorant Garamond",
+        "status": "unloaded"
+      },
+      {
+        "family": "Cormorant Garamond",
+        "status": "unloaded"
+      },
+      {
+        "family": "Cormorant Garamond",
+        "status": "unloaded"
+      },
+      {
+        "family": "Cormorant Garamond",
+        "status": "unloaded"
+      },
+      {
+        "family": "Cormorant Garamond",
+        "status": "unloaded"
+      },
+      {
+        "family": "Cormorant Garamond",
+        "status": "unloaded"
+      },
+      {
+        "family": "Cormorant Garamond",
+        "status": "unloaded"
+      },
+      {
+        "family": "Cormorant Garamond",
+        "status": "unloaded"
+      },
+      {
+        "family": "Cormorant Garamond",
+        "status": "unloaded"
+      },
+      {
+        "family": "Cormorant Garamond",
+        "status": "loaded"
+      },
+      {
+        "family": "Inter",
+        "status": "unloaded"
+      },
+      {
+        "family": "Inter",
+        "status": "unloaded"
+      },
+      {
+        "family": "Inter",
+        "status": "unloaded"
+      },
+      {
+        "family": "Inter",
+        "status": "unloaded"
+      },
+      {
+        "family": "Inter",
+        "status": "unloaded"
+      },
+      {
+        "family": "Inter",
+        "status": "unloaded"
+      },
+      {
+        "family": "Inter",
+        "status": "loaded"
+      },
+      {
+        "family": "Inter",
+        "status": "unloaded"
+      },
+      {
+        "family": "Inter",
+        "status": "unloaded"
+      },
+      {
+        "family": "Inter",
+        "status": "unloaded"
+      },
+      {
+        "family": "Inter",
+        "status": "unloaded"
+      },
+      {
+        "family": "Inter",
+        "status": "unloaded"
+      },
+      {
+        "family": "Inter",
+        "status": "unloaded"
+      },
+      {
+        "family": "Inter",
+        "status": "unloaded"
+      },
+      {
+        "family": "Inter",
+        "status": "unloaded"
+      },
+      {
+        "family": "Inter",
+        "status": "unloaded"
+      },
+      {
+        "family": "Inter",
+        "status": "unloaded"
+      },
+      {
+        "family": "Inter",
+        "status": "unloaded"
+      },
+      {
+        "family": "Inter",
+        "status": "unloaded"
+      },
+      {
+        "family": "Inter",
+        "status": "unloaded"
+      },
+      {
+        "family": "Inter",
+        "status": "unloaded"
+      },
+      {
+        "family": "League Spartan",
+        "status": "unloaded"
+      },
+      {
+        "family": "League Spartan",
+        "status": "unloaded"
+      },
+      {
+        "family": "League Spartan",
+        "status": "loaded"
+      },
+      {
+        "family": "Libre Baskerville",
+        "status": "unloaded"
+      },
+      {
+        "family": "Libre Baskerville",
+        "status": "loaded"
+      },
+      {
+        "family": "Libre Baskerville",
+        "status": "unloaded"
+      },
+      {
+        "family": "Libre Baskerville",
+        "status": "unloaded"
+      },
+      {
+        "family": "Mea Culpa",
+        "status": "unloaded"
+      },
+      {
+        "family": "Mea Culpa",
+        "status": "unloaded"
+      },
+      {
+        "family": "Mea Culpa",
+        "status": "loaded"
+      }
+    ],
+    "bodyFont": "\"Libre Baskerville\", serif",
+    "bookLinks": [
+      {
+        "text": "Reservar",
+        "adapter": false,
+        "y": 632
+      },
+      {
+        "text": "Reserva tu cita",
+        "adapter": false,
+        "y": 1927
+      },
+      {
+        "text": "Reservar",
+        "adapter": false,
+        "y": 2620
+      }
+    ],
+    "headings": [
+      {
+        "text": "Melanie\n          Diaz",
+        "font": "\"League Spartan\", sans-serif",
+        "y": 287,
+        "height": 175
+      },
+      {
+        "text": "Lo que ofrece Melanie",
+        "font": "\"Cormorant Garamond\", serif",
+        "y": 1016,
+        "height": 53
+      },
+      {
+        "text": "Cuidado, estilo y pelo sano primero",
+        "font": "\"Cormorant Garamond\", serif",
+        "y": 2183,
+        "height": 107
+      },
+      {
+        "text": "Un vistazo al trabajo",
+        "font": "\"Cormorant Garamond\", serif",
+        "y": 2872,
+        "height": 53
+      },
+      {
+        "text": "Te esperamos en la silla",
+        "font": "\"Cormorant Garamond\", serif",
+        "y": 3987,
+        "height": 53
+      }
+    ],
+    "errors": [],
+    "failed": []
+  },
+  {
+    "name": "links",
+    "title": "Melanie Diaz | Links — Book, services & social",
+    "width": 1440,
+    "scrollWidth": 1440,
+    "height": 900,
+    "fonts": [
+      {
+        "family": "Josefin Sans",
+        "status": "unloaded"
+      },
+      {
+        "family": "Josefin Sans",
+        "status": "unloaded"
+      },
+      {
+        "family": "Josefin Sans",
+        "status": "loaded"
+      },
+      {
+        "family": "Josefin Sans",
+        "status": "unloaded"
+      },
+      {
+        "family": "Josefin Sans",
+        "status": "unloaded"
+      },
+      {
+        "family": "Josefin Sans",
+        "status": "loaded"
+      },
+      {
+        "family": "Josefin Sans",
+        "status": "unloaded"
+      },
+      {
+        "family": "Josefin Sans",
+        "status": "unloaded"
+      },
+      {
+        "family": "Josefin Sans",
+        "status": "loaded"
+      },
+      {
+        "family": "Pacifico",
+        "status": "unloaded"
+      },
+      {
+        "family": "Pacifico",
+        "status": "unloaded"
+      },
+      {
+        "family": "Pacifico",
+        "status": "unloaded"
+      },
+      {
+        "family": "Pacifico",
+        "status": "unloaded"
+      },
+      {
+        "family": "Pacifico",
+        "status": "loaded"
+      },
+      {
+        "family": "Zalando Sans",
+        "status": "unloaded"
+      },
+      {
+        "family": "Zalando Sans",
+        "status": "unloaded"
+      },
+      {
+        "family": "Zalando Sans",
+        "status": "unloaded"
+      },
+      {
+        "family": "Zalando Sans",
+        "status": "unloaded"
+      },
+      {
+        "family": "Zalando Sans",
+        "status": "unloaded"
+      },
+      {
+        "family": "Zalando Sans",
+        "status": "unloaded"
+      },
+      {
+        "family": "Zalando Sans",
+        "status": "unloaded"
+      },
+      {
+        "family": "Zalando Sans",
+        "status": "unloaded"
+      },
+      {
+        "family": "Zalando Sans",
+        "status": "loaded"
+      }
+    ],
+    "bodyFont": "Inter, system-ui, sans-serif",
+    "bookLinks": [
+      {
+        "text": "Book Now",
+        "adapter": false,
+        "y": 412
+      }
+    ],
+    "headings": [
+      {
+        "text": "Melanie Diaz",
+        "font": "Pacifico, cursive",
+        "y": 160,
+        "height": 127
+      }
+    ],
+    "errors": [],
+    "failed": []
+  },
+  {
+    "name": "live-homepage",
+    "status": 200,
+    "title": "Melanie Diaz | Curly Hair Specialist — Baytown & Greater Houston, TX",
+    "services": [
+      "Curly dry cut",
+      "Haircut",
+      "Curly cut & define",
+      "Silk press + trim",
+      "Shampoo treatment",
+      "Relaxer",
+      "Blow-dry with wash",
+      "Baytown · 77521",
+      "Thank you"
+    ]
+  },
+  {
+    "name": "live-spanish",
+    "status": 200,
+    "title": "Melanie Diaz | Rizos y pelo rizado en Baytown y Houston | Estilista boricua",
+    "services": [
+      "Corte en seco para rizos",
+      "Corte",
+      "Corte rizado + definición",
+      "Silk press + recorte",
+      "Champú tratamiento",
+      "Relajante",
+      "Secado con lavado",
+      "Baytown · 77521",
+      "Gracias"
+    ]
+  },
+  {
+    "name": "live-links",
+    "status": 200,
+    "title": "Melanie Diaz | Links — Book, services & social",
+    "services": [
+      "First-Time Curly Experience (Full Wash, Cut & Style)",
+      "First-Time Curly Reset (Consultation, Detox, Hydration & Cut - No Styling)",
+      "First-Time VIP Curly Transformation (Full Olaplex Restoration + Cut)",
+      "Dry Curly Cut (Returning Clients Only)",
+      "Curly Cut + Wash & Go (Returning Clients Only)",
+      "Wash and Go with Definition (Returning Clients Only)",
+      "Olaplex Ultimate Scalp & Bond Restoration (Includes Wash & Go)",
+      "Signature Silk Press"
+    ]
+  }
+]
