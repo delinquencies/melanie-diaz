@@ -34,8 +34,9 @@ crons = ["*/30 * * * *"]   # Google Calendar free/busy sync (no-op until a calen
 [vars]
 NODE_ENV = "production"     # Secure cookies; requires SALON_OS_DATA_KEY
 PUBLIC_INTAKE = "off"       # Client intake submissions disabled until Melanie approves the form
+GOOGLE_REDIRECT_URI = "https://os.melanie-diaz.com/api/admin/oauth/google/callback"  # not secret
 
 # Secrets (set with `npx wrangler secret put NAME`, never committed):
 #   SALON_OS_DATA_KEY       32-byte base64 encryption key (back it up!)
 #   SETUP_TOKEN             one-time token to create the owner account
-#   GOOGLE_CLIENT_ID / GOOGLE_CLIENT_SECRET / GOOGLE_REDIRECT_URI   (when connecting Google Calendar)
+#   GOOGLE_CLIENT_ID / GOOGLE_CLIENT_SECRET   (when connecting Google Calendar)

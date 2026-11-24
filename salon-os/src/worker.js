@@ -63,7 +63,7 @@ export class SalonOS extends DurableObject {
   async fetch(request) {
     const url = new URL(request.url);
     if (url.pathname === "/__internal/sync") {
-      const accounts = this.db.get("SELECT COUNT(*) AS n FROM calendar_accounts").n;
+      const accounts = this.db.get("SELECT (SELECT COUNT(*) FROM calendar_accounts) + (SELECT COUNT(*) FROM calendar_feeds) AS n").n;
       if (!accounts) return Response.json({ skipped: "no calendar connected" });
       return Response.json(await syncBusy(this.app.ctx));
     }

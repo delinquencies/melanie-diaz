@@ -59,7 +59,10 @@ export function busyIntervals(db, fromIso, toIso, { excludeAppointmentId } = {})
     .filter((a) => a.id !== excludeAppointmentId);
   const ext = db.all(
     `SELECT b.starts_at, b.ends_at FROM busy_blocks b JOIN calendars c ON c.id = b.calendar_id
-      WHERE c.blocks_availability = 1 AND b.starts_at < ? AND b.ends_at > ?`, toIso, fromIso);
+      WHERE c.blocks_availability = 1 AND b.starts_at < ? AND b.ends_at > ?
+     UNION ALL
+     SELECT b.starts_at, b.ends_at FROM feed_busy_blocks b JOIN calendar_feeds f ON f.id = b.feed_id
+      WHERE f.blocks_availability = 1 AND b.starts_at < ? AND b.ends_at > ?`, toIso, fromIso, toIso, fromIso);
   const blocks = db.all("SELECT starts_at, ends_at FROM time_blocks WHERE kind IN ('vacation','break','blocked') AND starts_at < ? AND ends_at > ?", toIso, fromIso);
   const extra = db.all("SELECT starts_at, ends_at FROM time_blocks WHERE kind = 'extra_open' AND starts_at < ? AND ends_at > ?", toIso, fromIso);
   const toI = (r) => ({ start: new Date(r.starts_at), end: new Date(r.ends_at) });

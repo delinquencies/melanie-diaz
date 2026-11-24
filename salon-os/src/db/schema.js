@@ -175,6 +175,31 @@ CREATE TABLE IF NOT EXISTS busy_blocks (
 );
 CREATE INDEX IF NOT EXISTS busy_time ON busy_blocks(starts_at, ends_at);
 
+-- Calendar links (iCal / "secret address"), an alternative to OAuth. The link itself is a secret: stored
+-- encrypted, never returned by the API. Only busy intervals are kept — no titles or descriptions.
+CREATE TABLE IF NOT EXISTS calendar_feeds (
+  id                  TEXT PRIMARY KEY,
+  name                TEXT NOT NULL,
+  url_enc             TEXT NOT NULL,
+  url_hint            TEXT NOT NULL,              -- host only, e.g. calendar.google.com
+  kind                TEXT NOT NULL DEFAULT 'personal' CHECK (kind IN ('personal','business')),
+  blocks_availability INTEGER NOT NULL DEFAULT 1,
+  created_at          TEXT NOT NULL,
+  last_synced_at      TEXT,
+  last_error          TEXT,
+  last_count          INTEGER,
+  skipped_rules       INTEGER NOT NULL DEFAULT 0
+);
+
+CREATE TABLE IF NOT EXISTS feed_busy_blocks (
+  id         TEXT PRIMARY KEY,
+  feed_id    TEXT NOT NULL REFERENCES calendar_feeds(id) ON DELETE CASCADE,
+  starts_at  TEXT NOT NULL,
+  ends_at    TEXT NOT NULL,
+  synced_at  TEXT NOT NULL
+);
+CREATE INDEX IF NOT EXISTS feed_busy_time ON feed_busy_blocks(starts_at, ends_at);
+
 -- Vacations, breaks, manual blocks, one-off openings.
 CREATE TABLE IF NOT EXISTS time_blocks (
   id          TEXT PRIMARY KEY,

@@ -3,11 +3,11 @@
 _Last updated: 2026-11-22 (deployed)._ Keep this file short and current. It replaces separate plan/status files.
 
 ## ▶ Resume here (paused 2026-11-22)
-State: **live and private** at https://os.melanie-diaz.com behind Cloudflare Access (3 emails). **No owner account yet**, so nobody can log in to the dashboard. The setup token was removed while pausing.
-1. Owner setup: `cd salon-os && npx wrangler secret put SETUP_TOKEN` (new random value) → sign in through Access at `/admin/` → *First-time setup* → then `npx wrangler secret delete SETUP_TOKEN`.
+State: **live and private** at https://os.melanie-diaz.com behind Cloudflare Access (3 emails). Owner account created 2026-11-22; setup token deleted.
+1. ~~Owner setup~~ ✅ done.
 2. Move `SALON_OS_DATA_KEY` from `salon-os/data/PRODUCTION-SECRETS-move-to-password-manager.txt` into a password manager, then delete that file.
 3. Cloudflare Pages: turn off preview builds for non-main branches (the design branch is pushed).
-4. Then: connect Google Calendar; Melanie reviews the intake form.
+4. Then: deploy the calendar-link feature, Melanie pastes her iCal secret address in Settings; Melanie reviews the intake form.
 
 ## Boundaries (non-negotiable)
 - **Goldie is the live booking authority.** Salon OS never creates, changes or reads live Goldie bookings; there is no supported Goldie API.
@@ -29,12 +29,13 @@ State: **live and private** at https://os.melanie-diaz.com behind Cloudflare Acc
 | Booking hand-off | ✅ | `/book/` → intake → Goldie deep link to the exact service; "skip" always visible; falls back to Goldie if the backend is down |
 | Availability engine (sandbox) | ✅ | America/Chicago + DST, hours, grid, buffers, processing, notice, horizon, blocks, extra openings, personal busy time; conflict-safe booking |
 | Eligibility (sandbox) | ✅ | First-time vs returning; Dry Curly Cut needs a **verified** First-Time Experience/Reset within 6 months; duplicate haircut blocked; owner override |
-| Google Calendar | ✅ code · ⛔ not connected | OAuth (read-only, free/busy only), cron sync every 30 min on Cloudflare. Needs credentials. |
+| Calendar link (iCal) | ✅ code · ⛔ not deployed | **Preferred.** Settings → paste Google's "Secret address in iCal format". Link stored encrypted, never returned; only start/end kept (no titles). Handles repeats, exceptions, time zones/DST, free/cancelled events. Synced with the 30-min cron. |
+| Google Calendar (OAuth) | ✅ code · optional | Read-only free/busy. Needs a Google Cloud OAuth client; not needed if the calendar link is used. |
 | Owner dashboard | ✅ | Login, first-time setup, Today, Calendar, Intakes, Clients, Booking sandbox, Marketing, Settings |
 | **Deployment** | ✅ **live, private** | https://os.melanie-diaz.com (Worker `melanie-diaz-salon-os`, free plan). Behind Cloudflare Access app **Salon OS** → policy **Salon OS owners** (3 emails). Anonymous requests verified to be redirected to Access login. Photos stored encrypted in the Durable Object (R2 not enabled on the account). `PUBLIC_INTAKE=off`. Main site verified unaffected. |
 | Financials / retail / ad spend | ⏳ schema only | by design |
 
-Tests: `cd salon-os && npm test` → **41 passing** on Node.
+Tests: `cd salon-os && npm test` → **49 passing** on Node.
 
 ## Decisions made
 1. **No runtime dependencies.** Node built-ins locally; `wrangler` is a dev-only deploy tool.

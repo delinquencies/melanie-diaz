@@ -2,6 +2,7 @@
 // Provider-independent: providers implement { exchangeCode, ensureFresh, listCalendars, freeBusy }.
 import { newId, newToken } from "../lib/security.js";
 import * as google from "../providers/calendar/google.js";
+import * as ical from "../providers/calendar/ical.js";
 
 const fail = (code, status = 400) => Object.assign(new Error(code), { code, status });
 const PROVIDERS = { google };
@@ -33,6 +34,11 @@ export function unifiedView(ctx, fromIso, toIso) {
   }
   for (const b of db.all(
     `SELECT b.id, b.starts_at, b.ends_at, c.kind, c.name, c.blocks_availability FROM busy_blocks b JOIN calendars c ON c.id = b.calendar_id
+      WHERE b.starts_at < ? AND b.ends_at > ?`, toIso, fromIso)) {
+    items.push({ type: "busy", layer: b.kind, id: b.id, start: b.starts_at, end: b.ends_at, title: b.kind === "personal" ? "Personal — busy" : `${b.name} — busy`, blocksAvailability: !!b.blocks_availability });
+  }
+  for (const b of db.all(
+    `SELECT b.id, b.starts_at, b.ends_at, f.kind, f.name, f.blocks_availability FROM feed_busy_blocks b JOIN calendar_feeds f ON f.id = b.feed_id
       WHERE b.starts_at < ? AND b.ends_at > ?`, toIso, fromIso)) {
     items.push({ type: "busy", layer: b.kind, id: b.id, start: b.starts_at, end: b.ends_at, title: b.kind === "personal" ? "Personal — busy" : `${b.name} — busy`, blocksAvailability: !!b.blocks_availability });
   }
@@ -110,11 +116,70 @@ export async function syncBusy(ctx, { days = 60 } = {}) {
       }
     });
   }
-  return { busyBlocks: total, window: { timeMin, timeMax } };
+  const feeds = [];
+  for (const f of db.all("SELECT id FROM calendar_feeds")) {
+    const r = await syncFeed(ctx, f.id, { days });
+    feeds.push(r);
+    total += r.busyBlocks || 0;
+  }
+  return { busyBlocks: total, feeds, window: { timeMin, timeMax } };
+}
+
+// ───────── Calendar links (iCal) ─────────
+/** Fetch one link and replace its cached busy time. Never throws: errors are recorded on the feed. */
+export async function syncFeed(ctx, id, { days = 60, url } = {}) {
+  const { db, cipher } = ctx;
+  const now = ctx.now();
+  const fromMs = now.getTime(), toMs = fromMs + days * 86400000;
+  const row = db.get("SELECT * FROM calendar_feeds WHERE id = ?", id);
+  if (!row) return { id, error: "not_found" };
+  try {
+    const text = await ical.fetchFeed(ctx.fetch, url || cipher.decryptText(row.url_enc));
+    const { busy, skippedRules } = ical.busyFromIcs(text, { fromMs, toMs });
+    const nowIso = now.toISOString(), fromIso = new Date(fromMs).toISOString();
+    db.tx(() => {
+      db.run("DELETE FROM feed_busy_blocks WHERE feed_id = ? AND ends_at > ?", id, fromIso);
+      for (const b of busy) db.run("INSERT INTO feed_busy_blocks (id, feed_id, starts_at, ends_at, synced_at) VALUES (?,?,?,?,?)", newId("fb_"), id, b.start, b.end, nowIso);
+      db.run("UPDATE calendar_feeds SET last_synced_at = ?, last_error = NULL, last_count = ?, skipped_rules = ? WHERE id = ?", nowIso, busy.length, skippedRules, id);
+    });
+    return { id, busyBlocks: busy.length, skippedRules };
+  } catch (e) {
+    db.run("UPDATE calendar_feeds SET last_error = ? WHERE id = ?", String(e.code || "calendar_fetch_failed").slice(0, 80), id);
+    return { id, busyBlocks: 0, error: e.code || "calendar_fetch_failed" };
+  }
+}
+
+/** Add a calendar link. It is checked (fetched and read) before it is saved. */
+export async function addFeed(ctx, { name, url }) {
+  const clean = ical.normaliseFeedUrl(url);
+  // Validate first so a wrong link is never stored.
+  const text = await ical.fetchFeed(ctx.fetch, clean);
+  ical.busyFromIcs(text, { fromMs: ctx.now().getTime(), toMs: ctx.now().getTime() + 86400000 });
+  const id = newId("cf_");
+  ctx.db.run("INSERT INTO calendar_feeds (id, name, url_enc, url_hint, kind, blocks_availability, created_at) VALUES (?,?,?,?, 'personal', 1, ?)",
+    id, String(name || "").trim().slice(0, 80) || "Personal calendar", ctx.cipher.encryptText(clean), ical.feedHint(clean), ctx.now().toISOString());
+  const result = await syncFeed(ctx, id, { url: clean });
+  return { id, ...result };
+}
+
+export function updateFeed(ctx, id, { kind, blocksAvailability, name }) {
+  if (kind && !["personal", "business"].includes(kind)) throw fail("invalid_kind");
+  const r = ctx.db.run("UPDATE calendar_feeds SET kind = COALESCE(?, kind), blocks_availability = COALESCE(?, blocks_availability), name = COALESCE(?, name) WHERE id = ?",
+    kind || null, typeof blocksAvailability === "boolean" ? (blocksAvailability ? 1 : 0) : null, name ? String(name).trim().slice(0, 80) : null, id);
+  return r.changes > 0;
+}
+
+export function removeFeed(ctx, id) {
+  return ctx.db.tx(() => {
+    ctx.db.run("DELETE FROM feed_busy_blocks WHERE feed_id = ?", id);
+    return ctx.db.run("DELETE FROM calendar_feeds WHERE id = ?", id).changes > 0;
+  });
 }
 
 export function integrationsStatus(ctx) {
   return {
+    feeds: ctx.db.all(`SELECT id, name, url_hint, kind, blocks_availability, last_synced_at, last_error, last_count, skipped_rules
+      FROM calendar_feeds ORDER BY created_at`),
     google: {
       configured: google.googleConfigured(ctx.env),
       accounts: ctx.db.all("SELECT id, account_label, updated_at FROM calendar_accounts WHERE provider='google'"),

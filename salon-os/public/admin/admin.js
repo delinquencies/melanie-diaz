@@ -244,15 +244,59 @@ async function settings() {
   view.innerHTML = `<h1>Settings</h1>
     <h2>Booking providers</h2><table><tbody>${s.booking.map((b) => `<tr><td>${esc(b.id)}</td><td>${b.live ? '<span class="pill">live</span>' : '<span class="pill sand">sandbox</span>'}</td><td class="muted">${esc(Object.entries(b.capabilities).filter(([, v]) => v).map(([k]) => k).join(", "))}</td></tr>`).join("")}</tbody></table>
     <p class="muted">${esc(s.goldie.note)}</p>
-    <h2>Google Calendar</h2>
-    ${g.configured ? `<p><a class="btn" href="/api/admin/oauth/google/start">Connect a Google account</a> ${g.accounts.length ? '<button class="btn ghost" id="sync">Sync busy time now</button>' : ""}</p>` :
-      `<p class="note warn">Not configured. Needs GOOGLE_CLIENT_ID, GOOGLE_CLIENT_SECRET and GOOGLE_REDIRECT_URI (OAuth client from Google Cloud Console, Calendar API enabled).</p>`}
+    <h2>Calendar link</h2>
+    <p class="muted">Blocks salon time when you're busy. In Google Calendar on a computer: <b>Settings → your calendar → Integrate calendar → Secret address in iCal format</b>. Copy it and paste it here. Only start and end times are kept; event titles and details are never stored. You can reset the address in Google at any time.</p>
+    ${s.feeds.map((f) => `<div class="feed">
+      <p><b>${esc(f.name)}</b> <span class="muted">· ${esc(f.url_hint)}</span></p>
+      <p>${f.last_error ? `<span class="note warn" style="display:block;margin:0">${esc(feedError(f.last_error))}</span>` : f.last_synced_at ? `Synced ${esc(new Date(f.last_synced_at).toLocaleString())} · ${f.last_count} busy times${f.skipped_rules ? ` · <span class="pill warn">${f.skipped_rules} repeating events couldn't be read</span>` : ""}` : "Not synced yet"}</p>
+      <div class="feed__row">
+        <label>Type <select data-feed="${esc(f.id)}" data-k="kind"><option ${f.kind === "personal" ? "selected" : ""}>personal</option><option ${f.kind === "business" ? "selected" : ""}>business</option></select></label>
+        <label><input type="checkbox" data-feed="${esc(f.id)}" data-k="blocks" ${f.blocks_availability ? "checked" : ""}> Blocks salon time</label>
+        <button class="btn ghost" type="button" data-remove-feed="${esc(f.id)}">Remove</button>
+      </div></div>`).join("")}
+    <form id="feedForm" class="stack">
+      <label>Name<input name="name" maxlength="80" placeholder="Personal calendar" autocomplete="off"></label>
+      <label>Secret address (iCal)<input name="url" type="url" required placeholder="https://calendar.google.com/calendar/ical/…/basic.ics" autocomplete="off" spellcheck="false"></label>
+      <p><button class="btn" type="submit">Connect calendar link</button> ${s.feeds.length || g.accounts.length ? '<button class="btn ghost" type="button" id="sync">Sync busy time now</button>' : ""}</p>
+    </form>
+    <div id="m"></div>
+    <h2>Google Calendar (OAuth)</h2>
+    ${g.configured ? `<p><a class="btn" href="/api/admin/oauth/google/start">Connect a Google account</a></p>` :
+      `<p class="muted">Optional. Not needed if you use a calendar link above. Requires an OAuth client from Google Cloud Console.</p>`}
     ${g.calendars.length ? `<table><thead><tr><th>Calendar</th><th>Type</th><th>Blocks salon time</th></tr></thead><tbody>${g.calendars.map((c) => `<tr><td>${esc(c.name)}</td>
       <td><select data-cal="${esc(c.id)}" data-k="kind"><option ${c.kind === "personal" ? "selected" : ""}>personal</option><option ${c.kind === "business" ? "selected" : ""}>business</option></select></td>
-      <td><input type="checkbox" data-cal="${esc(c.id)}" data-k="blocks" ${c.blocks_availability ? "checked" : ""}></td></tr>`).join("")}</tbody></table>` : ""}
-    <div id="m"></div>`;
+      <td><input type="checkbox" data-cal="${esc(c.id)}" data-k="blocks" ${c.blocks_availability ? "checked" : ""}></td></tr>`).join("")}</tbody></table>` : ""}`;
+  const msg = (html) => { view.querySelector("#m").innerHTML = html; };
   view.querySelectorAll("[data-cal]").forEach((i) => i.addEventListener("change", () => api(`/api/admin/calendars/${i.dataset.cal}`, { method: "POST", body: i.dataset.k === "kind" ? { kind: i.value } : { blocksAvailability: i.checked } })));
-  view.querySelector("#sync")?.addEventListener("click", async () => { try { const r = await api("/api/admin/calendar/sync", { method: "POST" }); view.querySelector("#m").innerHTML = `<p class="note">Synced ${r.busyBlocks} busy blocks.</p>`; } catch (e) { view.querySelector("#m").innerHTML = errBox(e); } });
+  view.querySelectorAll("[data-feed]").forEach((i) => i.addEventListener("change", () => api(`/api/admin/calendar-feeds/${i.dataset.feed}`, { method: "POST", body: i.dataset.k === "kind" ? { kind: i.value } : { blocksAvailability: i.checked } })));
+  view.querySelectorAll("[data-remove-feed]").forEach((b) => b.addEventListener("click", async () => {
+    if (!confirm("Remove this calendar link? Its busy times will no longer block salon time.")) return;
+    try { await api(`/api/admin/calendar-feeds/${b.dataset.removeFeed}`, { method: "DELETE" }); await settings(); } catch (e) { msg(errBox(e)); }
+  }));
+  view.querySelector("#feedForm").addEventListener("submit", async (ev) => {
+    ev.preventDefault();
+    const f = ev.currentTarget, btn = f.querySelector("[type=submit]");
+    btn.disabled = true; msg(`<p class="note">Checking the link…</p>`);
+    try {
+      const r = await api("/api/admin/calendar-feeds", { method: "POST", body: { name: f.name.value, url: f.url.value } });
+      await settings();
+      msg(r.error ? `<p class="note warn">Saved, but the first sync failed: ${esc(feedError(r.error))}</p>` : `<p class="note">Connected. ${r.busyBlocks} busy times in the next 60 days.</p>`);
+    } catch (e) { btn.disabled = false; msg(`<p class="note warn">${esc(feedError(e.message))}</p>`); }
+  });
+  view.querySelector("#sync")?.addEventListener("click", async () => {
+    try { const r = await api("/api/admin/calendar/sync", { method: "POST" }); await settings(); msg(`<p class="note">Synced ${r.busyBlocks} busy times.</p>`); } catch (e) { msg(errBox(e)); }
+  });
+}
+
+function feedError(code) {
+  return ({
+    invalid_calendar_url: "That doesn't look like a calendar link.",
+    calendar_url_must_be_https: "The link must start with https:// (or webcal://).",
+    calendar_link_not_found_or_reset: "The link no longer works. It may have been reset in Google. Paste the new secret address.",
+    calendar_fetch_failed: "Couldn't reach the calendar. Try again in a minute.",
+    calendar_too_large: "That calendar is too large to read.",
+    not_an_ical_calendar: "That link isn't an iCal calendar. Use the \"Secret address in iCal format\".",
+  })[code] || code;
 }
 
 // ───────── Router ─────────

@@ -48,3 +48,5 @@ button.btn.danger{background:var(--err);border-color:var(--err)}
 .narrow{max-width:420px}
 @media (min-width:860px){.grid2.narrow{grid-template-columns:1fr}}
 :focus-visible{outline:2px solid var(--ink);outline-offset:2px}
+.feed{background:#fff;padding:12px;margin:10px 0;border-left:3px solid var(--ink)} .feed p{margin:0 0 8px}
+.feed__row{display:flex;flex-wrap:wrap;gap:8px 16px;align-items:center} .feed__row label{display:flex;align-items:center;gap:6px;margin:0}

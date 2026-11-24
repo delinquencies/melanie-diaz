@@ -7,7 +7,7 @@ import { listClients, clientProfile, addNote, addTreatment, exportClient, delete
 import { readPhoto } from "./domain/photos.js";
 import { acquisitionReport } from "./domain/attribution.js";
 import { sandboxAvailability, createSandboxAppointment, setSandboxStatus } from "./domain/appointments.js";
-import { addTimeBlock, removeTimeBlock, unifiedView, startConnect, finishConnect, updateCalendar, syncBusy, integrationsStatus } from "./domain/calendar.js";
+import { addTimeBlock, removeTimeBlock, unifiedView, startConnect, finishConnect, updateCalendar, syncBusy, integrationsStatus, addFeed, updateFeed, removeFeed } from "./domain/calendar.js";
 import { bookingProviders, liveProvider } from "./providers/booking.js";
 import { login, logout, sessionOwner, sessionCookie, clearCookie, readCookie, makeThrottle, SESSION_COOKIE, createOwner } from "./auth.js";
 import { sha256 } from "./lib/security.js";
@@ -167,6 +167,17 @@ export function createApp({ db, config, blobs, staticFile = async () => null, en
   }, { admin: true });
   on("POST", "/api/admin/calendars/:id", async (req, p) => updateCalendar(ctx, p.id, await req.json()) ? respond(200, { ok: true }) : err(404, "not_found"), { admin: true });
   on("POST", "/api/admin/calendar/sync", async () => respond(200, await syncBusy(ctx)), { admin: true });
+  on("POST", "/api/admin/calendar-feeds", async (req, p, ip, owner) => {
+    const r = await addFeed(ctx, await req.json());
+    audit(db, `owner:${owner.id}`, "calendar_feed.added", r.id, now().toISOString());
+    return respond(201, r);
+  }, { admin: true });
+  on("POST", "/api/admin/calendar-feeds/:id", async (req, p) => updateFeed(ctx, p.id, await req.json()) ? respond(200, { ok: true }) : err(404, "not_found"), { admin: true });
+  on("DELETE", "/api/admin/calendar-feeds/:id", (req, p, ip, owner) => {
+    if (!removeFeed(ctx, p.id)) return err(404, "not_found");
+    audit(db, `owner:${owner.id}`, "calendar_feed.removed", p.id, now().toISOString());
+    return respond(200, { ok: true });
+  }, { admin: true });
 
   // ───────── Native booking engine (sandbox) ─────────
   on("GET", "/api/admin/sandbox/availability", (req) => {
@@ -189,7 +200,7 @@ export function createApp({ db, config, blobs, staticFile = async () => null, en
       clients: db.get("SELECT COUNT(*) n FROM clients WHERE status='active'").n,
       upcomingRealAppointments: db.get("SELECT COUNT(*) n FROM appointments WHERE status='booked' AND source<>'sandbox' AND starts_at >= ?", nowIso).n,
       upcomingSandboxAppointments: db.get("SELECT COUNT(*) n FROM appointments WHERE status='booked' AND source='sandbox' AND starts_at >= ?", nowIso).n,
-      dataSources: { bookings: "Goldie (not synced — no supported API)", payments: "none connected", calendar: integrationsStatus(ctx).google.accounts.length ? "Google connected" : "not connected" },
+      dataSources: { bookings: "Goldie (not synced — no supported API)", payments: "none connected", calendar: (() => { const s = integrationsStatus(ctx); return s.google.accounts.length ? "Google connected" : s.feeds.length ? "calendar link connected" : "not connected"; })() },
     });
   }, { admin: true });
 
